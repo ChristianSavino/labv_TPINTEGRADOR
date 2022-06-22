@@ -12,7 +12,7 @@ public class Libro implements Serializable {
 		
 		@Id
 		@Column(name="id")
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		//@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int isbn;
 		
 		@Column(name="titulo")
