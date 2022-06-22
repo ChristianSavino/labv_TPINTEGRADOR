@@ -15,5 +15,6 @@
         <mapping class="entidades.Genero"/>
         <mapping class="entidades.Libro"/>
         <mapping class="entidades.Nacionalidad"/>
+        <mapping class="entidades.Biblioteca"/>
     </session-factory>
 </hibernate-configuration>
