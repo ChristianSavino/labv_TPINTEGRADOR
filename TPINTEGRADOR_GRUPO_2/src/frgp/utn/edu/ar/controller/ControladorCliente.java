@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import frgp.utn.edu.ar.entidad.Persona;
+import entidades.Persona;
 import frgp.utn.edu.ar.negocioImp.NegPersona;
 
 @Controller

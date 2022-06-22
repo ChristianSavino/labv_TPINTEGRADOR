@@ -6,8 +6,8 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import entidades.Persona;
 import frgp.utn.edu.ar.dao.IdaoPersona;
-import frgp.utn.edu.ar.entidad.Persona;
 
 @Repository("daoPersona")
 public class DaoPersona implements IdaoPersona {

@@ -2,7 +2,7 @@ package frgp.utn.edu.ar.dao;
 
 import java.util.List;
 
-import frgp.utn.edu.ar.entidad.Persona;
+import entidades.Persona;
 
 public interface IdaoPersona {
 
