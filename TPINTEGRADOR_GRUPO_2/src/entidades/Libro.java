@@ -36,7 +36,7 @@ public class Libro implements Serializable {
 		
 		@ManyToMany(cascade=(CascadeType.ALL))
 		@JoinColumn(name="idGenero")
-		List<Genero> generos = new ArrayList<Genero>();
+		private List<Genero> generos = new ArrayList<Genero>();
 		
 		public Libro() {
 		}
