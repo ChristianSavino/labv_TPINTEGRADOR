@@ -1,4 +1,4 @@
-package frgp.utn.edu.ar.daoImp;
+package daoImp;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -6,8 +6,8 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dao.IdaoPersona;
 import entidades.Persona;
-import frgp.utn.edu.ar.dao.IdaoPersona;
 
 @Repository("daoPersona")
 public class DaoPersona implements IdaoPersona {
@@ -17,26 +17,26 @@ public class DaoPersona implements IdaoPersona {
 	
 	@Override
 	public List<Persona> listarPersonas() {
-		Session session = conexion.abrirConexion();
+		//Session session = conexion.abrirConexion();
 		
-		session.close();
+		//session.close();
 		return null;
 	}
 
 	@Override
 	public boolean agregarPersona(Persona p) {
-		Session session = conexion.abrirConexion();
-		Transaction tx= session.beginTransaction();
+		//Session session = conexion.abrirConexion();
+		//Transaction tx= session.beginTransaction();
 		boolean aux = true;
 		try
 		{
-			session.save(p); 
-			tx = session.getTransaction();
-			tx.commit();
+		//	session.save(p); 
+		//	tx = session.getTransaction();
+		//	tx.commit();
 		}
 		catch (Exception e) {
 			aux=false;
-			tx.rollback();
+		//	tx.rollback();
 		}
 		conexion.cerrarSession();
 		return aux;

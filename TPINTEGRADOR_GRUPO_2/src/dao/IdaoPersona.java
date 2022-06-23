@@ -1,4 +1,4 @@
-package frgp.utn.edu.ar.dao;
+package dao;
 
 import java.util.List;
 
