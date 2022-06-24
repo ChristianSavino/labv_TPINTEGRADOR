@@ -1,5 +1,5 @@
-/entidades/
-/entidad/
-/frgp/
-/daoImp/
 /dao/
+/daoImp/
+/entidades/
+/frgp/
+/hibernate.cfg.xml

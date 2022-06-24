@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import entidades.Persona;
-import frgp.utn.edu.ar.negocioImp.NegPersona;
+import entidades.Cliente;
+import frgp.utn.edu.ar.negocioImp.NegCliente;
 
 @Controller
 public class ControladorCliente {
 
 	@Autowired
 	@Qualifier("servicioPersona")
-	private NegPersona negocioPersona;
+	private NegCliente negocioCliente;
 	@Autowired
-	private Persona persona;
+	private Cliente persona;
 	
 	
 	@RequestMapping("agregarPersona.html")
@@ -32,13 +32,13 @@ public class ControladorCliente {
 		persona.setDni(txtDni);
 		persona.setNombre(txtNombre);
 		
-		boolean estado= negocioPersona.agregarPersona(persona);
-		String cartel="No se pudo agregar la persona";
-		if(estado)
-		{
-			cartel="La persona ha sido agregada exitosamente";
-		}
-		MV.addObject("estadoAgregarPersona",cartel);
+		//boolean estado= negocioCliente.agre(persona);
+		//String cartel="No se pudo agregar la persona";
+		//if(estado)
+		//{
+		//	cartel="La persona ha sido agregada exitosamente";
+		//}
+		//MV.addObject("estadoAgregarPersona",cartel);
 		MV.setViewName("Inicio");
 		return MV;
 	}
