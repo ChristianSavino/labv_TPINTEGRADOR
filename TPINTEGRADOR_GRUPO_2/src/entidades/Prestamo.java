@@ -7,64 +7,68 @@ import javax.persistence.*;
 import org.springframework.stereotype.Component;
 
 @Component
-@Entity(name="Prestamo")
+@Entity(name = "Prestamo")
 public class Prestamo implements Serializable {
-	
-		@Id
-		@Column(name="id")
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private int id;
-		
-		@OneToMany(cascade = {CascadeType.PERSIST})
-		@JoinColumn(name="idBiblioteca")
-		private Biblioteca biblioteca;
-	
-		@Column(name="fechaDePrestamo")
-		private Date fechaPrestamo;
-		
-		@Column(name="CantidadDias")
-		private int cantDias;
-		
-		//@Column(name="cliente")
-		//private Cliente cliente;
 
-		public int getId() {
-			return id;
-		}
+	private static final long serialVersionUID = 1L;
 
-		public void setId(int id) {
-			this.id = id;
-		}
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-		public Biblioteca getBiblioteca() {
-			return biblioteca;
-		}
+	@OneToMany(cascade = { CascadeType.PERSIST })
+	@JoinColumn(name = "idBiblioteca")
+	private Biblioteca biblioteca;
 
-		public void setBiblioteca(Biblioteca biblioteca) {
-			this.biblioteca = biblioteca;
-		}
+	@Column(name = "fechaDePrestamo")
+	private Date fechaPrestamo;
 
-		public Date getFechaPrestamo() {
-			return fechaPrestamo;
-		}
+	@Column(name = "CantidadDias")
+	private int cantDias;
 
-		public void setFechaPrestamo(Date fechaPrestamo) {
-			this.fechaPrestamo = fechaPrestamo;
-		}
+	@OneToMany(cascade = { CascadeType.PERSIST })
+	@JoinColumn(name = "idCliente")
+	private Cliente cliente;
 
-		public int getCantDias() {
-			return cantDias;
-		}
+	public int getId() {
+		return id;
+	}
 
-		public void setCantDias(int cantDias) {
-			this.cantDias = cantDias;
-		}
+	public void setId(int id) {
+		this.id = id;
+	}
 
-		/*public Cliente getCliente() {
-			return cliente;
-		}
+	public Biblioteca getBiblioteca() {
+		return biblioteca;
+	}
 
-		public void setCliente(Cliente cliente) {
-			this.cliente = cliente;
-		}*/
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
+	}
+
+	public Date getFechaPrestamo() {
+		return fechaPrestamo;
+	}
+
+	public void setFechaPrestamo(Date fechaPrestamo) {
+		this.fechaPrestamo = fechaPrestamo;
+	}
+
+	public int getCantDias() {
+		return cantDias;
+	}
+
+	public void setCantDias(int cantDias) {
+		this.cantDias = cantDias;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 }
