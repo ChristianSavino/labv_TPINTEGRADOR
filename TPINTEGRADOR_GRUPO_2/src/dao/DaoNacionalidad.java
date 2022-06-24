@@ -1,31 +1,31 @@
-package daoImp;
+package dao;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import dao.IdaoGenero;
-import entidades.Genero;
 
-public class DaoGenero implements IdaoGenero {
+import daoImp.IdaoNacionalidad;
+import entidades.Nacionalidad;
 
+public class DaoNacionalidad implements IdaoNacionalidad {
 	@Autowired
 	private Conexion conexion;
 
 	@Override
-	public List<Genero> listarGeneros() {
+	public List<Nacionalidad> listarNacionalidades() {
 		conexion.abrirConexion();
-		List<Genero> listaGeneros= (List<Genero>)conexion.getSession().createQuery("FROM Genero g ORDER BY idGenero asc").list();
+		List<Nacionalidad> listaNacionalidades= (List<Nacionalidad>)conexion.getSession().createQuery("FROM Nacionalidad n ORDER BY idNacionalidad asc").list();
 		conexion.cerrarSession();
 
-		return listaGeneros;
+		return listaNacionalidades;
 	}
 
 	@Override
-	public boolean agregarGenero(Genero g) {
+	public boolean agregarNacionalidad(Nacionalidad n) {
 		conexion.abrirConexion();
 		boolean exito = true;
 		try {
 			conexion.IniciarTransaccion();
-			conexion.GuardarObjeto(g);
+			conexion.GuardarObjeto(n);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
 			conexion.RollbackearTransaccion();
@@ -36,12 +36,12 @@ public class DaoGenero implements IdaoGenero {
 	}
 
 	@Override
-	public boolean modificarGenero(Genero g) {
+	public boolean modificarNacionalidad(Nacionalidad n) {
 		conexion.abrirConexion();
 		boolean exito = true;
 		try {
 			conexion.IniciarTransaccion();
-			conexion.ActualizarObjeto(g);
+			conexion.ActualizarObjeto(n);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
 			conexion.RollbackearTransaccion();
@@ -52,12 +52,12 @@ public class DaoGenero implements IdaoGenero {
 	}
 
 	@Override
-	public boolean eliminarGenero(Genero g){
+	public boolean eliminarNacionalidad(Nacionalidad n) {
 		conexion.abrirConexion();
 		boolean exito = true;
 		try {
 			conexion.IniciarTransaccion();
-			conexion.BorrarObjeto(g);
+			conexion.BorrarObjeto(n);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
 			conexion.RollbackearTransaccion();
@@ -68,15 +68,15 @@ public class DaoGenero implements IdaoGenero {
 	}
 
 	@Override
-	public Genero obtenerGenero(int idGenero){
+	public Nacionalidad obtenerNacionalidad(int idNacionalidad) {
 		conexion.abrirConexion();
-		Genero g = new Genero();
+		Nacionalidad n = new Nacionalidad();
 		try {
-			g = (Genero)conexion.ObtenerObjeto(Genero.class, idGenero);
+			n = (Nacionalidad)conexion.ObtenerObjeto(Nacionalidad.class, idNacionalidad);
 		} catch (Exception e) {
-			g = null;
+			n = null;
 		}
 		conexion.cerrarSession();
-		return g;
+		return n;
 	}
 }

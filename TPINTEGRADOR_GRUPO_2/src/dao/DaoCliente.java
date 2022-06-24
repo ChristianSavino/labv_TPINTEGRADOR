@@ -1,10 +1,10 @@
-package daoImp;
+package dao;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dao.IdaoCliente;
+import daoImp.IdaoCliente;
 import entidades.Cliente;
 
 

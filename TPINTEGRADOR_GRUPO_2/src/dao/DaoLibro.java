@@ -1,33 +1,31 @@
-package daoImp;
+package dao;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dao.IdaoAutor;
-import entidades.Autor;
+import daoImp.IdaoLibro;
+import entidades.Libro;
 
-public class DaoAutor implements IdaoAutor {
-
+public class DaoLibro implements IdaoLibro {
 	@Autowired
 	private Conexion conexion;
 
 	@Override
-	public List<Autor> listarAutores() {
+	public List<Libro> listarLibros() {
 		conexion.abrirConexion();
-		List<Autor> listaAutores= (List<Autor>)conexion.getSession().createQuery("FROM Autor a ORDER BY idAutor asc").list();
+		List<Libro> listaLibros= (List<Libro>)conexion.getSession().createQuery("FROM Libro l ORDER BY l.id asc").list();
 		conexion.cerrarSession();
 
-		return listaAutores;
+		return listaLibros;
 	}
 
 	@Override
-	public boolean agregarAutor(Autor a) {
+	public boolean agregarLibro(Libro l) {
 		conexion.abrirConexion();
 		boolean exito = true;
 		try {
 			conexion.IniciarTransaccion();
-			conexion.GuardarObjeto(a);
+			conexion.GuardarObjeto(l);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
 			conexion.RollbackearTransaccion();
@@ -38,12 +36,12 @@ public class DaoAutor implements IdaoAutor {
 	}
 
 	@Override
-	public boolean modificarAutor(Autor a) {
+	public boolean modificarLibro(Libro l) {
 		conexion.abrirConexion();
 		boolean exito = true;
 		try {
 			conexion.IniciarTransaccion();
-			conexion.ActualizarObjeto(a);
+			conexion.ActualizarObjeto(l);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
 			conexion.RollbackearTransaccion();
@@ -54,12 +52,12 @@ public class DaoAutor implements IdaoAutor {
 	}
 
 	@Override
-	public boolean eliminarAutor(Autor a){
+	public boolean eliminarLibro(Libro l) {
 		conexion.abrirConexion();
 		boolean exito = true;
 		try {
 			conexion.IniciarTransaccion();
-			conexion.BorrarObjeto(a);
+			conexion.BorrarObjeto(l);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
 			conexion.RollbackearTransaccion();
@@ -68,17 +66,17 @@ public class DaoAutor implements IdaoAutor {
 		conexion.cerrarSession();
 		return exito;
 	}
-	
+
 	@Override
-	public Autor obtenerAutor(int idAutor){
+	public Libro obtenerLibro(int isbn) {
 		conexion.abrirConexion();
-		Autor a = new Autor();
+		Libro l = new Libro();
 		try {
-			a = (Autor)conexion.ObtenerObjeto(Autor.class, idAutor);
+			l = (Libro)conexion.ObtenerObjeto(Libro.class, isbn);
 		} catch (Exception e) {
-			a = null;
+			l = null;
 		}
 		conexion.cerrarSession();
-		return a;
+		return l;
 	}
 }

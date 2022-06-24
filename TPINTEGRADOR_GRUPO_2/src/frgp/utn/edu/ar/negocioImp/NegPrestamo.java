@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dao.IdaoPrestamo;
+import daoImp.IdaoPrestamo;
 import entidades.Prestamo;
 import frgp.utn.edu.ar.negocio.InegPrestamo;
 
@@ -29,4 +29,9 @@ public class NegPrestamo implements InegPrestamo{
 	public boolean modificarPrestamo(Prestamo p) {
 		return daoPrestamo.modificarPrestamo(p);
 	}
+	
+	@Override
+	 public Prestamo obtenerPrestamo(int idPrestamo) {
+		 return daoPrestamo.obtenerPrestamo(idPrestamo);
+	 }
 }

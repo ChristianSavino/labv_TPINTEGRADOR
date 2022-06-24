@@ -1,10 +1,11 @@
-package daoImp;
+package dao;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import dao.IdaoPrestamo;
 
+import daoImp.IdaoPrestamo;
+import entidades.Cliente;
 import entidades.Prestamo;
 
 public class DaoPrestamo implements IdaoPrestamo{
@@ -50,5 +51,18 @@ public class DaoPrestamo implements IdaoPrestamo{
 		}
 		conexion.cerrarSession();
 		return exito;
+	}
+	
+	@Override
+	public Prestamo obtenerPrestamo(int idPrestamo){
+		conexion.abrirConexion();
+		Prestamo a = new Prestamo();
+		try {
+			a = (Prestamo)conexion.ObtenerObjeto(Prestamo.class, idPrestamo);
+		} catch (Exception e) {
+			a = null;
+		}
+		conexion.cerrarSession();
+		return a;
 	}
 }

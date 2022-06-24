@@ -1,30 +1,33 @@
-package daoImp;
+package dao;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import dao.IdaoLibro;
-import entidades.Libro;
 
-public class DaoLibro implements IdaoLibro {
+import org.springframework.beans.factory.annotation.Autowired;
+
+import daoImp.IdaoAutor;
+import entidades.Autor;
+
+public class DaoAutor implements IdaoAutor {
+
 	@Autowired
 	private Conexion conexion;
 
 	@Override
-	public List<Libro> listarLibros() {
+	public List<Autor> listarAutores() {
 		conexion.abrirConexion();
-		List<Libro> listaLibros= (List<Libro>)conexion.getSession().createQuery("FROM Libro l ORDER BY l.id asc").list();
+		List<Autor> listaAutores= (List<Autor>)conexion.getSession().createQuery("FROM Autor a ORDER BY idAutor asc").list();
 		conexion.cerrarSession();
 
-		return listaLibros;
+		return listaAutores;
 	}
 
 	@Override
-	public boolean agregarLibro(Libro l) {
+	public boolean agregarAutor(Autor a) {
 		conexion.abrirConexion();
 		boolean exito = true;
 		try {
 			conexion.IniciarTransaccion();
-			conexion.GuardarObjeto(l);
+			conexion.GuardarObjeto(a);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
 			conexion.RollbackearTransaccion();
@@ -35,12 +38,12 @@ public class DaoLibro implements IdaoLibro {
 	}
 
 	@Override
-	public boolean modificarLibro(Libro l) {
+	public boolean modificarAutor(Autor a) {
 		conexion.abrirConexion();
 		boolean exito = true;
 		try {
 			conexion.IniciarTransaccion();
-			conexion.ActualizarObjeto(l);
+			conexion.ActualizarObjeto(a);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
 			conexion.RollbackearTransaccion();
@@ -51,12 +54,12 @@ public class DaoLibro implements IdaoLibro {
 	}
 
 	@Override
-	public boolean eliminarLibro(Libro l) {
+	public boolean eliminarAutor(Autor a){
 		conexion.abrirConexion();
 		boolean exito = true;
 		try {
 			conexion.IniciarTransaccion();
-			conexion.BorrarObjeto(l);
+			conexion.BorrarObjeto(a);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
 			conexion.RollbackearTransaccion();
@@ -65,17 +68,17 @@ public class DaoLibro implements IdaoLibro {
 		conexion.cerrarSession();
 		return exito;
 	}
-
+	
 	@Override
-	public Libro obtenerLibro(int isbn) {
+	public Autor obtenerAutor(int idAutor){
 		conexion.abrirConexion();
-		Libro l = new Libro();
+		Autor a = new Autor();
 		try {
-			l = (Libro)conexion.ObtenerObjeto(Libro.class, isbn);
+			a = (Autor)conexion.ObtenerObjeto(Autor.class, idAutor);
 		} catch (Exception e) {
-			l = null;
+			a = null;
 		}
 		conexion.cerrarSession();
-		return l;
+		return a;
 	}
 }

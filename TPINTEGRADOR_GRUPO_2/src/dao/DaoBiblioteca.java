@@ -1,10 +1,10 @@
-package daoImp;
+package dao;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dao.IdaoBiblioteca;
+import daoImp.IdaoBiblioteca;
 import entidades.Biblioteca;
 
 public class DaoBiblioteca implements IdaoBiblioteca {

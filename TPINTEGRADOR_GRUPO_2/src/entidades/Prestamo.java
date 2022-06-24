@@ -17,7 +17,7 @@ public class Prestamo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToMany(cascade = { CascadeType.PERSIST })
+	@OneToOne(cascade = { CascadeType.PERSIST })
 	@JoinColumn(name = "idBiblioteca")
 	private Biblioteca biblioteca;
 
@@ -27,7 +27,7 @@ public class Prestamo implements Serializable {
 	@Column(name = "CantidadDias")
 	private int cantDias;
 
-	@OneToMany(cascade = { CascadeType.PERSIST })
+	@OneToOne(cascade = { CascadeType.PERSIST })
 	@JoinColumn(name = "idCliente")
 	private Cliente cliente;
 
