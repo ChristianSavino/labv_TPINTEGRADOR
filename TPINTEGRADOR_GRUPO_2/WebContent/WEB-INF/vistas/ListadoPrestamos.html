@@ -16,6 +16,18 @@
         <div class="row">
             <div class="col-12">
                 <h1>Listado de prestamos</h1>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 offset-10">
+                <button type="button" class="btn btn-success" data-toggle="modal"
+                    data-target="#exampleModalCenter3">Nuevo Prestamo</button>
+            </div>
+        </div>
+        <h3></h3>
+        <div class="row">
+            <div class="col-12">
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -39,8 +51,8 @@
                             <td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenter"><i class="far fa-eye"></i></button>
-                                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                    data-target="#exampleModalCenter2"><i class="fas fa-edit"></i></button>
                             </td>
                         </tr>
 
@@ -61,66 +73,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                   
-                    <form action="#" method="post">
-
-                        <div class=" form-group row">
-                            <label for="lastName" class="col-sm-5 col-form-label">Nro Prestamo</label>
-                            <div class="col-sm-7">1</div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="lastName" class="col-sm-5 col-form-label">ISBN</label>
-                            <div class="col-sm-7">12344567-2344</div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="lastName" class="col-sm-5 col-form-label">Nombre Libro</label>
-                            <div class="col-sm-7">Un libro mas</div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="lastName" class="col-sm-5 col-form-label">DNI Cliente</label>
-                            <div class="col-sm-7">39999999</div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="lastName" class="col-sm-5 col-form-label">Nombre Cliente</label>
-                            <div class="col-sm-7">Nomnre cliente</div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="lastName" class="col-sm-5 col-form-label">Apellido Cliente</label>
-                            <div class="col-sm-7">Apellido cliente</div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="lastName" class="col-sm-5 col-form-label">Fecha Prestamo</label>
-                            <div class="col-sm-7">39/02/2022</div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="lastName" class="col-sm-5 col-form-label">Cantidad Dias Prestamo</label>
-                            <div class="col-sm-7">9991992949</div>
-                        </div>
-                        <div class=" form-group row">
-                            <label for="lastName" class="col-sm-5 col-form-label">Estado</label>
-                            <div class="col-sm-7">Atrasado</div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="exampleModalCentewr" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Detalles del prestamo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-               
-                <form action="#" method="post">
-
                     <div class=" form-group row">
                         <label for="lastName" class="col-sm-5 col-form-label">Nro Prestamo</label>
                         <div class="col-sm-7">1</div>
@@ -157,15 +109,167 @@
                         <label for="lastName" class="col-sm-5 col-form-label">Estado</label>
                         <div class="col-sm-7">Atrasado</div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+
+    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Detalles del prestamo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="#" method="post">
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Nro Prestamo</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">ISBN</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Nombre Libro</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">DNI Cliente</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Nombre Cliente</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Apellido Cliente</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Fecha Prestamo</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Cantidad Dias Prestamo</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Estado</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Detalles del prestamo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="#" method="post">
+                        
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">ISBN</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Nombre Libro</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">DNI Cliente</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Nombre Cliente</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Apellido Cliente</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+               
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-5 col-form-label">Cantidad Dias Prestamo</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="username"
+                                    placeholder="Ingrese un nombre de usuario">
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar Nuevo Prestamo</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
