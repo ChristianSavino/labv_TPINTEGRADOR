@@ -16,8 +16,7 @@
         <h1>Biblioteca</h1>
         <div class="card">
             <div class="card-body">
-                <form action="login.html" method="get">
-
+                <form action="index.html" method="get">				
                     <div class=" form-group row">
                         <label for="lastName" class="col-sm-2 col-form-label">Usuario</label>
                         <div class="col-sm-7">
@@ -25,7 +24,6 @@
                                 placeholder="Ingrese un nombre de usuario">
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="lastName" class="col-sm-2 col-form-label">Contraseña</label>
                         <div class="col-sm-7">
@@ -35,6 +33,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Iniciar sesion</button>
                 </form>
+                
+                <h1>${loginFailed}</h1>
             </div>
         </div>
     </div>
