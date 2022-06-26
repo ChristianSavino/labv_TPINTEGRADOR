@@ -1,0 +1,63 @@
+@charset "ISO-8859-1";
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+
+body{
+    line-height: 1.6;
+}
+
+header{
+    margin-bottom: 10px;
+}
+
+ul{
+    text-align: center;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    min-height: 8vh;
+    background-color: rgb(50, 56, 66);
+}
+
+.enlaces-menu{
+    display: flex;
+}
+
+.enlaces-menu li{
+    padding: 0 40px;
+    list-style-type: none;
+    color: #fff;
+    transition: 0.3s;
+    margin: 10px;
+}
+
+.enlaces-menu li a{
+    font-size: 1.8rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.enlaces-menu li:hover{
+    background-color: rgb(62, 130, 197);
+    cursor: pointer;
+}
+
+.btnCerrarSesion{
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}

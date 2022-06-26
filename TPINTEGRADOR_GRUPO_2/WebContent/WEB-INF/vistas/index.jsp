@@ -8,10 +8,26 @@
     <title>Sistema de Biblioteca</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+<link rel="stylesheet" type="text/css" href="../lib/css/Main.css"/>
 </head>
 
 <body>
+	<header>
+	      <div>
+	        <nav>
+	          <ul class="enlaces-menu">
+	            <li type="button"><a href="#">Biblioteca</a></li>
+	            <li type="button"><a href="#" >Prestamos</a></li>
+	            <li type="button"><a href="#">Clientes</a></li>		
+	          </ul>
+	          <ul class="enlaces-menu">
+	            <li>
+	              <button class="btnCerrarSesion">Cerrar Sesión</button>
+	            </li>
+	          </ul>
+	        </nav>
+	      </div>
+	</header>
     <div class="container">
         <h1>Biblioteca</h1>
         <div class="card">
