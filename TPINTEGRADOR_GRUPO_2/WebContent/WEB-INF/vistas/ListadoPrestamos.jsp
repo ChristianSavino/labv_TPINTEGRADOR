@@ -5,7 +5,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Prestamos</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -15,27 +15,11 @@
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../lib/css/Main.css">
-<link rel="stylesheet" type="text/css" href="../lib/css/Main.css" />
+<link rel="stylesheet" type="text/css" href="css/Main.css" />
 </head>
 
 <body>
-	<header>
-	<div>
-		<nav>
-		<ul class="enlaces-menu">
-			<li href="#" type="button"><a>Biblioteca</a></li>
-			<li href="#" type="button"><a>Prestamos</a></li>
-			<li href="#" type="button"><a>Clientes</a></li>
-		</ul>
-		<ul class="enlaces-menu">
-			<li>
-				<button class="btnCerrarSesion">Cerrar Sesión</button>
-			</li>
-		</ul>
-		</nav>
-	</div>
-	</header>
-
+<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="row">
 			<div class="col-12">

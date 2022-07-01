@@ -10,18 +10,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/css/Main.css" />
+<link rel="stylesheet" type="text/css" href="css/Main.css" />
 </head>
 
 <style>
-body { 
-	background:rgba(0,0,0,0.5) url('https://static.nationalgeographicla.com/files/styles/image_3200/public/006-library-biblioteca-angelica-a-roma_0002.jpg?w=1600&h=900');	 
-	 background-position: center;
-	 background-repeat: no-repeat;
-	 background-size: cover;
-	 background-blend-mode: darken;
-}
-
 .form{
 	margin-top: 150px;
 }

@@ -23,9 +23,36 @@ public class DaoBiblioteca implements IdaoBiblioteca {
 	}
 	
 	@Override
-	public List<Object[]> listarBibliotecasTabla() {
+	public List<Object[]> listarBibliotecasTabla(String fechaAlta, int estado, int isbn) {
+		String condiciones = "";
+		int cantCondiciones = 0;
+		
+		if (fechaAlta.length() > 0) {
+			condiciones = " WHERE DATE(b.fechaDeAlta) = '" + fechaAlta + "'";
+			cantCondiciones++;
+		}
+		
+		if(estado > 0) {
+			if(cantCondiciones == 0) {
+				condiciones = " WHERE b.estado = " + estado;
+				cantCondiciones++;
+			}
+			else
+				condiciones += " AND b.estado = " + estado;
+		}
+		
+		if(isbn > 0) {
+			if(cantCondiciones == 0) {
+				condiciones = " WHERE l.id = " + isbn;
+				cantCondiciones++;
+			}
+			else
+				condiciones += " AND l.id = " + isbn;
+		}
+		
 		conexion.abrirConexion();
-		List<Object[]> listaBibliotecas= conexion.ObtenerListaPorQuery("SELECT b.id as Codigo, l.id as ISBN, l.titulo as Titulo, DATE_FORMAT(b.fechaDeAlta,'%d/%m/%Y') as 'Fecha Alta', CASE WHEN b.estado = 1 THEN 'Disponible' ELSE 'Prestado' END as Estado FROM biblioteca b INNER JOIN libro l ON b.idlibro = l.id;");
+		List<Object[]> listaBibliotecas= conexion.ObtenerListaPorQuery("SELECT b.id as Codigo, l.id as ISBN, l.titulo as Titulo, DATE_FORMAT(b.fechaDeAlta,'%d/%m/%Y') as 'Fecha Alta', CASE WHEN b.estado = 1 THEN 'Disponible' ELSE 'Prestado' END as Estado "
+				+ "FROM biblioteca b INNER JOIN libro l ON b.idlibro = l.id" + condiciones+";");
 		conexion.cerrarSession();
 
 		return listaBibliotecas;
