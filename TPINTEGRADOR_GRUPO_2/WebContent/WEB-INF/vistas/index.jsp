@@ -15,12 +15,20 @@
 
 <style>
 body { 
-	background-image: url('https://static.nationalgeographicla.com/files/styles/image_3200/public/006-library-biblioteca-angelica-a-roma_0002.jpg?w=1600&h=900');
+	background:rgba(0,0,0,0.5) url('https://static.nationalgeographicla.com/files/styles/image_3200/public/006-library-biblioteca-angelica-a-roma_0002.jpg?w=1600&h=900');	 
+	 background-position: center;
+	 background-repeat: no-repeat;
+	 background-size: cover;
+	 background-blend-mode: darken;
+}
+
+.form{
+	margin-top: 150px;
 }
 </style>
 
 <body>
-	<div style="background:rgba(0, 0, 0, 0.5);">
+	<div class="form">
 		<div class="container">
 			<div class="card">
 				<h1>Sistema Biblioteca: Grupo 2</h1>
