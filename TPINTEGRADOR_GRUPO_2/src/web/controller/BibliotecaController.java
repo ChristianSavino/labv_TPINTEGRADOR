@@ -25,4 +25,9 @@ public class BibliotecaController {
 		Iterable<Biblioteca> biblo = negBiblioteca.listarBibliotecas();
 		return biblo;
 	}
+	@RequestMapping("modificarBiblioteca.html")
+	@ResponseBody
+	public String modificarBiblioteca() {
+		return "{'status':true}";
+	}
 }

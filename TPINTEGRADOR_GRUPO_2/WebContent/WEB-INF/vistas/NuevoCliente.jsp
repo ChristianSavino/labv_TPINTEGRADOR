@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -20,7 +22,7 @@
           </ul>
           <ul class="enlaces-menu">
             <li>
-              <button class="btnCerrarSesion">Cerrar Sesión</button>
+              <button class="btnCerrarSesion">Cerrar Sesiï¿½n</button>
             </li>
           </ul>
         </nav>
@@ -50,16 +52,16 @@
                             <div class="col-md-5"><select name="Nacionalidad" id="Nacionalidad">
                             						<option value="A">Argentina</option>
                             						<option value="C">Chile</option>
-                            						<option value="P">Perú</option>
+                            						<option value="P">Perï¿½</option>
                             						<option value="O">...</option>
                             						</select></div>
                             <label for="fnacimiento" class="col-md-3 offset-4 col-form-label">Fecha de Nacimiento: </label>
                             <div class="col-md-5"><input type="date" name="FNacimiento"></div>
                             <label for="localidad" class="col-md-3 offset-4 col-form-label">Localidad: </label>
                             <div class="col-md-5"><input type="text" name="Localidad" value="Rosario"></div>
-                            <label for="direccion" class="col-md-3 offset-4 col-form-label">Dirección: </label>
+                            <label for="direccion" class="col-md-3 offset-4 col-form-label">Direcciï¿½n: </label>
                             <div class="col-md-5"><input type="text" name="Direccion" value="Calle Falsa 123"></div>
-                            <label for="correo" class="col-md-3 offset-4 col-form-label">Correo Electrónico: </label>
+                            <label for="correo" class="col-md-3 offset-4 col-form-label">Correo Electrï¿½nico: </label>
                             <div class="col-md-5"><input type="text" name="Correo" value="LeoMessi@mail.com"></div>
                             <label for="telefono" class="col-md-3 offset-4 col-form-label">Telefono: </label>
                             <div class="col-md-5"><input type="text" name="Telefono" value="03034567899"></div>
