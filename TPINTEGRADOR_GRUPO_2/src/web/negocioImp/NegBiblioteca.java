@@ -21,6 +21,11 @@ public class NegBiblioteca implements InegBiblioteca{
 	}
 	
 	@Override
+	public List<Object[]> listarBibliotecasTabla(){
+		return daoBiblioteca.listarBibliotecasTabla();
+	}
+	
+	@Override
 	public boolean agregarBiblioteca(Biblioteca b) {
 		return daoBiblioteca.agregarBiblioteca(b);
 	}

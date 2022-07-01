@@ -21,6 +21,15 @@ public class DaoBiblioteca implements IdaoBiblioteca {
 
 		return listaBibliotecas;
 	}
+	
+	@Override
+	public List<Object[]> listarBibliotecasTabla() {
+		conexion.abrirConexion();
+		List<Object[]> listaBibliotecas= conexion.ObtenerListaPorQuery("SELECT b.id as Codigo, l.id as ISBN, l.titulo as Titulo, DATE_FORMAT(b.fechaDeAlta,'%d/%m/%Y') as 'Fecha Alta', CASE WHEN b.estado = 1 THEN 'Disponible' ELSE 'Prestado' END as Estado FROM biblioteca b INNER JOIN libro l ON b.idlibro = l.id;");
+		conexion.cerrarSession();
+
+		return listaBibliotecas;
+	}
 
 	@Override
 	public boolean agregarBiblioteca(Biblioteca b) {

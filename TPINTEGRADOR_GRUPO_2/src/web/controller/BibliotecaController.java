@@ -19,10 +19,10 @@ public class BibliotecaController {
 	@Qualifier("servicioBiblioteca")
 	private NegBiblioteca negBiblioteca;
 	
-	@RequestMapping("listarBiblioteca.html")
+	/*@RequestMapping("listarBiblioteca.html")
 	@ResponseBody
-	public Iterable<Biblioteca> ListarTodasBibliotecas() {
+	public List<Object> ListarTodasBibliotecas() {
 		Iterable<Biblioteca> biblo = negBiblioteca.listarBibliotecas();
 		return biblo;
-	}
+	}*/
 }

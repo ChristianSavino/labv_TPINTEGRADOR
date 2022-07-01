@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Usuario;
+import web.negocioImp.NegBiblioteca;
 import web.negocioImp.NegScriptInicial;
 import web.negocioImp.NegUsuario;
 
@@ -21,6 +22,10 @@ public class IndexController {
 	@Qualifier("servicioScriptInicial")
 	private NegScriptInicial iNegScriptInicial;
 	
+	@Autowired
+	@Qualifier("servicioBiblioteca")
+	private NegBiblioteca negBiblioteca;
+	
 	@RequestMapping("index.html")
 	public ModelAndView Login(String username, String password)	{		
 		ModelAndView mv = new ModelAndView();
@@ -29,7 +34,11 @@ public class IndexController {
 			iNegScriptInicial.CheckearScriptInicial();
 			Usuario u = iNegUsuario.obtenerUsuarioConPass(username, password);
 			if (u.getId() != 0)
-				redirect = "ListadoBiblioteca";			
+			{
+				redirect = "ListadoBiblioteca";
+				mv.addObject("bibliotecas",negBiblioteca.listarBibliotecasTabla());
+				mv.addObject("nombre",u.getUsername());
+			}	
 		} catch (Exception e) {
 			mv.addObject("loginFailed","Credenciales Incorrectas");
 			redirect = "index";	

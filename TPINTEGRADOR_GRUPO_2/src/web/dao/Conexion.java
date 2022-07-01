@@ -1,5 +1,7 @@
 package web.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -46,6 +48,11 @@ public class Conexion {
 		return session.get(clase, id);
 	}
 
+	public List<Object[]> ObtenerListaPorQuery(String query){
+	 	   List<Object[]> list = (List<Object[]>)session.createSQLQuery(query).list();
+	 	   return list;
+	}
+	
 	public void ActualizarObjeto(Object object) {
 		session.update(object);
 	}
