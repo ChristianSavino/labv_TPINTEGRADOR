@@ -59,7 +59,7 @@ public class NegBiblioteca implements InegBiblioteca{
 
 	@Override
 	public Biblioteca obtenerLibro(int id) {
-		return daoBiblioteca.obtenerLibro(id);
+		return daoBiblioteca.obtenerBiblioteca(id);
 	}
 
 }

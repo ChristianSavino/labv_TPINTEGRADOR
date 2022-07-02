@@ -27,4 +27,11 @@ public class BibliotecaController {
 		mv.setViewName("ListadoBiblioteca");
 		return mv;
 	}
+	
+	@RequestMapping("agregarBiblioteca.html")
+	public ModelAndView AgregarBiblioteca(int isbn, String fechaAlta ) {
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
 }

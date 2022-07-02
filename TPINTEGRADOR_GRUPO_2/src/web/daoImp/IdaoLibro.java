@@ -10,4 +10,5 @@ public interface IdaoLibro {
 	public boolean modificarLibro(Libro l);
 	public boolean eliminarLibro(Libro l);
 	public Libro obtenerLibro(int isbn);
+	public Libro obtenerLibroFiltroNuevaBiblioteca(int isbn,String nombre);
 }

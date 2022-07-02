@@ -86,4 +86,20 @@ public class DaoLibro implements IdaoLibro {
 		conexion.cerrarSession();
 		return l;
 	}
+
+	@Override
+	public Libro obtenerLibroFiltroNuevaBiblioteca(int isbn, String nombre) {
+		conexion.abrirConexion();
+		
+		String condicion="";
+		if(isbn > 0)
+			condicion= " AND l.id = " + isbn;
+		if(nombre.length() > 0) 
+			condicion += " AND l.titulo= '"+nombre+"'";
+		int libro = (int)conexion.obtenerDatoUnicoPorQuery("select l.id from libro l left join biblioteca b on l.id = b.idlibro WHERE b.id is null"+condicion);
+		
+		Libro l = (Libro)conexion.ObtenerObjeto(Libro.class, libro);
+		conexion.cerrarSession();
+		return l;
+	}
 }

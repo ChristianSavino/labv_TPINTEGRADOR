@@ -53,6 +53,11 @@ public class Conexion {
 	 	   return list;
 	}
 	
+	public Object obtenerDatoUnicoPorQuery(String query) {
+		Object object = (Object)session.createSQLQuery(query).uniqueResult();
+		return object;
+	}
+	
 	public void ActualizarObjeto(Object object) {
 		session.update(object);
 	}

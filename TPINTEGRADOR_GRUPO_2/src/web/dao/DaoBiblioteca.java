@@ -107,7 +107,7 @@ public class DaoBiblioteca implements IdaoBiblioteca {
 	}
 
 	@Override
-	public Biblioteca obtenerLibro(int id) {
+	public Biblioteca obtenerBiblioteca(int id) {
 		conexion.abrirConexion();
 		Biblioteca b = new Biblioteca();
 		try {

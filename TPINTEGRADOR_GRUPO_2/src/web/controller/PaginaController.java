@@ -71,4 +71,11 @@ public class PaginaController {
 		mv.setViewName("index");
 		return mv;
 	}
+	
+	@RequestMapping("nuevaBiblioteca.html")
+	public ModelAndView PaginaNuevaBiblioteca() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("NuevaBiblioteca");
+		return mv;
+	}
 }
