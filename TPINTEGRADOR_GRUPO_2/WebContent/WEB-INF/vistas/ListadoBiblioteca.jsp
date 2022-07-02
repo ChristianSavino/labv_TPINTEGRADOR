@@ -34,6 +34,7 @@
 							<td>Titulo</td>
 							<td>Fecha Alta</td>
 							<td>Estado</td>
+							<td>Acciones</td>
 						</tr>
 						<c:forEach var="obj" items="${bibliotecas}">
 							<tr>
@@ -42,6 +43,11 @@
 								<td>${obj[2]}</td>
 								<td>${obj[3]}</td>
 								<td>${obj[4]}</td>
+								<td>                              
+									<input type="button" value="Eliminar"	onclick="location.href = 'eliminarBiblioteca.html?id=${obj[0]}';"	class="btn btn-danger"></input>
+									<input type="button" value="Modificar"	onclick="location.href = 'modificarBiblioteca.html?id=${obj[0]}';"	class="btn btn-primary"></input>
+									<input type="button" value="Prestamo"   onclick="location.href = 'nuevoPrestamo?idBiblioteca=${obj[0]}.html';" class="btn btn-primary"></input>
+                              	</td>
 							</tr>
 						</c:forEach>
 					</table>
