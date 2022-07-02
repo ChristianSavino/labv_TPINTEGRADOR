@@ -10,6 +10,7 @@ import web.entidades.Usuario;
 import web.negocioImp.NegBiblioteca;
 import web.negocioImp.NegScriptInicial;
 import web.negocioImp.NegUsuario;
+import web.negocioImp.NegCliente;
 
 @Controller
 public class PaginaController {
@@ -25,6 +26,10 @@ public class PaginaController {
 	@Autowired
 	@Qualifier("servicioBiblioteca")
 	private NegBiblioteca iNegBiblioteca;
+	
+	@Autowired
+	@Qualifier("servicioCliente")
+	private NegCliente iNegCliente;
 	
 	@RequestMapping("index.html")
 	public String Login(String username, String password)	{		
@@ -62,6 +67,14 @@ public class PaginaController {
 	public ModelAndView PaginaPrestamos() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("ListadoPrestamos");
+		return mv;
+	}
+	
+	@RequestMapping("listadoClientes.html")
+	public ModelAndView PaginaClientes() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("clientes",iNegCliente.listarClienteTabla("","",""));
+		mv.setViewName("ListadoClientes");
 		return mv;
 	}
 	

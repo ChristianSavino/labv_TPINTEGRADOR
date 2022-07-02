@@ -17,10 +17,46 @@ public class DaoCliente implements IdaoCliente{
 	@Override
 	public List<Cliente> listarClientes() {
 		conexion.abrirConexion();
-		List<Cliente> listaAutores= (List<Cliente>)conexion.getSession().createQuery("FROM Autor a ORDER BY idAutor asc").list();
+		List<Cliente> listaAutores= (List<Cliente>)conexion.getSession().createQuery("FROM Cliente a ORDER BY idCliente asc").list();
 		conexion.cerrarSession();
 
 		return listaAutores;
+	}
+	
+	@Override
+	public List<Object[]> listarClienteTabla(String nacionalidad, String nombre, String apellido) {
+		String condiciones = "";
+		int cantCondiciones = 0;
+		
+		if (nacionalidad.length() > 0) {
+			condiciones = " WHERE c.Nacionalidad = '" + nacionalidad + "'";
+			cantCondiciones++;
+		}
+		
+		if(nombre.length() > 0) {
+			if(cantCondiciones == 0) {
+				condiciones = " WHERE c.Nombre = " + nombre;
+				cantCondiciones++;
+			}
+			else
+				condiciones += " AND c.Nombre = " + nombre;
+		}
+		
+		if(apellido.length() > 0) {
+			if(cantCondiciones == 0) {
+				condiciones = " WHERE c.Apellido = " + apellido;
+				cantCondiciones++;
+			}
+			else
+				condiciones += " AND c.Apellido = " + apellido;
+		}
+		
+		conexion.abrirConexion();
+		List<Object[]> listaClientes= conexion.ObtenerListaPorQuery("SELECT c.Dni as DNI, c.Nombre as Nombre, c.Apellido as Apellido, c.Nacionalidad as Nacionalidad, c.Email as Email, c.Direccion as Direccion, c.Localidad as Localidad, c.Telefono as Teléfono, DATE_FORMAT(c.FechaNacimiento,'%d/%m/%Y') as 'Fecha Nacimiento' "
+				+ "FROM Cliente " + condiciones+";");
+		conexion.cerrarSession();
+
+		return listaClientes;
 	}
 
 	@Override
