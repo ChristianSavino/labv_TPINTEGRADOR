@@ -27,7 +27,7 @@
 			<div class="row">
 				<div class="col-12">
 					<h1>Clientes</h1>
-					<input type="button" value="Agregar Cliente" onclick="location.href = 'NuevoCliente.html';" class="btn btn-primary"></input>
+					<input type="button" value="Agregar Cliente" onclick="location.href = 'nuevoCliente.html';" class="btn btn-primary"></input>
 					<table class="table table-bordered table-hover">
 						<tr>
 							<td>DNI</td>
