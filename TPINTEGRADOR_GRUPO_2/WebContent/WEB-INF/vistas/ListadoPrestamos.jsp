@@ -25,7 +25,7 @@
             </div>
             <div class="row">
                 <div class="col-12 offset-10">
-                    <a href="NuevoPrestamo.html" class="btn btn-success">Nuevo Prestamo</a>
+                <input type="button" value="Nuevo Prestamo" onclick="location.href = 'nuevoPrestamo.html';" class="btn btn-primary"></input>
                 </div>
             </div>
             <h3></h3>

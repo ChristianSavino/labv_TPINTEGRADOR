@@ -16,26 +16,12 @@
 .text-divider span{background-color: #ffffff; padding: 1em;}
 .text-divider:before{ content: " "; display: block; border-top: 1px solid #e3e3e3; border-bottom: 1px solid #f7f7f7;}
         </style>
-	<link rel="stylesheet" href="~/lib/css/Main.css">
+<link rel="stylesheet" type="text/css" href="css/Main.css" />
 </head>
 
 <body>
- <header>
-      <div>
-        <nav>
-          <ul class="enlaces-menu">
-            <li href="#" type="button"><a>Biblioteca</a></li>
-            <li href="#" type="button"><a>Prestamos</a></li>
-            <li href="#" type="button"><a>Clientes</a></li>		
-          </ul>
-          <ul class="enlaces-menu">
-            <li>
-              <button class="btnCerrarSesion">Cerrar Sesi�n</button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+ 	<jsp:include page="Header.jsp" />
+
 
     <div class="container">
         <h1>Nuevo Prestamo</h1>
