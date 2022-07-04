@@ -23,7 +23,7 @@ public class DaoBiblioteca implements IdaoBiblioteca {
 	}
 	
 	@Override
-	public List<Object[]> listarBibliotecasTabla(String fechaAlta, int estado, int isbn) {
+	public List<Object[]> listarBibliotecasTabla(String fechaAlta, int estado, int isbn,String titulo) {
 		String condiciones = "";
 		int cantCondiciones = 0;
 		
@@ -48,6 +48,15 @@ public class DaoBiblioteca implements IdaoBiblioteca {
 			}
 			else
 				condiciones += " AND l.id = " + isbn;
+		}
+		
+		if(titulo.length() > 0) {
+			if(cantCondiciones == 0) {
+				condiciones = " WHERE l.titulo = '" + titulo + "'";
+				cantCondiciones++;
+			}
+			else
+				condiciones = " AND l.titulo = '" + titulo + "'";
 		}
 		
 		conexion.abrirConexion();

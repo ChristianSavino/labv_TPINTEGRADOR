@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Biblioteca;
-import web.entidades.Libro;
 import web.negocioImp.NegBiblioteca;
 
 @Controller
@@ -20,11 +19,13 @@ public class BibliotecaController {
 	@Qualifier("servicioBiblioteca")
 	private NegBiblioteca iNegBiblioteca;
 	
+
+	
 	@RequestMapping("listarBibliotecaFiltro.html")
 	@ResponseBody
-	public ModelAndView ListarTodasBibliotecasFiltro(String fechaAlta,String estado, String isbn) {
+	public ModelAndView ListarTodasBibliotecasFiltro(String fechaAlta,String estado, String isbn,String titulo) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("bibliotecas",iNegBiblioteca.listarBibliotecasTabla(fechaAlta,estado,isbn));
+		mv.addObject("bibliotecas",iNegBiblioteca.listarBibliotecasTabla(fechaAlta,estado,isbn,titulo));
 		mv.setViewName("ListadoBiblioteca");
 		return mv;
 	}

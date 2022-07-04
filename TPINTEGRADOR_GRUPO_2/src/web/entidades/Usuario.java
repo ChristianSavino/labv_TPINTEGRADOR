@@ -1,7 +1,6 @@
 package web.entidades;
 
 import javax.persistence.*;
-
 import org.springframework.stereotype.Component;
 
 @Component
