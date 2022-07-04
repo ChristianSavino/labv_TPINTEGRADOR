@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Biblioteca;
+import web.entidades.Libro;
 import web.negocioImp.NegBiblioteca;
 
 @Controller
 public class BibliotecaController {
-
+	
 	@Autowired
 	@Qualifier("servicioBiblioteca")
 	private NegBiblioteca iNegBiblioteca;
@@ -32,6 +33,17 @@ public class BibliotecaController {
 	public ModelAndView AgregarBiblioteca(int isbn, String fechaAlta ) {
 		ModelAndView mv = new ModelAndView();
 		
+		return mv;
+	}
+	
+	@RequestMapping("nuevoPrestamo.html")
+	public ModelAndView PaginaNuevaBiblioteca(int idBiblioteca) {
+		
+		Biblioteca libro = iNegBiblioteca.obtenerLibro(idBiblioteca);
+		System.out.println(libro.toString());
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("libro", libro);
+		mv.setViewName("NuevoPrestamo");
 		return mv;
 	}
 }

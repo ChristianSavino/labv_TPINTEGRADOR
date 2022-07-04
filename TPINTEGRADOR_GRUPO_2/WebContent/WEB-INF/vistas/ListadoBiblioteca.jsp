@@ -47,7 +47,7 @@
 								<td>                              
 									<input type="button" value="Eliminar"	onclick="location.href = 'eliminarBiblioteca.html?id=${obj[0]}';"	class="btn btn-danger"></input>
 									<input type="button" value="Modificar"	onclick="location.href = 'modificarBiblioteca.html?id=${obj[0]}';"	class="btn btn-primary"></input>
-									<input type="button" value="Prestamo"   onclick="location.href = 'nuevoPrestamo?idBiblioteca=${obj[0]}.html';" class="btn btn-primary"></input>
+									<input type="button" value="Prestamo"   onclick="location.href = 'nuevoPrestamo.html?idBiblioteca=${obj[0]}';" class="btn btn-primary"></input>
                               	</td>
 							</tr>
 						</c:forEach>

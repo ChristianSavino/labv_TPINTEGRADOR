@@ -24,21 +24,28 @@
 
 
     <div class="container">
-        <h1>Nuevo Prestamo</h1>
         <div class="card">
             <div class="card-body">
-                <form action="#" method="post">
-
-                        <button type="button" class="btn btn-primary col-md-3 offset-4" data-toggle="modal"
-                                    data-target="#exampleModalCenter">Asignar libro</button>
+            <div class="row">
+            <div class="col-md-4 offset-4">
+        <h1>Nuevo Prestamo</h1>
+            </div>
+            </div>
+                <form action="#" method="post">               	
                         <div class="row">
+                        <div class="col-md-8 offset-2">
+                            <hr>
+                        </div>
+                    </div>
+                        <div class="row">
+						<h3 class="col-md-3 offset-4">Libro</h3>
 
                             <label for="lastName" class="col-md-3 offset-4 col-form-label">ISBN</label>
-                            <div class="col-md-5">isb del libro seleccionado</div>
-                            <label for="lastName" class="col-md-3 offset-4 col-form-label">Nombre </label>
-                            <div class="col-md-5">nombre del libro</div>
+                            <div class="col-md-3">${libro.getLibro().getIsbn()}</div>
+                            <label for="lastName" class="col-md-3 offset-4 col-form-label">Titulo </label>
+                            <div class="col-md-3">${libro.getLibro().getTitulo()}</div>
                             <label for="lastName" class="col-md-3 offset-4 col-form-label">Autor </label>
-                            <div class="col-md-5">autor del libro</div>
+                            <div class="col-md-3">${libro.getLibro().getAutor().getNombre()} ${libro.getLibro().getAutor().getApellido()}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-8 offset-2">
@@ -54,11 +61,11 @@
                         <div class="row">
 
                             <label for="lastName" class="col-md-3 offset-4 col-form-label">DNI</label>
-                            <div class="col-md-5">dni cliente</div>
+                            <div class="col-md-3">dni cliente</div>
                             <label for="lastName" class="col-md-3 offset-4 col-form-label">Nombre </label>
-                            <div class="col-md-5">nombre cliente</div>
+                            <div class="col-md-3">nombre cliente</div>
                             <label for="lastName" class="col-md-3 offset-4 col-form-label">Apellido </label>
-                            <div class="col-md-5">apellido cliente</div>
+                            <div class="col-md-3">apellido cliente</div>
                     </div>
                     <div class="row">
                         <div class="col-md-8 offset-2">

@@ -53,7 +53,7 @@ public class DaoCliente implements IdaoCliente{
 		
 		conexion.abrirConexion();
 		List<Object[]> listaClientes= conexion.ObtenerListaPorQuery("SELECT c.Dni as DNI, c.Nombre as Nombre, c.Apellido as Apellido, c.Nacionalidad as Nacionalidad, c.Email as Email, c.Direccion as Direccion, c.Localidad as Localidad, c.Telefono as Teléfono, DATE_FORMAT(c.FechaNacimiento,'%d/%m/%Y') as 'Fecha Nacimiento' "
-				+ "FROM Cliente " + condiciones+";");
+				+ "FROM Cliente as c " + condiciones+";");
 		conexion.cerrarSession();
 
 		return listaClientes;
