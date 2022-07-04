@@ -35,20 +35,20 @@ public class DaoCliente implements IdaoCliente{
 		
 		if(nombre.length() > 0) {
 			if(cantCondiciones == 0) {
-				condiciones = " WHERE c.Nombre = " + nombre;
+				condiciones = " WHERE c.Nombre = '" + nombre + "'";
 				cantCondiciones++;
 			}
 			else
-				condiciones += " AND c.Nombre = " + nombre;
+				condiciones += " AND c.Nombre = '" + nombre + "'";
 		}
 		
 		if(apellido.length() > 0) {
 			if(cantCondiciones == 0) {
-				condiciones = " WHERE c.Apellido = " + apellido;
+				condiciones = " WHERE c.Apellido = '" + apellido + "'";
 				cantCondiciones++;
 			}
 			else
-				condiciones += " AND c.Apellido = " + apellido;
+				condiciones += " AND c.Apellido = '" + apellido + "'";
 		}
 		
 		conexion.abrirConexion();

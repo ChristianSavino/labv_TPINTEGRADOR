@@ -43,6 +43,7 @@ public class BibliotecaController {
 		System.out.println(libro.toString());
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("libro", libro);
+		mv.addObject("idBiblioteca", idBiblioteca);
 		mv.setViewName("NuevoPrestamo");
 		return mv;
 	}
