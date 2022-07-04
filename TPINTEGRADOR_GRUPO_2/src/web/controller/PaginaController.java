@@ -3,7 +3,9 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Usuario;
@@ -13,6 +15,7 @@ import web.negocioImp.NegUsuario;
 import web.negocioImp.NegCliente;
 
 @Controller
+@SessionAttributes("usuario")
 public class PaginaController {
 	
 	@Autowired
@@ -31,15 +34,21 @@ public class PaginaController {
 	@Qualifier("servicioCliente")
 	private NegCliente iNegCliente;
 	
+	@ModelAttribute("usuario")
+	public Usuario getUsername() {
+		return new Usuario();
+	}
+	
 	@RequestMapping("index.html")
-	public String Login(String username, String password)	{		
+	public String Login(@ModelAttribute("usuario") Usuario u,String username, String password)	{		
 		String redirect = "";
 		try {
 			iNegScriptInicial.CheckearScriptInicial();
-			Usuario u = iNegUsuario.obtenerUsuarioConPass(username, password);
-			if (u.getId() != 0)
+			Usuario usuario = iNegUsuario.obtenerUsuarioConPass(username, password);
+			if (usuario.getId() != 0)
 			{
 				redirect = "redirect:/listadoBiblioteca.html";
+				u = usuario;
 			}	
 		} catch (Exception e) {
 			redirect = "redirect:/loginFailed.html";	
@@ -58,7 +67,7 @@ public class PaginaController {
 	@RequestMapping("listadoBiblioteca.html")
 	public ModelAndView ListadoBiblioteca() {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("bibliotecas",iNegBiblioteca.listarBibliotecasTabla("","",""));
+		mv.addObject("bibliotecas",iNegBiblioteca.listarBibliotecasTabla("","","",""));
 		mv.setViewName("ListadoBiblioteca");
 		return mv;
 	}

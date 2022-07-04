@@ -59,7 +59,7 @@
 							</p>
 							
 								<p>Fecha de Alta:
-								<input class="form-control" type="search" name="fechaAlta"></p>
+								<input class="form-control" type="date" name="fechaAlta"></p>
 								<p></p>							
 								<p>
 								Estado:
@@ -72,6 +72,10 @@
 								<p></p>						
 								<p>ISBN:
 								<input class="form-control" type="search" name="isbn">
+								</p>
+								<p></p>	
+								<p>Titulo:
+								<input class="form-control" type="search" name="titulo">
 								</p>
 								<p><input class="form-control" type="submit" value="Buscar"></p>
 							</div>
