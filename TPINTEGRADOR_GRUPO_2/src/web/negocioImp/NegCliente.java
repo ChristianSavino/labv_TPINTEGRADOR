@@ -61,4 +61,9 @@ public class NegCliente implements InegCliente {
 	public boolean eliminarCliente(Cliente c) {
 		return daoCliente.eliminarCliente(c);
 	}
+	
+	@Override
+	public Cliente obtenerCliente(int dni) {
+		return daoCliente.obtenerCliente(dni);
+	}
 }

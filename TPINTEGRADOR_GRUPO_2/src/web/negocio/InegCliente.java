@@ -12,4 +12,5 @@ public interface InegCliente {
 	public boolean agregarCliente(Cliente c);
 	public boolean modificarCliente(Cliente c);
 	public boolean eliminarCliente(Cliente c);
+	public Cliente obtenerCliente(int dni);
 }
