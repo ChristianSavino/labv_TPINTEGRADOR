@@ -14,8 +14,13 @@ public class NegLibro implements InegLibro {
 	private DaoLibro daoLibro;
 	
 	@Override
-	public Libro BuscarLibroNuevaBiblioteca(int isbn, String nombre) {
-		return daoLibro.obtenerLibroFiltroNuevaBiblioteca(isbn,nombre);
+	public Libro BuscarLibroNuevaBiblioteca(String isbn, String nombre) {
+		int isbnAux = 0;
+		if (isbn.length() > 0) {
+			isbnAux = Integer.parseInt(isbn);
+		}
+		
+		return daoLibro.obtenerLibroFiltroNuevaBiblioteca(isbnAux,nombre);
 	}
 
 	@Override

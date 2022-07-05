@@ -22,6 +22,12 @@
                nombre = document.getElementById("nombre").value;
         	   location.href = "buscarLibroFiltro.html?isbn="+ isbn+"&nombre="+nombre;
             };
+
+           function agregarBiblioteca() {
+               isbn = document.getElementById("isbn").value;
+               fechaAlta = document.getElementById("fechaAlta").value;
+               location.href = "agregarBiblioteca.html?isbn="+ isbn+"&fechaAlta="+fechaAlta;
+           };
         </script>
 </head>
 
@@ -29,7 +35,7 @@
 	<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="card">
-			<h1>Agregar Biblioteca</h1>
+			<h1>Nueva Biblioteca</h1>
 			<div class="card-body">
 				<form action="#" method="post">
 
@@ -39,18 +45,15 @@
 							<input type="text" id="isbn" placeholder="isbn" value="${isbnLibro}"/>
 							<input type="text" id="nombre" placeholder="nombre libro" value="${nombreLibro}"/>
 							<input type="button" id="botonBusqueda" value="Buscar Libro" onclick="buscarLibro()" class="btn btn-primary"></input>
-							<input type="button" id="botonAgregar" value="Nuevo Libro" onclick="location.href = 'nuevaBiblioteca.html';" class="btn btn-primary"></input>
+							<input type="button" id="botonAgregar" value="Nuevo Libro" onclick="agregarLibro()" class="btn btn-primary"></input>
 						</div>
 						<div class="col-md-5">
-							<label>Fecha de Alta: </label> <input type="date" name="fechaAlta">
+							<label>Fecha de Alta: </label> <input type="date" id="fechaAlta">
 						</div>
 					</div>
 
 					<div class="row">
-						<button type="submit"
-							class="btn btn-primary col-md-3 offset-4 ml-center">Guardar
-							Biblioteca</button>
-
+						<input type="button" id="botonAgregarBiblio" value="Agregar Biblioteca" onclick="agregarBiblioteca()" class="btn btn-primary col-md-3 offset-4 ml-center"></input>
 					</div>
 				</form>
 			</div>

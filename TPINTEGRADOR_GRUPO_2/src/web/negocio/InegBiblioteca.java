@@ -8,7 +8,7 @@ import web.entidades.Biblioteca;
 public interface InegBiblioteca {
 	public List<Biblioteca> listarBibliotecas();
 	public List<Object[]> listarBibliotecasTabla(String fechaAlta,String estado, String isbn,String titulo);
-	public boolean agregarBiblioteca(Biblioteca b);
+	public boolean agregarBiblioteca(int isbn,String fechaAlta);
 	public boolean modificarBiblioteca(Biblioteca b);
 	public boolean eliminarBiblioteca(Biblioteca b);
 	public Biblioteca obtenerBiblioteca(int id);

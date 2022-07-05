@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Biblioteca;
 import web.entidades.Cliente;
+import web.entidades.Libro;
 import web.entidades.Usuario;
 import web.negocioImp.NegBiblioteca;
 import web.negocioImp.NegCliente;
@@ -20,7 +21,7 @@ import web.negocioImp.NegScriptInicial;
 import web.negocioImp.NegUsuario;
 
 @Controller
-@SessionAttributes({"usuario","biblioteca","cliente"})
+@SessionAttributes({"usuario","biblioteca","cliente","libro"})
 public class PaginaController {
 	
 	@Autowired
@@ -45,7 +46,7 @@ public class PaginaController {
 	}
 	
 	@RequestMapping("index.html")
-	public String Login(ModelMap map, @ModelAttribute("usuario") Usuario u,String username, String password)	{		
+	public String Login(SessionStatus status, ModelMap map, @ModelAttribute("usuario") Usuario u,String username, String password)	{		
 		String redirect = "";
 		try {
 			iNegScriptInicial.CheckearScriptInicial();
@@ -95,15 +96,20 @@ public class PaginaController {
 	
 	@RequestMapping("cerrarSesion.html")
 	public ModelAndView CerrarSesion(SessionStatus status) {
+		status.setComplete();
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index");
-		status.setComplete();
 		return mv;
 	}
 	
 	@RequestMapping("nuevaBiblioteca.html")
-	public ModelAndView PaginaNuevaBiblioteca() {
+	public ModelAndView PaginaNuevaBiblioteca(@SessionAttribute(name="libro",required=false) Libro libro) {
 		ModelAndView mv = new ModelAndView();
+		
+		if(libro != null && libro.getIsbn() > 0) {
+			mv.addObject("isbnLibro",libro.getIsbn());
+			mv.addObject("nombreLibro",libro.getTitulo());
+		}
 		mv.setViewName("NuevaBiblioteca");
 		return mv;
 	}

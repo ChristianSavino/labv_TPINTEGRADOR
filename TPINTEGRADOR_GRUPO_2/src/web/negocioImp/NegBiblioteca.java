@@ -1,5 +1,7 @@
 package web.negocioImp;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,12 @@ public class NegBiblioteca implements InegBiblioteca{
 
 	@Autowired
 	private DaoBiblioteca daoBiblioteca;
+	
+	@Autowired
+	private NegLibro iNegLibro;
+	
+	@Autowired
+	private Biblioteca biblioteca;
 
 	@Override
 	public List<Biblioteca> listarBibliotecas(){
@@ -22,12 +30,6 @@ public class NegBiblioteca implements InegBiblioteca{
 
 	@Override
 	public List<Object[]> listarBibliotecasTabla(String fechaAlta, String estado, String isbn, String titulo) {
-		/*String newFecha = "";
-		if (fechaAlta.length() > 0) {
-			String[] datos = fechaAlta.split("");
-			newFecha = datos[2] + "-" +datos[1] + "-" + datos[0];
-		}*/
-
 		int est = 0;
 		if(estado.length() > 1) {
 			if(estado.equals("Disponible"))
@@ -42,8 +44,15 @@ public class NegBiblioteca implements InegBiblioteca{
 	}
 
 	@Override
-	public boolean agregarBiblioteca(Biblioteca b) {
-		return daoBiblioteca.agregarBiblioteca(b);
+	public boolean agregarBiblioteca(int isbn, String fechaAlta) {
+		try {
+			biblioteca.setLibro(iNegLibro.obtenerLibro(isbn)); 
+			biblioteca.setEstado(1);
+			biblioteca.setFechaLanzamiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaAlta));
+			return daoBiblioteca.agregarBiblioteca(biblioteca);
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
