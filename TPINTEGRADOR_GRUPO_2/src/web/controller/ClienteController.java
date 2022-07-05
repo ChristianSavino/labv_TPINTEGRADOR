@@ -1,25 +1,26 @@
 package web.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Cliente;
 import web.negocioImp.NegCliente; 
 
 @Controller
+@SessionAttributes("cliente")
 public class ClienteController {
 
 	@Autowired
 	@Qualifier("servicioCliente")
 	private NegCliente iNegCliente;
+	
+	@ModelAttribute("cliente")
+	public Cliente getUsername() {
+		return new Cliente();
+	}
 	
 	@RequestMapping("listarClienteFiltro.html")
 	@ResponseBody
@@ -51,6 +52,17 @@ public class ClienteController {
 		//falla cuando hace el obtener cliente porque trae null cuando deberia traer el cliente en cuestion
 		return "{idCliente:"+cliente.getId()+"}";
 	
+	}
+	
+	@RequestMapping("obtenerClienteNuevoPrestamo.html")
+	public String ObtenerClienteNuevoPrestamo(@ModelAttribute("cliente")Cliente cliente, int idCliente) {
+		try {
+			Cliente cl = iNegCliente.obtenerCliente(idCliente);
+			cliente = cl;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "redirect:/nuevoPrestamo.html";
 	}
 	
 }

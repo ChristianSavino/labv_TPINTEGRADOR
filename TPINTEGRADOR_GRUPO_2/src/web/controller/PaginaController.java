@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import web.entidades.Biblioteca;
+import web.entidades.Cliente;
 import web.entidades.Usuario;
 import web.negocioImp.NegBiblioteca;
 import web.negocioImp.NegScriptInicial;
@@ -98,6 +101,17 @@ public class PaginaController {
 	public ModelAndView PaginaNuevaBiblioteca() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("NuevaBiblioteca");
+		return mv;
+	}
+	
+	@RequestMapping("nuevoPrestamo.html")
+	public ModelAndView PaginaNuevoPrestamo(@SessionAttribute("cliente") Cliente cliente, @SessionAttribute("biblioteca") Biblioteca biblioteca) {
+		ModelAndView mv = new ModelAndView();
+		if(biblioteca.getId() != 0)
+			mv.addObject("libro", biblioteca);
+		if(cliente.getId() != 0)
+			mv.addObject("cliente", cliente);
+		mv.setViewName("NuevoPrestamo");
 		return mv;
 	}
 }
