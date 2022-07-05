@@ -3,6 +3,7 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +19,7 @@ public class ClienteController {
 	private NegCliente iNegCliente;
 	
 	@ModelAttribute("cliente")
-	public Cliente getUsername() {
+	public Cliente getCliente() {
 		return new Cliente();
 	}
 	
@@ -55,12 +56,12 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("obtenerClienteNuevoPrestamo.html")
-	public String ObtenerClienteNuevoPrestamo(@ModelAttribute("cliente")Cliente cliente, int idCliente) {
+	public String ObtenerClienteNuevoPrestamo(ModelMap map, @ModelAttribute("cliente")Cliente cliente, int idCliente) {
 		try {
 			Cliente cl = iNegCliente.obtenerCliente(idCliente);
 			cliente = cl;
+			map.put("cliente",cliente);
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		return "redirect:/nuevoPrestamo.html";
 	}

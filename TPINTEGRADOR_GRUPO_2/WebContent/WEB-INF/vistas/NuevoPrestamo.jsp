@@ -34,8 +34,6 @@
 
 	<body>
 		<jsp:include page="Header.jsp" />
-
-
 		<div class="container">
 			<div class="card">
 				<div class="card-body">

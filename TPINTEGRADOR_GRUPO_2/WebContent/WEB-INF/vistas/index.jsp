@@ -25,7 +25,7 @@
 			<div class="card">
 				<h1>Sistema Biblioteca: Grupo 2</h1>
 				<div class="card-body">
-					<form action="index.html" method="get">
+					<form action="index.html" method="post">
 						<div class=" form-group row">
 							<label for="lastName" class="col-sm-2 col-form-label">Usuario</label>
 							<div class="col-sm-7">

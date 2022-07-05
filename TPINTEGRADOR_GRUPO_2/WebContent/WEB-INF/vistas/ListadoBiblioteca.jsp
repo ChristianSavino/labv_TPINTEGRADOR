@@ -24,10 +24,12 @@
 <jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="card">
-			<div class="row">
+		<div class="card-body">
 				<div class="col-12">
 					<h1>Biblioteca</h1>
 					<input type="button" value="Agregar Libro" onclick="location.href = 'nuevaBiblioteca.html';" class="btn btn-primary"></input>
+				</div>
+				<div class="col-12">
 					<table class="table table-bordered table-hover">
 						<tr>
 							<td>Codigo</td>
@@ -44,15 +46,18 @@
 								<td>${obj[2]}</td>
 								<td>${obj[3]}</td>
 								<td>${obj[4]}</td>
-								<td>                              
+								<td>
+								<form method="GET">                              
 									<input type="button" value="Eliminar"	onclick="location.href = 'eliminarBiblioteca.html?id=${obj[0]}';"	class="btn btn-danger"></input>
-									<input type="button" value="Modificar"	onclick="location.href = 'modificarBiblioteca.html?id=${obj[0]}';"	class="btn btn-primary"></input>
-									<input type="button" value="Prestamo"   onclick="location.href = 'nuevoPrestamo.html?idBiblioteca=${obj[0]}';" class="btn btn-primary"></input>
+									<input type="button" value="Modificar"  onclick="location.href = 'modificarBiblioteca.html?id=${obj[0]}';"	class="btn btn-primary"></input>
+									<input type="button" <c:choose><c:when test="${obj[4] == 'Prestado'}"><c:out value="value='Info. Prestamo'" escapeXml="false"/></c:when> <c:otherwise><c:out value="value='Nuevo Prestamo'" escapeXml="false"/></c:otherwise></c:choose>  onclick="location.href = 'obtenerBibliotecaDesdeLista.html?idBiblioteca=${obj[0]}';" class="btn btn-primary"></input>
+									</form>
                               	</td>
 							</tr>
 						</c:forEach>
 					</table>
-					<form class="col-12" action="listarBibliotecaFiltro.html" method="Get">			
+					</div>
+					<form class="col-9" action="listarBibliotecaFiltro.html" method="Get">			
 							<div>
 							<p>
 							<h3>Filtrar por:</h3>
@@ -71,16 +76,15 @@
 								</p>
 								<p></p>						
 								<p>ISBN:
-								<input class="form-control" type="search" name="isbn">
+								<input class="form-control" type="number" name="isbn">
 								</p>
 								<p></p>	
 								<p>Titulo:
-								<input class="form-control" type="search" name="titulo">
+								<input class="form-control" type="text" name="titulo">
 								</p>
 								<p><input class="form-control" type="submit" value="Buscar"></p>
 							</div>
 					</form>
-				</div>
 			</div>
 		</div>
 	</div>

@@ -13,11 +13,12 @@ import org.springframework.stereotype.Repository;
 public class Conexion {
 	private SessionFactory sessionFactory;
 	private Session session;
+	ServiceRegistry serviceRegistry;
+	Configuration configuration;
 
 	public Conexion() {
-		Configuration configuration = new Configuration().configure();
-		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		configuration = new Configuration().configure();
+		serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
 	}
 
 	public Session getSession() {
@@ -29,11 +30,13 @@ public class Conexion {
 	}
 
 	public void abrirConexion()	{
+		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		session=sessionFactory.openSession();
 	}
 
 	public void cerrarSession()	{
 		session.close();
+		sessionFactory.close();
 	}	
 
 	public void cerrarSessionFactory()	{
