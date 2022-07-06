@@ -3,11 +3,14 @@ package web.entidades;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -33,8 +36,9 @@ public class Cliente implements Serializable {
 	@Column(name="apellido")
 	private String apellido;
 	
-	@Column(name="nacionalidad")
-	private String nacionalidad;
+	@ManyToOne(cascade=(CascadeType.ALL))
+	@JoinColumn(name="idNacionalidad")
+	private Nacionalidad nacionalidad;
 	
 	@Column(name="email")
 	private String email;
@@ -69,17 +73,16 @@ public class Cliente implements Serializable {
 	public void setDni(int dni) {
 		this.dni = dni;
 	}
-
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNacionalidad() {
+	public Nacionalidad getNacionalidad() {
 		return nacionalidad;
 	}
-	public void setNacionalidad(String nacionalidad) {
+	public void setNacionalidad(Nacionalidad nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
 	public String getEmail() {

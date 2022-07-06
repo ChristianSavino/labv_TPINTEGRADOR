@@ -124,4 +124,11 @@ public class PaginaController {
 		mv.setViewName("NuevoPrestamo");
 		return mv;
 	}
+	
+	@RequestMapping("nuevoCliente.html")
+	public ModelAndView PaginaNuevoCliente() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("NuevoCliente");
+		return mv;
+	}
 }

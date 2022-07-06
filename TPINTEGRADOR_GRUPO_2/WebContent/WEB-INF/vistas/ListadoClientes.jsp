@@ -25,9 +25,10 @@
 	<div class="container">
 		<div class="card">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-11">
 					<h1>Clientes</h1>
 					<input type="button" value="Agregar Cliente" onclick="location.href = 'nuevoCliente.html';" class="btn btn-primary"></input>
+					<br><br>
 					<table class="table table-bordered table-hover">
 						<tr>
 							<td>DNI</td>
@@ -39,6 +40,7 @@
 							<td>Localidad</td>
 							<td>Teléfono</td>
 							<td>Fecha Nacimiento</td>
+							<td>Acciones</td>
 						</tr>
 						<c:forEach var="obj" items="${clientes}">
 							<tr>
