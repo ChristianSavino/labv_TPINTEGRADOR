@@ -27,7 +27,7 @@
 				<td>${obj[7]}</td>
 				<td>${obj[8]}</td>
 				<td>                              
-					<input type="button" value="Seleccionar" data-id-cliente="${obj[9]}" class="seleccionarCliente btn btn-success"></input>
+					<input type="button" value="Seleccionar" onclick="location.href = 'obtenerClienteNuevoPrestamo.html?idCliente=${obj[9]}';" data-id-cliente="${obj[9]}" class=" btn btn-success"></input>
                 </td>
 			</tr>
 		</c:forEach>
@@ -42,8 +42,8 @@
 					$("#idCliente").val(idCliente);
 					$.ajax({
 
-					    type: "POST",
-					    url: "obtenerCliente.html?idCliente="+idCliente,
+					    type: "GET",
+					    url: "obtenerClienteNuevoPrestamo.html?idCliente="+idCliente,
 					    contentType: "application/json",
 					    dataType: 'json',
 					    success: function (data) {

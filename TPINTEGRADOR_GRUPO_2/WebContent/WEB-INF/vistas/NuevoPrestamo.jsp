@@ -42,9 +42,9 @@
 							<h1>Nuevo Prestamo</h1>
 						</div>
 					</div>
-					<form action="#" method="post">
-						<input type="hidden" value="${idBiblioteca}" name="idBiblioteca"></input>
-						<input type="hidden" value="" name="idCliente" id="idCliente"></input>
+					<form action="guardarNuevoPrestamo.html" method="post">
+						<input type="hidden" value="${biblioteca.getId()}" name="idBiblioteca"></input>
+						<input type="hidden" value="${cliente.getId()}" name="idCliente" id="idCliente"></input>
 						<div class="row">
 							<div class="col-md-8 offset-2">
 								<hr>
@@ -77,13 +77,13 @@
 						<div class="row">
 
 							<label for="lastName" class="col-md-3 offset-4 col-form-label">DNI</label>
-							<div class="col-md-3"></div>
+							<div class="col-md-3">${cliente.getDni()}</div>
 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Nombre
 							</label>
-							<div class="col-md-3"></div>
+							<div class="col-md-3">${cliente.getNombre()}</div>
 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Apellido
 							</label>
-							<div class="col-md-3"></div>
+							<div class="col-md-3">${cliente.getApellido()}</div>
 						</div>
 						<div class="row">
 							<div class="col-md-8 offset-2">
@@ -94,8 +94,8 @@
 						<div class="row">
 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Fecha</label>
 							<div class="col-md-2">
-								<input type="text" id="datepicker" width="276" class="form-control"
-									value="dd/mm/yyyy" />
+								<input type="date" id="selFecha" name="fecha" class="form-control"
+									step="1" min="01-07-2022" max="31-12-2022" value="01-07-2022" />
 
 							</div>
 						</div>
@@ -103,7 +103,7 @@
 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Cantidad
 								Dias Prestamo</label>
 							<div class="col-md-2">
-								<input type="number" min="1" class="form-control" name="username">
+								<input type="number" min="1" class="form-control" name="cantidadDias" value="1">
 							</div>
 						</div>
 						<div class="row">
@@ -265,6 +265,19 @@
 				
 				
 			});
+			
+			document.getElementById("selFecha").min = getCurrentDate();
+			document.getElementById("selFecha").value = getCurrentDate();
+			
+			function getCurrentDate(){
+				var today = new Date();
+				var dd = String(today.getDate()).padStart(2, '0');
+				var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+				var yyyy = today.getFullYear();
+
+				return yyyy + '-' + mm + '-' + dd;
+			}
+			
 		</script>
 
 	</body>
