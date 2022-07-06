@@ -15,7 +15,6 @@ public class Libro implements Serializable {
 		
 		@Id
 		@Column(name="id")
-		//@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int isbn;
 		
 		@Column(name="titulo")
@@ -44,9 +43,10 @@ public class Libro implements Serializable {
 		public Libro() {
 		}
 		
-		public Libro(int id,String tit,String idi,int paginas,Autor au, ArrayList<Genero> gen, String sinopsis) {
+		public Libro(int id,String tit,Date fechaL,String idi,int paginas,Autor au, ArrayList<Genero> gen, String sinopsis) {
 			isbn = id;
 			titulo = tit;
+			fechaLanzamiento = fechaL;
 			idioma = idi;
 			cantidadPaginas = paginas;
 			autor = au;

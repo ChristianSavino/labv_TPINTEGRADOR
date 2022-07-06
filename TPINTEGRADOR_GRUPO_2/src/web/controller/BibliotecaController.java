@@ -23,10 +23,6 @@ public class BibliotecaController {
 	@Qualifier("servicioBiblioteca")
 	private NegBiblioteca iNegBiblioteca;
 	
-	@Autowired
-	@Qualifier("servicioCliente")
-	private NegCliente iNegCliente;
-	
 	@ModelAttribute("biblioteca")
 	public Biblioteca getBiblioteca() {
 		return new Biblioteca();
@@ -42,10 +38,13 @@ public class BibliotecaController {
 	}
 	
 	@RequestMapping("agregarBiblioteca.html")
-	public ModelAndView AgregarBiblioteca(int isbn, String fechaAlta ) {
-		ModelAndView mv = new ModelAndView();
+	public String AgregarBiblioteca(String isbn, String fechaAlta ) {
+		boolean estado = iNegBiblioteca.agregarBiblioteca(Integer.parseInt(isbn), fechaAlta);
+		String redirect = "";
+		if(estado)
+			redirect = "redirect:/listadoBiblioteca.html";
 		
-		return mv;
+		return redirect;
 	}
 	
 	@RequestMapping(value="obtenerBibliotecaDesdeLista.html",method = RequestMethod.GET)
