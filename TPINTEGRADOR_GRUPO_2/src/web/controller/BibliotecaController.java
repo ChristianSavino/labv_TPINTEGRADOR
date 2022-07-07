@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,5 +61,16 @@ public class BibliotecaController {
 			 returnvalue="redirect:/ListadoBiblioteca.html";
 		}
 		return returnvalue;	
+	}
+	
+	@RequestMapping("/eliminarBiblioteca.html")
+	public String eliminarBiblioteca(@RequestParam(value = "id", required = false) int id){
+		try {
+			Biblioteca biblioteca = iNegBiblioteca.obtenerBiblioteca(id);
+			iNegBiblioteca.eliminarBiblioteca(biblioteca);
+		}
+		catch(Exception e) {
+		}
+		return "redirect:/listadoBiblioteca.html";
 	}
 }

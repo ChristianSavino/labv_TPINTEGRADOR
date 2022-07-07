@@ -40,8 +40,6 @@ public class ClienteController {
 		mv.addObject("clientes", iNegCliente.listarClienteTabla(nacionalidad, nombre, apellido));
 		mv.setViewName("ListadoClientesFragment");
 		return mv;
-		
-	
 	}
 	
 	@RequestMapping(value= "obtenerCliente.html",
@@ -52,7 +50,6 @@ public class ClienteController {
 		Cliente cliente = iNegCliente.obtenerCliente(idCliente);
 		//falla cuando hace el obtener cliente porque trae null cuando deberia traer el cliente en cuestion
 		return "{idCliente:"+cliente.getId()+"}";
-	
 	}
 	
 	@RequestMapping("obtenerClienteNuevoPrestamo.html")
@@ -64,6 +61,17 @@ public class ClienteController {
 		} catch (Exception e) {
 		}
 		return "redirect:/nuevoPrestamo.html";
+	}
+	
+	@RequestMapping("/eliminarCliente.html")
+	public String eliminarCliente(@RequestParam(value = "id", required = false) int id){
+		try {
+			Cliente cliente = iNegCliente.obtenerCliente(id);
+			iNegCliente.eliminarCliente(cliente);
+		}
+		catch(Exception e) {
+		}
+		return "redirect:/listadoClientes.html";
 	}
 	
 }

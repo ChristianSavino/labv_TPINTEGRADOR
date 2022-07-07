@@ -52,8 +52,8 @@ public class DaoCliente implements IdaoCliente{
 		}
 		
 		conexion.abrirConexion();
-		List<Object[]> listaClientes= conexion.ObtenerListaPorQuery("SELECT c.Dni as DNI, c.Nombre as Nombre, c.Apellido as Apellido, c.idNacionalidad as Nacionalidad, c.Email as Email, c.Direccion as Direccion, c.Localidad as Localidad, c.Telefono as Teléfono, DATE_FORMAT(c.FechaNacimiento,'%d/%m/%Y') as 'Fecha Nacimiento', c.idCliente as idCliente "
-				+ "FROM Cliente as c " + condiciones+";");
+		List<Object[]> listaClientes= conexion.ObtenerListaPorQuery("SELECT c.idCliente as idCliente, c.Dni as DNI, c.Nombre as Nombre, c.Apellido as Apellido, c.sexo as Sexo, n.descripcion as Nacionalidad, c.Email as Email, c.Direccion as Direccion, c.Localidad as Localidad, c.Telefono as Teléfono, DATE_FORMAT(c.FechaNacimiento,'%d/%m/%Y') as 'Fecha Nacimiento'"
+				+ "FROM Cliente as c INNER JOIN Nacionalidad as n ON c.idNacionalidad = n.idNacionalidad" + condiciones+";");
 		conexion.cerrarSession();
 
 		return listaClientes;
@@ -119,4 +119,5 @@ public class DaoCliente implements IdaoCliente{
 		conexion.cerrarSession();
 		return a;
 	}
+	
 }

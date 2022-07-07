@@ -24,66 +24,72 @@
 <jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="card">
-			<div class="row">
-				<div class="col-11">
-					<h1>Clientes</h1>
-					<input type="button" value="Agregar Cliente" onclick="location.href = 'nuevoCliente.html';" class="btn btn-primary"></input>
-					<br><br>
-					<table class="table table-bordered table-hover">
-						<tr>
-							<td>DNI</td>
-							<td>Nombre</td>
-							<td>Apellido</td>
-							<td>Nacionalidad</td>
-							<td>Email</td>
-							<td>Dirección</td>
-							<td>Localidad</td>
-							<td>Teléfono</td>
-							<td>Fecha Nacimiento</td>
-							<td>Acciones</td>
-						</tr>
-						<c:forEach var="obj" items="${clientes}">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-11">
+						<h1>Clientes</h1>
+						<input type="button" value="Agregar Cliente" onclick="location.href = 'nuevoCliente.html';" class="btn btn-primary"></input>
+						<br><br>
+						<table class="table table-bordered table-hover">
 							<tr>
-								<td>${obj[0]}</td>
-								<td>${obj[1]}</td>
-								<td>${obj[2]}</td>
-								<td>${obj[3]}</td>
-								<td>${obj[4]}</td>
-								<td>${obj[5]}</td>
-								<td>${obj[6]}</td>
-								<td>${obj[7]}</td>
-								<td>${obj[8]}</td>
-								<td>                              
-									<input type="button" value="Eliminar"	onclick="location.href = 'eliminarCliente.html?id=${obj[0]}';"	class="btn btn-danger"></input>
-									<input type="button" value="Modificar"	onclick="location.href = 'modificarCliente.html?id=${obj[0]}';"	class="btn btn-primary"></input>									
-                              	</td>
+								<td>ID</td>
+								<td>DNI</td>
+								<td>Nombre</td>
+								<td>Apellido</td>
+								<td>Sexo</td>
+								<td>Nacionalidad</td>
+								<td>Email</td>
+								<td>Direccion</td>
+								<td>Localidad</td>
+								<td>Telefono</td>
+								<td>Fecha de Nacimiento</td>
+								<td>Acciones</td>
 							</tr>
-						</c:forEach>
-					</table>
-					<form class="col-12" action="listarClienteFiltro.html" method="Get">			
-							<div>
-							<p>
-							<h3>Filtrar por:</h3>
-							</p>
-							
-								<p>Nacionalidad:
-								<input class="form-control" type="search" name="nacionalidad"></p>
-								<p></p>							
+							<c:forEach var="obj" items="${clientes}">
+								<tr>
+									<td>${obj[0]}</td>
+									<td>${obj[1]}</td>
+									<td>${obj[2]}</td>
+									<td>${obj[3]}</td>
+									<td>${obj[4]}</td>
+									<td>${obj[5]}</td>
+									<td>${obj[6]}</td>
+									<td>${obj[7]}</td>
+									<td>${obj[8]}</td>
+									<td>${obj[9]}</td>
+									<td>${obj[10]}</td>
+									<td>                              
+										<input type="button" value="Eliminar"	onclick="location.href = 'eliminarCliente.html?id=${obj[0]}';"	class="btn btn-danger"></input>
+										<input type="button" value="Modificar"	onclick="location.href = 'modificarCliente.html?id=${obj[0]}';"	class="btn btn-primary"></input>									
+	                              	</td>
+								</tr>
+							</c:forEach>
+						</table>
+						<form class="col-12" action="listarClienteFiltro.html" method="Get">			
+								<div>
 								<p>
-								Nombre:
-								<input class="form-control" type="search" name="nombre"></p>
-								<p></p>
-								<p></p>						
-								<p>Apellido:
-								<input class="form-control" type="search" name="apellido">
+								<h3>Filtrar por:</h3>
 								</p>
-								<p><input class="form-control" type="submit" value="Buscar"></p>
-							</div>
-					</form>
+								
+									<p>Nacionalidad:
+									<input class="form-control" type="search" name="nacionalidad"></p>
+									<p></p>							
+									<p>
+									Nombre:
+									<input class="form-control" type="search" name="nombre"></p>
+									<p></p>
+									<p></p>						
+									<p>Apellido:
+									<input class="form-control" type="search" name="apellido">
+									</p>
+									<p><input class="form-control" type="submit" value="Buscar"></p>
+								</div>
+							</form>	
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"

@@ -36,7 +36,10 @@ public class Cliente implements Serializable {
 	@Column(name="apellido")
 	private String apellido;
 	
-	@ManyToOne(cascade=(CascadeType.ALL))
+	@Column(name="sexo")
+	private String sexo;
+	
+	@ManyToOne(cascade={CascadeType.PERSIST})
 	@JoinColumn(name="idNacionalidad")
 	private Nacionalidad nacionalidad;
 	
@@ -78,6 +81,12 @@ public class Cliente implements Serializable {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 	public Nacionalidad getNacionalidad() {
 		return nacionalidad;

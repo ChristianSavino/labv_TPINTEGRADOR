@@ -24,7 +24,7 @@ public class Autor implements Serializable {
 	@Column(name="apellido")
 	private String apellido;
 	
-	@ManyToOne(cascade=(CascadeType.ALL))
+	@ManyToOne(cascade={CascadeType.PERSIST})
 	@JoinColumn(name="idNacionalidad")
 	private Nacionalidad nacionalidad;
 	
