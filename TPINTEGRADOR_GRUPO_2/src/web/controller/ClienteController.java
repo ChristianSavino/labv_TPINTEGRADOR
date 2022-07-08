@@ -63,7 +63,7 @@ public class ClienteController {
 		return "redirect:/nuevoPrestamo.html";
 	}
 	
-	@RequestMapping("/eliminarCliente.html")
+	@RequestMapping("eliminarCliente.html")
 	public String eliminarCliente(@RequestParam(value = "id", required = false) int id){
 		try {
 			Cliente cliente = iNegCliente.obtenerCliente(id);
