@@ -48,8 +48,25 @@ public class NegCliente implements InegCliente {
 	}
 
 	@Override
-	public boolean agregarCliente(Cliente c) {
+	public boolean agregarCliente(int id, String sexo, String localidad, String direccion, String nombre, String apellido, String
+			correo, String telefono, String fecha) {
+		try {
+		cliente.setId();
+		cliente.setSexo();
+		Cliente.setLocalidad();
+		cliente.setDireccion();
+		cliente.setNombre();
+		cliente.setApellido();
+		cliente.setEmail();
+		cliente.setTelefono();
+		cliente setFechaNacimiento
+		
 		return daoCliente.agregarCliente(c);
+		}
+		catch (Exception e) {
+			return false;
+		}
+		
 	}
 
 	@Override
