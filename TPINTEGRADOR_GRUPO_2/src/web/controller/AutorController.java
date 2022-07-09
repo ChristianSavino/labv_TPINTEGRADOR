@@ -7,11 +7,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import web.dao.DaoBiblioteca;
 import web.entidades.Autor;
 import web.entidades.Nacionalidad;
 import web.negocioImp.NegAutor;
-import web.negocioImp.NegCliente; 
 
 @Controller
 @SessionAttributes("autor")
@@ -19,9 +17,7 @@ public class AutorController {
 	
 	@Autowired
 	@Qualifier("servicioAutor")
-	private NegAutor iNegAutor;
-	
-	private Autor autor;
+	private NegAutor iNegAutor;	
 	
 	@ModelAttribute("autor")
 	public Autor getAutor() {
@@ -39,11 +35,7 @@ public class AutorController {
 	
 	@RequestMapping("agregarAutor.html")
 	public String AgregarAutor(String nombre, String apellido, Nacionalidad nacionalidad, String email) {
-		autor.setApellido(apellido);
-		autor.setEmail(email);
-		autor.setNombre(nombre);
-		autor.setNacionalidad(nacionalidad);
-		boolean estado = iNegAutor.agregarAutor(autor);
+		boolean estado = iNegAutor.agregarAutor(nombre, apellido, nacionalidad, email);
 		String redirect = "";
 		if(estado)
 			redirect = "redirect:/listadoAutor.html";

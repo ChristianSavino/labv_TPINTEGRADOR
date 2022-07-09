@@ -1,5 +1,6 @@
 package web.negocioImp;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class NegCliente implements InegCliente {
 	public List<Cliente> listarClientes() {
 		return daoCliente.listarClientes();
 	}
+	
+	@Autowired
+	private Cliente cliente;
 	
 	@Override
 	public List<Object[]> listarClienteTabla(String nacionalidad, String nombre, String apellido) {
@@ -48,20 +52,19 @@ public class NegCliente implements InegCliente {
 	}
 
 	@Override
-	public boolean agregarCliente(int id, String sexo, String localidad, String direccion, String nombre, String apellido, String
+	public boolean agregarCliente(String sexo, String localidad, String direccion, String nombre, String apellido, String
 			correo, String telefono, String fecha) {
-		try {
-		cliente.setId();
-		cliente.setSexo();
-		Cliente.setLocalidad();
-		cliente.setDireccion();
-		cliente.setNombre();
-		cliente.setApellido();
-		cliente.setEmail();
-		cliente.setTelefono();
-		cliente setFechaNacimiento
-		
-		return daoCliente.agregarCliente(c);
+		try {						
+			cliente.setSexo(sexo);
+			cliente.setLocalidad(localidad);
+			cliente.setDireccion(direccion);
+			cliente.setNombre(nombre);
+			cliente.setApellido(apellido);
+			cliente.setEmail(correo);
+			cliente.setTelefono(telefono);
+			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fecha));
+			
+			return daoCliente.agregarCliente(cliente);
 		}
 		catch (Exception e) {
 			return false;

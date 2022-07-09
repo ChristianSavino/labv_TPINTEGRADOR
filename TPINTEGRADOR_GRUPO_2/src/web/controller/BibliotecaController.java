@@ -63,7 +63,7 @@ public class BibliotecaController {
 		return returnvalue;	
 	}
 	
-	@RequestMapping("/eliminarBiblioteca.html")
+	@RequestMapping("eliminarBiblioteca.html")
 	public String eliminarBiblioteca(@RequestParam(value = "id", required = false) int id){
 		try {
 			Biblioteca biblioteca = iNegBiblioteca.obtenerBiblioteca(id);

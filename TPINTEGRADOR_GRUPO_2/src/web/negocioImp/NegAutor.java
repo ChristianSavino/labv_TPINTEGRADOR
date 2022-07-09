@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.DaoAutor;
-import web.dao.DaoCliente;
 import web.entidades.Autor;
-import web.entidades.Cliente;
+import web.entidades.Nacionalidad;
 import web.negocio.InegAutor;
 
 @Service("servicioAutor")
@@ -21,10 +20,21 @@ public class NegAutor implements InegAutor{
 	public List<Autor> listarAutores() {
 		return daoAutor.listarAutores();
 	}
+	
+	@Autowired
+	private Autor autor;
 
 	@Override
-	public boolean agregarAutor(Autor a) {
-		return daoAutor.agregarAutor(a);
+	public boolean agregarAutor(String nombre, String apellido, Nacionalidad nacionalidad, String email) {
+		try {
+			autor.setApellido(apellido);
+			autor.setEmail(email);
+			autor.setNombre(nombre);
+			autor.setNacionalidad(nacionalidad);	
+			return daoAutor.agregarAutor(autor);
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 	@Override
