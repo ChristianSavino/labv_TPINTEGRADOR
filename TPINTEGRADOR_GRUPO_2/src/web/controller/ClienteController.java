@@ -6,9 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.text.SimpleDateFormat;
 import web.entidades.Cliente;
 import web.negocioImp.NegCliente; 
+import web.entidades.Nacionalidad;
 
 @Controller
 @SessionAttributes("cliente")
@@ -74,4 +75,23 @@ public class ClienteController {
 		return "redirect:/listadoClientes.html";
 	}
 	
+	@RequestMapping("editarCliente.html")
+	public String modificarCliente(int dni, String nombre, String apellido, Nacionalidad nacionalidad,
+			String sexo, String fechaNacimiento, String direccion, String telefono, String localidad, String email) {
+		try {
+			Cliente cliente = iNegCliente.obtenerCliente(dni);
+			cliente.setDni(dni);
+			cliente.setNombre(nombre);
+			cliente.setApellido(apellido);
+			cliente.setNacionalidad(nacionalidad);
+			cliente.setSexo(sexo);
+			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento));
+			cliente.setDireccion(direccion);
+			cliente.setTelefono(telefono);
+			cliente.setLocalidad(localidad);
+			cliente.setEmail(email);
+		}catch(Exception e){		
+		}		
+		return "redirect:/listadoClientes.html";
+	}	
 }
