@@ -90,6 +90,7 @@ public class ClienteController {
 			cliente.setTelefono(telefono);
 			cliente.setLocalidad(localidad);
 			cliente.setEmail(email);
+			iNegCliente.modificarCliente(cliente);
 		}catch(Exception e){		
 		}		
 		return "redirect:/listadoClientes.html";
