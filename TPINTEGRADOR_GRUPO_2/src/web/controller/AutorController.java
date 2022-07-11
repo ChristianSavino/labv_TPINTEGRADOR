@@ -34,7 +34,7 @@ public class AutorController {
 	}
 	
 	@RequestMapping("agregarAutor.html")
-	public String AgregarAutor(ModelMap map,@ModelAttribute("autor") Autor autor ,String nombre, String apellido, Nacionalidad nacionalidad, String email) {
+	public String AgregarAutor(ModelMap map,@ModelAttribute("autor") Autor autor ,String nombre, String apellido, String nacionalidad, String email) {
 		boolean estado = iNegAutor.agregarAutor(nombre, apellido, nacionalidad, email);
 		
 		String redirect = "";

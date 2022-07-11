@@ -73,7 +73,7 @@ public class NegCliente implements InegCliente {
 	}
 
 	@Override
-	public boolean modificarCliente(int dni, String nombre, String apellido, Nacionalidad nacionalidad,
+	public boolean modificarCliente(int dni, String nombre, String apellido, String nacionalidad,
 			String sexo, String fechaNacimiento, String direccion, String telefono, String localidad, String email) {
 		try {
 			Cliente cliente = iNegCliente.obtenerCliente(dni);

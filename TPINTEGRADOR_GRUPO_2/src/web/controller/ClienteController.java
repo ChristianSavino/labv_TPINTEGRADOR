@@ -75,22 +75,23 @@ public class ClienteController {
 		return "redirect:/listadoClientes.html";
 	}
 
-	@RequestMapping("agregarCliente.html")
-	public String agregarCliente(ModelMap map,@ModelAttribute("cliente") Cliente cliente ,int dni, String nombre, String apellido, Nacionalidad nacionalidad,
+	/*@RequestMapping("agregarCliente.html")
+	public String agregarCliente(ModelMap map,@ModelAttribute("cliente") Cliente cliente ,int dni, String nombre, String apellido, String nacionalidad,
 	String sexo, String fechaNacimiento, String direccion, String telefono, String localidad, String email) {
 		boolean estado = iNegCliente.agregarCliente(nombre, apellido, nacionalidad, email,dni,fechaNacimiento,localidad,direccion,telefono);
 		
 		String redirect = "";
 		if(estado) {
 			redirect = "redirect:/agregarCliente.html";
-			cliente = iNegCliente.obtenerClienteNombreYApellido(nombre, apellido);
+			cliente = iNegCliente.obtenerCliente(nombre, apellido);
 			map.put("Cliente",Cliente);
 		}
 		return redirect;
 	}
+	*/
 	
 	@RequestMapping("modificarCliente.html")
-	public boolean modificarCliente((ModelMap map, @ModelAttribute("cliente")Cliente cliente, int idCliente) {
+	public boolean modificarCliente(ModelMap map, @ModelAttribute("cliente") Cliente cliente, int idCliente) {
 		try {
 			Cliente cl = iNegCliente.obtenerCliente(idCliente);
 			cliente = cl;

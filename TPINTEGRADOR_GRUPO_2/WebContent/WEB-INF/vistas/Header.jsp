@@ -6,10 +6,10 @@
 			<ul class="enlaces-menu">
 				<li class="btnCerrarSesion" id="usuario"></li>
 				<li><input type="button" value="Cerrar Sesion" class="container">
-					<li><input type="button" value="Cerrar Sesion"
+				<!--	<li><input type="button" value="Cerrar Sesion"
 						onclick="location.href = 'cerrarSesion.html';"
 						class="btnCerrarSesion" style="background-color:pink; border-color:black; color:white; float: right;"
-						></input></li>
+						></input></li>*/ -->
 				<li><input type="button" value="Biblioteca"
 					onclick="location.href = 'listadoBiblioteca.html';"
 					class="btnCerrarSesion"></input></li>

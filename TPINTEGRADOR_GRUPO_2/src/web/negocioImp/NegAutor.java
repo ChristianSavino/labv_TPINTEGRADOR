@@ -25,7 +25,7 @@ public class NegAutor implements InegAutor{
 	private Autor autor;
 
 	@Override
-	public boolean agregarAutor(String nombre, String apellido, Nacionalidad nacionalidad, String email) {
+	public boolean agregarAutor(String nombre, String apellido, String nacionalidad, String email) {
 		try {
 			autor.setApellido(apellido);
 			autor.setEmail(email);
