@@ -70,7 +70,7 @@ public class DaoAutor implements IdaoAutor {
 		conexion.cerrarSession();
 		return exito;
 	}
-	
+
 	@Override
 	public Autor obtenerAutor(int idAutor){
 		conexion.abrirConexion();
@@ -82,5 +82,14 @@ public class DaoAutor implements IdaoAutor {
 		}
 		conexion.cerrarSession();
 		return a;
+	}
+
+	@Override
+	public Autor obtenerAutorNombreYApellido(String nombre, String apellido) {
+		conexion.abrirConexion();
+		Autor autor= (Autor)conexion.getSession().createQuery("FROM Autor a ORDER BY a.nombre= '"+ nombre +"' AND a.apellido='"+apellido+"'").uniqueResult();
+		conexion.cerrarSession();
+
+		return autor;
 	}
 }

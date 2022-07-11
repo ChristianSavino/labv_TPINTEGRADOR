@@ -41,9 +41,9 @@
                             <div><input type="text" name="email" id="emailAutor" value=""></div>
                             <label for="nacionalidad" class="col-md-3 offset-4 col-form-label">Nacionalidad: </label>
                             <select field="{nacionalidad}">                    			
-	                            <c:forEach var="obj" items="${nacionalidad}">
-		                            <option value="">--</option>
-		                            <option class="nacionalidad" value="${obj[1]" id="${obj[1]">{obj[1]}</option>													
+	                           <option value="">--</option>
+	                            <c:forEach var="obj" items="${nacionalidades}">
+		                            <option class="nacionalidad" value="${obj.getIdNacionalidad()}">{obj.getDescripcion()}</option>													
 								</c:forEach>
 							</select>
                     </div>                    

@@ -11,4 +11,5 @@ public interface InegAutor {
 	public boolean modificarAutor(Autor a);
 	public boolean eliminarAutor(Autor a);
 	public Autor obtenerAutor(int id);
+	public Autor obtenerAutorNombreYApellido(String nombre, String apellido);
 }

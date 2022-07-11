@@ -10,4 +10,5 @@ public interface IdaoAutor {
 	public boolean modificarAutor(Autor a);
 	public boolean eliminarAutor(Autor a);
 	public Autor obtenerAutor(int idAutor);
+	public Autor obtenerAutorNombreYApellido(String nombre,String apellido);
 }

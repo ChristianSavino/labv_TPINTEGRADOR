@@ -11,40 +11,38 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import web.entidades.Biblioteca;
-import web.entidades.Cliente;
-import web.entidades.Libro;
-import web.entidades.Usuario;
-import web.negocioImp.NegBiblioteca;
-import web.negocioImp.NegCliente;
-import web.negocioImp.NegScriptInicial;
-import web.negocioImp.NegUsuario;
+import web.entidades.*;
+import web.negocioImp.*;
 
 @Controller
-@SessionAttributes({"usuario","biblioteca","cliente","libro"})
+@SessionAttributes({"usuario","biblioteca","cliente","libro","autor"})
 public class PaginaController {
-	
+
 	@Autowired
 	@Qualifier("servicioUsuario")
 	private NegUsuario iNegUsuario;
-	
+
 	@Autowired
 	@Qualifier("servicioScriptInicial")
 	private NegScriptInicial iNegScriptInicial;
-	
+
 	@Autowired
 	@Qualifier("servicioBiblioteca")
 	private NegBiblioteca iNegBiblioteca;
-	
+
 	@Autowired
 	@Qualifier("servicioCliente")
 	private NegCliente iNegCliente;
-	
+
+	@Autowired
+	@Qualifier("servicioComplementos")
+	private NegComplementos iNegComplementos;
+
 	@ModelAttribute("usuario")
 	public Usuario getUsername() {
 		return new Usuario();
 	}
-	
+
 	@RequestMapping("index.html")
 	public String Login(SessionStatus status, ModelMap map, @ModelAttribute("usuario") Usuario u,String username, String password)	{		
 		String redirect = "";
@@ -62,7 +60,7 @@ public class PaginaController {
 		}
 		return redirect;
 	}
-	
+
 	@RequestMapping("loginFailed.html")
 	public ModelAndView LoginFailed()	{		
 		ModelAndView mv = new ModelAndView();
@@ -70,7 +68,7 @@ public class PaginaController {
 		mv.setViewName("index");
 		return mv;
 	}
-	
+
 	@RequestMapping("listadoBiblioteca.html")
 	public ModelAndView ListadoBiblioteca() {
 		ModelAndView mv = new ModelAndView();
@@ -78,14 +76,14 @@ public class PaginaController {
 		mv.setViewName("ListadoBiblioteca");
 		return mv;
 	}
-	
+
 	@RequestMapping("listadoPrestamos.html")
 	public ModelAndView PaginaPrestamos() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("ListadoPrestamos");
 		return mv;
 	}
-	
+
 	@RequestMapping("listadoClientes.html")
 	public ModelAndView PaginaClientes() {
 		ModelAndView mv = new ModelAndView();
@@ -93,7 +91,7 @@ public class PaginaController {
 		mv.setViewName("ListadoClientes");
 		return mv;
 	}
-	
+
 	@RequestMapping("cerrarSesion.html")
 	public ModelAndView CerrarSesion(SessionStatus status) {
 		status.setComplete();
@@ -101,11 +99,11 @@ public class PaginaController {
 		mv.setViewName("index");
 		return mv;
 	}
-	
+
 	@RequestMapping("nuevaBiblioteca.html")
 	public ModelAndView PaginaNuevaBiblioteca(@SessionAttribute(name="libro",required=false) Libro libro) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		if(libro != null && libro.getIsbn() > 0) {
 			mv.addObject("isbnLibro",libro.getIsbn());
 			mv.addObject("nombreLibro",libro.getTitulo());
@@ -113,7 +111,7 @@ public class PaginaController {
 		mv.setViewName("NuevaBiblioteca");
 		return mv;
 	}
-	
+
 	@RequestMapping(value="nuevoPrestamo.html")
 	public ModelAndView PaginaNuevoPrestamo(@SessionAttribute("biblioteca") Biblioteca biblioteca, @SessionAttribute(name="cliente",required=false) Cliente cliente) {
 		ModelAndView mv = new ModelAndView();
@@ -124,11 +122,28 @@ public class PaginaController {
 		mv.setViewName("NuevoPrestamo");
 		return mv;
 	}
-	
+
 	@RequestMapping("nuevoCliente.html")
 	public ModelAndView PaginaNuevoCliente() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("NuevoCliente");
+		return mv;
+	}
+
+	@RequestMapping("NuevoAutor.html")
+	public ModelAndView PaginaAgregarAutor() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("nacionalidades",iNegComplementos.ListarNacionalidades());
+		mv.setViewName("NuevoAutor");
+		return mv;
+	}
+	
+	@RequestMapping("NuevoLibro.html")
+	public ModelAndView PaginaNuevoLibro(@SessionAttribute(name="autor",required=false) Autor autor) {
+		ModelAndView mv = new ModelAndView();
+		if (autor != null && autor.getIdAutor() != 0)
+			mv.addObject("autor",autor);
+		mv.setViewName("NuevoLibro");
 		return mv;
 	}
 }

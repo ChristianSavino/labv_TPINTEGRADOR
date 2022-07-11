@@ -51,4 +51,9 @@ public class NegAutor implements InegAutor{
 	public Autor obtenerAutor(int id) {
 		return daoAutor.obtenerAutor(id);
 	}
+
+	@Override
+	public Autor obtenerAutorNombreYApellido(String nombre, String apellido) {
+		return daoAutor.obtenerAutorNombreYApellido(nombre,apellido);
+	}
 }
