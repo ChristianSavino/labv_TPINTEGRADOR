@@ -73,8 +73,27 @@ public class NegCliente implements InegCliente {
 	}
 
 	@Override
-	public boolean modificarCliente(Cliente c) {
-		return daoCliente.modificarCliente(c);
+	public boolean modificarCliente(int dni, String nombre, String apellido, Nacionalidad nacionalidad,
+			String sexo, String fechaNacimiento, String direccion, String telefono, String localidad, String email) {
+		try {
+			Cliente cliente = iNegCliente.obtenerCliente(dni);
+			cliente.setDni(dni);
+			cliente.setNombre(nombre);
+			cliente.setApellido(apellido);
+			cliente.setNacionalidad(nacionalidad);
+			cliente.setSexo(sexo);
+			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento));
+			cliente.setDireccion(direccion);
+			cliente.setTelefono(telefono);
+			cliente.setLocalidad(localidad);
+			cliente.setEmail(email);
+
+			return daoCliente.modificarCliente(cliente);
+			/*iNegCliente.modificarCliente(cliente); 
+			 * Funcion estaba como string	*/
+		}catch(Exception e){		
+		}		
+		return "redirect:/listadoClientes.html";
 	}
 
 	@Override

@@ -76,23 +76,13 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("modificarCliente.html")
-	public String modificarCliente(int dni, String nombre, String apellido, Nacionalidad nacionalidad,
-			String sexo, String fechaNacimiento, String direccion, String telefono, String localidad, String email) {
+	public String modificarCliente((ModelMap map, @ModelAttribute("cliente")Cliente cliente, int idCliente) {
 		try {
-			Cliente cliente = iNegCliente.obtenerCliente(dni);
-			cliente.setDni(dni);
-			cliente.setNombre(nombre);
-			cliente.setApellido(apellido);
-			cliente.setNacionalidad(nacionalidad);
-			cliente.setSexo(sexo);
-			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento));
-			cliente.setDireccion(direccion);
-			cliente.setTelefono(telefono);
-			cliente.setLocalidad(localidad);
-			cliente.setEmail(email);
-			iNegCliente.modificarCliente(cliente);
-		}catch(Exception e){		
-		}		
-		return "redirect:/listadoClientes.html";
-	}	
+			Cliente cl = iNegCliente.obtenerCliente(idCliente);
+			cliente = cl;
+			map.put("cliente",cliente);
+		} catch (Exception e) {
+		}
+		return "redirect:/modificarCliente.html";
+	}
 }
