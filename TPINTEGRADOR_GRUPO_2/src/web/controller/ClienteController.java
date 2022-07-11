@@ -75,7 +75,7 @@ public class ClienteController {
 		return "redirect:/listadoClientes.html";
 	}
 	
-	@RequestMapping("editarCliente.html")
+	@RequestMapping("modificarCliente.html")
 	public String modificarCliente(int dni, String nombre, String apellido, Nacionalidad nacionalidad,
 			String sexo, String fechaNacimiento, String direccion, String telefono, String localidad, String email) {
 		try {
