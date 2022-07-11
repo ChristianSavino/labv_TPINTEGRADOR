@@ -93,7 +93,6 @@
 			<div class="card">
 				<h1>Nuevo Libro</h1>
 				<div class="card-body">
-					<form action="index.html" method="post">
 						<div class=" form-group row">
 							<label for="isbn" class="col-sm-2 col-form-label">ISBN:</label>
 							<div class="col-sm-7">
@@ -178,8 +177,7 @@
 							</table>
 						</div>
 						
-						<button type="submit" class="btn btn-primary">Crear Libro</button>
-					</form>
+						<button type="button" onclick="AgregarLibro()" class="btn btn-primary">Crear Libro</button>
 				</div>
 			</div>
 		</div>

@@ -18,10 +18,10 @@
 	<link rel="stylesheet" type="text/css" href="css/Main.css" />
         <script type="text/javascript">
            function agregarAutor() {
-               nombre = document.getElementById("nombreAutor").value;
-        	   apellido = document.getElementById("apellidoAutor").value;
-               nacionalidad = document.getElementByClassName("nacionalidad").value;
-        	   email = document.getElementById("emailAutor").value;
+               var nombre = document.getElementById("nombreAutor").value;
+        	   var apellido = document.getElementById("apellidoAutor").value;
+               var nacionalidad = document.getElementById("nacionalidad").value;
+        	   var email = document.getElementById("emailAutor").value;
                location.href = "agregarAutor.html?nombre="+ nombreAutor+"&apellido="+apellidoAutor+ "&nacionalidad="+nacionalidad+"&email="+email;
            };
         </script>
@@ -32,19 +32,20 @@
         <div class="card">
         <h1>Agregar Autor</h1>
             <div class="card-body">
-                <form action="#" method="post">
+                <form action="agregarAutor.html" method="Post">
                         <div class="row">                           
                             <label for="nombre" class="col-md-3 offset-4 col-form-label">Nombre: </label>
-                            <div><input type="text" name="nombre" id="nombreAutor" value=""></div>
+                            <div><input type="text" name="nombre"></div>
                             <label for="apellido" class="col-md-3 offset-4 col-form-label">Apellido: </label>
-                            <div><input type="text" name="apellido" id="apellidoAutor" value=""></div>
+                            <div><input type="text" name="apellido"></div>
                             <label for="email" class="col-md-3 offset-4 col-form-label">Email: </label>
-                            <div><input type="text" name="email" id="emailAutor" value=""></div>
+                            <div><input type="text" name="email"></div>
                             <label for="nacionalidad" class="col-md-3 offset-4 col-form-label">Nacionalidad: </label>
-                            <select id="nacionalidad">                    			
+                            <select name="nacionalidad">                    			
 	                           <option value="">--</option>
 	                            <c:forEach var="obj" items="${nacionalidades}">
-		                            <option class="nacionalidad" value="${obj.getIdNacionalidad()}">${obj.getDescripcion()}</option>													
+		                            <option value="${obj.getIdNacionalidad()}">${obj.getDescripcion()}</option>
+		                            console.log(${obj.getIdNacionalidad()})													
 								</c:forEach>
 							</select>
                     </div>                    
@@ -54,7 +55,7 @@
                         </div>
                     </div>                    
                     <div class="row">
-                        <button type="submit" class="btn btn-primary col-md-3 offset-4 ml-center"  onclick="agregarAutor()">Guardar Autor</button>
+                        <button type="submit" class="btn btn-primary col-md-3 offset-4 ml-center" >Guardar Autor</button>
                     </div>
                 </form>
             </div>
