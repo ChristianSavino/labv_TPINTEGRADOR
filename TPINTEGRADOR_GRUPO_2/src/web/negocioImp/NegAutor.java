@@ -16,6 +16,9 @@ public class NegAutor implements InegAutor{
 	@Autowired
 	private DaoAutor daoAutor;
 	
+	@Autowired
+	private NegComplementos iNegComplementos;
+	
 	@Override
 	public List<Autor> listarAutores() {
 		return daoAutor.listarAutores();
@@ -25,12 +28,12 @@ public class NegAutor implements InegAutor{
 	private Autor autor;
 
 	@Override
-	public boolean agregarAutor(String nombre, String apellido, String nacionalidad, String email) {
+	public boolean agregarAutor(String nombre, String apellido, int nacionalidad, String email) {
 		try {
 			autor.setApellido(apellido);
 			autor.setEmail(email);
 			autor.setNombre(nombre);
-			autor.setNacionalidad(nacionalidad);	
+			autor.setNacionalidad(iNegComplementos.obtenerNacionalidad(nacionalidad));	
 			return daoAutor.agregarAutor(autor);
 		} catch (Exception e) {
 			return false;

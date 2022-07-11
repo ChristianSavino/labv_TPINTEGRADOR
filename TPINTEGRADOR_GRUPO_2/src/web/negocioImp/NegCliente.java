@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.DaoCliente;
+import web.dao.DaoNacionalidad;
 import web.entidades.Biblioteca;
 import web.entidades.Cliente;
 import web.negocio.InegCliente;
@@ -16,6 +17,9 @@ public class NegCliente implements InegCliente {
 
 	@Autowired
 	private DaoCliente daoCliente;
+	
+	@Autowired
+	private NegComplementos iNegComplementos;
 	
 	@Override
 	public List<Cliente> listarClientes() {
@@ -53,7 +57,7 @@ public class NegCliente implements InegCliente {
 
 	@Override
 	public boolean agregarCliente(String sexo, String localidad, String direccion, String nombre, String apellido, String
-			correo, String telefono, String fecha) {
+			correo, String telefono, String fecha,String nacionalidad) {
 		try {						
 			cliente.setSexo(sexo);
 			cliente.setLocalidad(localidad);
@@ -63,6 +67,7 @@ public class NegCliente implements InegCliente {
 			cliente.setEmail(correo);
 			cliente.setTelefono(telefono);
 			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fecha));
+			cliente.setNacionalidad(iNegComplementos.obtenerNacionalidad(Integer.parseInt(nacionalidad)));
 			
 			return daoCliente.agregarCliente(cliente);
 		}
@@ -76,11 +81,11 @@ public class NegCliente implements InegCliente {
 	public boolean modificarCliente(int dni, String nombre, String apellido, String nacionalidad,
 			String sexo, String fechaNacimiento, String direccion, String telefono, String localidad, String email) {
 		try {
-			Cliente cliente = iNegCliente.obtenerCliente(dni);
+			Cliente cliente = daoCliente.obtenerCliente(dni);
 			cliente.setDni(dni);
 			cliente.setNombre(nombre);
 			cliente.setApellido(apellido);
-			cliente.setNacionalidad(nacionalidad);
+			cliente.setNacionalidad(iNegComplementos.obtenerNacionalidad(Integer.parseInt(nacionalidad)));
 			cliente.setSexo(sexo);
 			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento));
 			cliente.setDireccion(direccion);
@@ -93,7 +98,7 @@ public class NegCliente implements InegCliente {
 			 * Funcion estaba como string	*/
 		}catch(Exception e){		
 		}		
-		return "redirect:/listadoClientes.html";
+		return true;
 	}
 
 	@Override

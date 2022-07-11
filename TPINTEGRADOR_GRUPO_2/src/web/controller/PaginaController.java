@@ -1,5 +1,7 @@
 package web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -130,19 +132,22 @@ public class PaginaController {
 		return mv;
 	}
 
-	@RequestMapping("NuevoAutor.html")
+	@RequestMapping("nuevoAutor.html")
 	public ModelAndView PaginaAgregarAutor() {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("nacionalidades",iNegComplementos.ListarNacionalidades());
+		List<Nacionalidad> nacionalidades = iNegComplementos.ListarNacionalidades();
+		mv.addObject("nacionalidades",nacionalidades);
 		mv.setViewName("NuevoAutor");
 		return mv;
 	}
 	
-	@RequestMapping("NuevoLibro.html")
+	@RequestMapping("nuevoLibro.html")
 	public ModelAndView PaginaNuevoLibro(@SessionAttribute(name="autor",required=false) Autor autor) {
 		ModelAndView mv = new ModelAndView();
 		if (autor != null && autor.getIdAutor() != 0)
 			mv.addObject("autor",autor);
+		List<Genero> generos = iNegComplementos.ListarGeneros();
+		mv.addObject("generos", generos);
 		mv.setViewName("NuevoLibro");
 		return mv;
 	}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,10 +41,10 @@
                             <label for="email" class="col-md-3 offset-4 col-form-label">Email: </label>
                             <div><input type="text" name="email" id="emailAutor" value=""></div>
                             <label for="nacionalidad" class="col-md-3 offset-4 col-form-label">Nacionalidad: </label>
-                            <select field="{nacionalidad}">                    			
+                            <select id="nacionalidad">                    			
 	                           <option value="">--</option>
 	                            <c:forEach var="obj" items="${nacionalidades}">
-		                            <option class="nacionalidad" value="${obj.getIdNacionalidad()}">{obj.getDescripcion()}</option>													
+		                            <option class="nacionalidad" value="${obj.getIdNacionalidad()}">${obj.getDescripcion()}</option>													
 								</c:forEach>
 							</select>
                     </div>                    

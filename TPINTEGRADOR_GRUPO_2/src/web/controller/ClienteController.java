@@ -90,7 +90,7 @@ public class ClienteController {
 	}
 	*/
 	
-	@RequestMapping("modificarCliente.html")
+	/*@RequestMapping("modificarCliente.html")
 	public boolean modificarCliente(ModelMap map, @ModelAttribute("cliente") Cliente cliente, int idCliente) {
 		try {
 			Cliente cl = iNegCliente.obtenerCliente(idCliente);
@@ -99,5 +99,5 @@ public class ClienteController {
 		} catch (Exception e) {
 		}
 		return "redirect:/modificarCliente.html";
-	}
+	}*/
 }

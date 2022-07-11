@@ -34,18 +34,24 @@ public class AutorController {
 	}
 	
 	@RequestMapping("agregarAutor.html")
-	public String AgregarAutor(ModelMap map,@ModelAttribute("autor") Autor autor ,String nombre, String apellido, String nacionalidad, String email) {
+	public String AgregarAutor(ModelMap map,@ModelAttribute("autor") Autor autor ,String nombre, String apellido, int nacionalidad, String email) {
 		boolean estado = iNegAutor.agregarAutor(nombre, apellido, nacionalidad, email);
 		
 		String redirect = "";
 		if(estado) {
-			redirect = "redirect:/listadoAutor.html";
+			redirect = "redirect:/nuevoLibro.html";
 			autor = iNegAutor.obtenerAutorNombreYApellido(nombre, apellido);
 			map.put("autor",autor);
 		}
 		return redirect;
 	}
 	
+	@RequestMapping("buscarAutorNombreYApellido.html")
+	public String ObtenerAutorNombreYApellido(ModelMap map,@ModelAttribute("autor") Autor autor,String nombre,String apellido) {
+		autor = iNegAutor.obtenerAutorNombreYApellido(nombre, apellido);
+		map.put("autor", autor);
+		return "redirect:/nuevoLibro.html";
+	}
 
 	@RequestMapping("eliminarAutor.html")
 	public String eliminarAutor(@RequestParam(value = "id", required = false) int id){

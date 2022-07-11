@@ -5,5 +5,7 @@ import java.util.*;
 import web.entidades.*;
 
 public interface InegComplementos {
-public ArrayList<Nacionalidad> ListarNacionalidades();
+	public ArrayList<Nacionalidad> ListarNacionalidades();
+	public ArrayList<Genero> ListarGeneros();
+	public Nacionalidad obtenerNacionalidad(int n);
 }

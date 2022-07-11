@@ -87,7 +87,7 @@ public class DaoAutor implements IdaoAutor {
 	@Override
 	public Autor obtenerAutorNombreYApellido(String nombre, String apellido) {
 		conexion.abrirConexion();
-		Autor autor= (Autor)conexion.getSession().createQuery("FROM Autor a ORDER BY a.nombre= '"+ nombre +"' AND a.apellido='"+apellido+"'").uniqueResult();
+		Autor autor= (Autor)conexion.getSession().createQuery("FROM Autor a ORDER BY a.nombre= '"+nombre+"' AND a.apellido= '"+apellido+"'").uniqueResult();
 		conexion.cerrarSession();
 
 		return autor;

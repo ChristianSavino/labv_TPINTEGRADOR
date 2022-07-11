@@ -11,7 +11,7 @@ public interface InegCliente {
 	public List<Object[]> listarClienteTabla(String nacionalidad, String nombre, String apellido);
 	public boolean agregarCliente(String sexo, String localidad, String direccion, String nombre, String apellido, String
 			correo, String telefono, String fecha, String nacionalidad);
-	public boolean modificarCliente(Cliente cliente, int idCliente);
+	public boolean modificarCliente(int dni, String nombre, String apellido, String nacionalidad, String sexo, String fechaNacimiento, String direccion, String telefono, String localidad, String email);
 	public boolean eliminarCliente(Cliente c);
 	public Cliente obtenerCliente(int dni);
 }

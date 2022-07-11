@@ -34,7 +34,7 @@ public class Autor implements Serializable {
 	public Autor() {		
 	}
 	
-	public Autor(String nom, String ape, String nac, String mail) {
+	public Autor(String nom, String ape, Nacionalidad nac, String mail) {
 		nombre = nom;
 		apellido = ape;
 		nacionalidad = nac;
