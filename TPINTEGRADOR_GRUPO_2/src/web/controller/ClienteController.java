@@ -76,7 +76,7 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("modificarCliente.html")
-	public String modificarCliente((ModelMap map, @ModelAttribute("cliente")Cliente cliente, int idCliente) {
+	public boolean modificarCliente((ModelMap map, @ModelAttribute("cliente")Cliente cliente, int idCliente) {
 		try {
 			Cliente cl = iNegCliente.obtenerCliente(idCliente);
 			cliente = cl;
