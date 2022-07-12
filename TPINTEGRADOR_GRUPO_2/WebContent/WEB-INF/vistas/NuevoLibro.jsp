@@ -79,6 +79,8 @@
 		};
 
 		function AgregarLibro() {
+			var table = document.getElementById("tBody");
+
 			var isbn = document.getElementById("isbn").value;
 			var titulo = document.getElementById("titulo").value;
 			var fechaLanzamiento = document.getElementById("fechaLanzamiento").value;
@@ -138,7 +140,7 @@
 						</div>
 						
 						<div class="form-group row">
-						<input type="hidden" id="idAutor" hidden value="${autor.getgetIdAutor()}">>
+						<input type="hidden" id="idAutor" value="${autor.getIdAutor()}">
 							<label for="nombreAutor" class="col-sm-2 col-form-label">Nombre:</label>
 							<div class="col-sm-7">
 								<input type="text" class="form-control" id="nombreAutor" name="nombreAutor" value="${autor.getNombre()}">

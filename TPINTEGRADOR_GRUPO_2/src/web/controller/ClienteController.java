@@ -49,14 +49,13 @@ public class ClienteController {
 	public String obtenerCliente(int idCliente) {
 		System.out.println(idCliente);
 		Cliente cliente = iNegCliente.obtenerCliente(idCliente);
-		//falla cuando hace el obtener cliente porque trae null cuando deberia traer el cliente en cuestion
 		return "{idCliente:"+cliente.getId()+"}";
 	}
 	
 	@RequestMapping("obtenerClienteNuevoPrestamo.html")
-	public String ObtenerClienteNuevoPrestamo(ModelMap map, @ModelAttribute("cliente")Cliente cliente, int idCliente) {
+	public String ObtenerClienteNuevoPrestamo(ModelMap map, @ModelAttribute("cliente")Cliente cliente, String idCliente) {
 		try {
-			Cliente cl = iNegCliente.obtenerCliente(idCliente);
+			Cliente cl = iNegCliente.obtenerCliente(Integer.parseInt(idCliente));
 			cliente = cl;
 			map.put("cliente",cliente);
 		} catch (Exception e) {
@@ -78,26 +77,12 @@ public class ClienteController {
 	@RequestMapping("agregarCliente.html")
 	public String agregarCliente(ModelMap map,@ModelAttribute("cliente") Cliente cliente ,String dni, String nombre, String apellido, String sexo, String nacionalidad,
 	String fNacimiento, String localidad, String direccion, String correo, String telefono) {
-		/*int dniInt = Integer.parseInt(dni);*/
 		boolean estado = iNegCliente.agregarCliente(dni, nombre, apellido, sexo, Integer.parseInt(nacionalidad), fNacimiento, localidad, direccion, correo,telefono);
 		
 		String redirect = "";
 		if(estado) {
 			redirect = "redirect:/listadoClientes.html";
-			map.put("cliente", cliente);
 		}
 		return redirect;
 	}
-	
-	
-	/*@RequestMapping("modificarCliente.html")
-	public boolean modificarCliente(ModelMap map, @ModelAttribute("cliente") Cliente cliente, int idCliente) {
-		try {
-			Cliente cl = iNegCliente.obtenerCliente(idCliente);
-			cliente = cl;
-			map.put("cliente",cliente);
-		} catch (Exception e) {
-		}
-		return "redirect:/modificarCliente.html";
-	}*/
 }

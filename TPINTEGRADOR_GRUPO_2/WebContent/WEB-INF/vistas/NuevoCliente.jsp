@@ -32,7 +32,7 @@
                             <label for="apellido" class="col-md-3 offset-4 col-form-label">Apellido: </label>
                             <div><input type="text" name="apellido" value=""></div>
                             <label for="sexo" class="col-md-3 offset-4 col-form-label">Sexo: </label>
-                            <div><select name="Sexo" id="sexo">
+                            <div><select name="sexo" id="sexo">
                             				<option value="">Seleccione Opción</option>
                             				<option value="F">Femenino</option>
                             				<option value="M">Masculino</option>
