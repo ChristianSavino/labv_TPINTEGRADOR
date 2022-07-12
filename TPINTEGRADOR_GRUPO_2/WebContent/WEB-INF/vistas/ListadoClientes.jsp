@@ -30,8 +30,8 @@
 					<input type="button" value="Agregar Cliente" onclick="location.href = 'nuevoCliente.html';" class="btn btn-primary"></input>
 				</div>
 				<br>
-				<div class="col-9">
-					<table class="table table-bordered table-hover">
+				<div class="col-12">
+					<table class="table table-bordered table-hover table-sm">
 						<tr>
 								<td>ID</td>
 								<td>DNI</td>
@@ -67,7 +67,7 @@
 							</c:forEach>
 						</table>
 						</div>
-						<form class="col-9" action="listarClienteFiltro.html" method="Get">			
+						<form class="col-12" action="listarClienteFiltro.html" method="Get">			
 								<div>
 								<p>
 								<h3>Filtrar por:</h3>

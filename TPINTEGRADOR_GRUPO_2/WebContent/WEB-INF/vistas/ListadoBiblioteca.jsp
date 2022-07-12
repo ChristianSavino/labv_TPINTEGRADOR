@@ -29,6 +29,7 @@
 					<h1>Biblioteca</h1>
 					<input type="button" value="Agregar Libro" onclick="location.href = 'nuevaBiblioteca.html';" class="btn btn-primary"></input>
 				</div>
+				<br>
 				<div class="col-12">
 					<table class="table table-bordered table-hover">
 						<tr>
