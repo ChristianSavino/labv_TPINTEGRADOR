@@ -56,19 +56,20 @@ public class NegCliente implements InegCliente {
 	}
 
 	@Override
-	public boolean agregarCliente(String sexo, String localidad, String direccion, String nombre, String apellido, String
-			correo, String telefono, String fecha,String nacionalidad) {
-		try {						
-			cliente.setSexo(sexo);
-			cliente.setLocalidad(localidad);
-			cliente.setDireccion(direccion);
-			cliente.setNombre(nombre);
+	public boolean agregarCliente(String dni,String nombre,String apellido,String sexo, int nacionalidad,String fechaNacimiento,String localidad,String direccion,String email,String telefono){
+		try {
+			int dniInt;
 			cliente.setApellido(apellido);
-			cliente.setEmail(correo);
+			cliente.setDireccion(direccion);
+			dniInt = Integer.parseInt(dni);
+			cliente.setDni(dniInt);
+			cliente.setEmail(email);
+			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento));
+			cliente.setLocalidad(localidad);
+			cliente.setNombre(nombre);		
+			cliente.setSexo(sexo);
 			cliente.setTelefono(telefono);
-			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fecha));
-			cliente.setNacionalidad(iNegComplementos.obtenerNacionalidad(Integer.parseInt(nacionalidad)));
-			
+			cliente.setNacionalidad(iNegComplementos.obtenerNacionalidad(nacionalidad));
 			return daoCliente.agregarCliente(cliente);
 		}
 		catch (Exception e) {

@@ -128,6 +128,8 @@ public class PaginaController {
 	@RequestMapping("nuevoCliente.html")
 	public ModelAndView PaginaNuevoCliente() {
 		ModelAndView mv = new ModelAndView();
+		List<Nacionalidad> nacionalidades = iNegComplementos.ListarNacionalidades();
+		mv.addObject("nacionalidades",nacionalidades);
 		mv.setViewName("NuevoCliente");
 		return mv;
 	}

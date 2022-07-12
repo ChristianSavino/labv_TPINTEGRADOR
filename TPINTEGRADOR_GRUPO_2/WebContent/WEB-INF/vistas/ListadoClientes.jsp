@@ -24,14 +24,15 @@
 <jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="card">
-			<div class="card-body">
-				<div class="row">
-					<div class="col-11">
-						<h1>Clientes</h1>
-						<input type="button" value="Agregar Cliente" onclick="location.href = 'nuevoCliente.html';" class="btn btn-primary"></input>
-						<br><br>
-						<table class="table table-bordered table-hover">
-							<tr>
+		<div class="card-body">				
+				<div class="col-12">
+					<h1>Clientes</h1>
+					<input type="button" value="Agregar Cliente" onclick="location.href = 'nuevoCliente.html';" class="btn btn-primary"></input>
+				</div>
+				<br>
+				<div class="col-9">
+					<table class="table table-bordered table-hover">
+						<tr>
 								<td>ID</td>
 								<td>DNI</td>
 								<td>Nombre</td>
@@ -65,7 +66,8 @@
 								</tr>
 							</c:forEach>
 						</table>
-						<form class="col-12" action="listarClienteFiltro.html" method="Get">			
+						</div>
+						<form class="col-9" action="listarClienteFiltro.html" method="Get">			
 								<div>
 								<p>
 								<h3>Filtrar por:</h3>
@@ -86,10 +88,8 @@
 								</div>
 							</form>	
 						</div>
-					</div>
 				</div>
 			</div>
-		</div>
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
