@@ -29,4 +29,11 @@ public class LibroController {
 		return "redirect:/nuevaBiblioteca.html";
 	}
 	
+	@RequestMapping("agregarLibro.html")
+	public String AgregarNuevoLibro(ModelMap map, String isbn, String titulo, String fechaLanzamiento, String idAutor, String descripcion,String idioma, String generos, String cantidadPaginas) {
+		iNegLibro.AgregarLibro(isbn,titulo,fechaLanzamiento,idAutor,descripcion,idioma,generos,cantidadPaginas);
+		Libro l = iNegLibro.obtenerLibro(Integer.parseInt(isbn));
+		map.put("libro", l);
+		return "redirect:/nuevaBiblioteca.html";
+	}
 }

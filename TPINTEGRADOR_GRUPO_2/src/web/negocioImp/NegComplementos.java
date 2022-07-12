@@ -33,4 +33,9 @@ public class NegComplementos implements InegComplementos {
 		return daoNacionalidad.obtenerNacionalidad(n);
 	}
 
+	@Override
+	public Genero obtenerGenero(int g) {
+		return daoGenero.obtenerGenero(g);
+	}
+
 }

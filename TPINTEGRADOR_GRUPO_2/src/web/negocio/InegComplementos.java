@@ -8,4 +8,5 @@ public interface InegComplementos {
 	public ArrayList<Nacionalidad> ListarNacionalidades();
 	public ArrayList<Genero> ListarGeneros();
 	public Nacionalidad obtenerNacionalidad(int n);
+	public Genero obtenerGenero(int g);
 }

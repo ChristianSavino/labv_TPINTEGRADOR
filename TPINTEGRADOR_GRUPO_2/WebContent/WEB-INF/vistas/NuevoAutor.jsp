@@ -16,15 +16,6 @@
 	crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="css/Main.css" />
-        <script type="text/javascript">
-           function agregarAutor() {
-               var nombre = document.getElementById("nombreAutor").value;
-        	   var apellido = document.getElementById("apellidoAutor").value;
-               var nacionalidad = document.getElementById("nacionalidad").value;
-        	   var email = document.getElementById("emailAutor").value;
-               location.href = "agregarAutor.html?nombre="+ nombreAutor+"&apellido="+apellidoAutor+ "&nacionalidad="+nacionalidad+"&email="+email;
-           };
-        </script>
 </head>
 <body>
 	<jsp:include page="Header.jsp" />

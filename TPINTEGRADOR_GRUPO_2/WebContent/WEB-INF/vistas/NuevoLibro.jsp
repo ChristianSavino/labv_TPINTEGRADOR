@@ -73,14 +73,33 @@
 				tableBody.appendChild(row);			
 			}
 			catch (error) {
-				
+				alert("Este Genero ya fue agregado");
 			}
 			
 		};
+
+		function AgregarLibro() {
+			var isbn = document.getElementById("isbn").value;
+			var titulo = document.getElementById("titulo").value;
+			var fechaLanzamiento = document.getElementById("fechaLanzamiento").value;
+			var idAutor = document.getElementById("idAutor").value;
+			var descripcion = document.getElementById("descripcion").value;
+			var idioma = document.getElementById("idioma").value;		
+
+			var generos = "";
+			for (var i = 0, row; row = table.rows[i]; i++) {
+				generos += row.cells[0].innerHTML + "-";
+			};
+
+			var cantidadPaginas = document.getElementById("cantidadPaginas").value;
+			
+			location.href = "agregarLibro.html?isbn="+isbn+"&titulo="+titulo+"&fechaLanzamiento="+fechaLanzamiento+"&idAutor="+idAutor+"&descripcion="
+			+descripcion+"&idioma="+idioma+"&generos="+generos+"&cantidadPaginas="+cantidadPaginas;
+		};
 	
-		function buscarAutor() {
-            nombre = document.getElementById("nombreAutor").value;
-            apellido = document.getElementById("apellidoAutor").value;
+		function BuscarAutor() {
+            var nombre = document.getElementById("nombreAutor").value;
+            var apellido = document.getElementById("apellidoAutor").value;
      	   location.href = "buscarAutorNombreYApellido.html?nombre="+ nombre+"&apellido="+apellido;
          };
          
@@ -96,14 +115,14 @@
 						<div class=" form-group row">
 							<label for="isbn" class="col-sm-2 col-form-label">ISBN:</label>
 							<div class="col-sm-7">
-								<input class="form-control" type="number" name="isbn">
+								<input class="form-control" type="number" id="isbn">
 							</div>
 						</div>
 						
 						<div class="form-group row">
 							<label for="titulo" class="col-sm-2 col-form-label">Titulo:</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" name="titulo" placeholder="Ingrese un titulo">
+								<input type="text" class="form-control" id="titulo" placeholder="Ingrese un titulo">
 							</div>
 						</div>
 						
@@ -119,6 +138,7 @@
 						</div>
 						
 						<div class="form-group row">
+						<input type="hidden" id="idAutor" hidden value="${autor.getgetIdAutor()}">>
 							<label for="nombreAutor" class="col-sm-2 col-form-label">Nombre:</label>
 							<div class="col-sm-7">
 								<input type="text" class="form-control" id="nombreAutor" name="nombreAutor" value="${autor.getNombre()}">
@@ -132,22 +152,29 @@
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-7">
-								<input type="button" value="Buscar Autor"  onclick="buscarAutor()"	class="btn btn-primary"></input>
+								<input type="button" value="Buscar Autor"  onclick="BuscarAutor()"	class="btn btn-primary"></input>
 								<input type="button" value="Agregar Autor"  onclick="location.href = 'nuevoAutor.html';"	class="btn btn-primary"></input>
+							</div>
+						</div>
+						
+						<div class=" form-group row">
+							<label for="isbn" class="col-sm-2 col-form-label">ISBN:</label>
+							<div class="col-sm-7">
+								<input class="form-control" type="number" id="cantidadPaginas">
 							</div>
 						</div>
 						
 						<div class="form-group row">
 							<label for="lastName" class="col-sm-2 col-form-label">Idioma:</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" name="idioma">
+								<input type="text" class="form-control" id="idioma">
 							</div>
 						</div>
 						
 						<div class="form-group row">
 							<label for="lastName" class="col-sm-2 col-form-label">Sinopsis:</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" name="descripcion">
+								<input type="text" class="form-control" id="descripcion">
 							</div>
 						</div>
 						
