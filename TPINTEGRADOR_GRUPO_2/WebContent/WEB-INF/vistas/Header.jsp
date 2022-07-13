@@ -1,29 +1,26 @@
 <header>
 	<script src="js/jQuery.js"></script>
 	<script src="js/header.js"></script>
-	<div>
-		<nav>
-			<ul class="enlaces-menu">
-				<li class="btnCerrarSesion" id="usuario"></li>
-				<li><input type="button" value="Cerrar Sesion" class="container">
-					<li><input type="button" value="Cerrar Sesion"
-						onclick="location.href = 'cerrarSesion.html';"
-						class="btnCerrarSesion" ></input></li>
-				<!--	<li><input type="button" value="Cerrar Sesion"
-						onclick="location.href = 'cerrarSesion.html';"
-						class="btnCerrarSesion" style="background-color:pink; border-color:black; color:white; float: right;"
-						></input></li>*/ -->
-				<li><input type="button" value="Biblioteca"
-					onclick="location.href = 'listadoBiblioteca.html';"
-					class="btnCerrarSesion"></input></li>
-				<li><input type="button" value="Clientes"
-					onclick="location.href = 'listadoClientes.html';"
-					class="btnCerrarSesion"></input></li>
-				
-			</ul>
-			<ul class="enlaces-menu">
-				<li></li>
-			</ul>
-		</nav>
-	</div>
+
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="navbar-brand" id="usuario"></div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="listadoBiblioteca.html">Biblioteca</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="listadoClientes.html">Clientes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="cerrarSesion.html">Cerrar Sesion</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 </header>

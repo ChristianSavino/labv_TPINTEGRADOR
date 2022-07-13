@@ -52,15 +52,20 @@ public class ClienteController {
 		return "{idCliente:"+cliente.getId()+"}";
 	}
 	
-	@RequestMapping("obtenerClienteNuevoPrestamo.html")
-	public String ObtenerClienteNuevoPrestamo(ModelMap map, @ModelAttribute("cliente")Cliente cliente, String idCliente) {
+		
+	@RequestMapping("obtenerClienteNuevoPrestamoFragment.html")
+	public ModelAndView ObtenerClienteNuevoPrestamoFragment(int idCliente) {
+		//lo que no se manejar todavia es cuando no encuentra el cliente, por algun motivo no devuelve null el obtenerCliente de iNegCliente.
 		try {
-			Cliente cl = iNegCliente.obtenerCliente(Integer.parseInt(idCliente));
-			cliente = cl;
-			map.put("cliente",cliente);
+			Cliente cl = iNegCliente.obtenerCliente(idCliente);
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("clienteFragmentAjax", cl);
+			mv.setViewName("ClienteFragment");
+			return mv;
 		} catch (Exception e) {
-		}
-		return "redirect:/nuevoPrestamo.html";
+			System.out.println("<<MENSAJE ERROR>>" + e.getMessage());
+			return null;
+		}		
 	}
 	
 	@RequestMapping("eliminarCliente.html")

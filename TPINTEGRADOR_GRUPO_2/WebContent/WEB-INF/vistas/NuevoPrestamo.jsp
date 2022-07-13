@@ -42,9 +42,9 @@
 							<h1>Nuevo Prestamo</h1>
 						</div>
 					</div>
-					<form action="guardarNuevoPrestamo.html" method="post">
+					<form action="guardarNuevoPrestamo.html" method="post" id="formNuevoPrestamo">
 						<input type="hidden" value="${biblioteca.getId()}" name="idBiblioteca"></input>
-						<input type="hidden" value="${cliente.getId()}" name="idCliente" id="idCliente"></input>
+<%-- 						<input type="hidden" value="${cliente.getId()}" name="idCliente" id="idCliente"></input> --%>
 						<div class="row">
 							<div class="col-md-8 offset-2">
 								<hr>
@@ -74,16 +74,16 @@
 							<button type="button" id="listadoClienteAjax" class="btn btn-primary col-md-3 offset-4"
 								data-toggle="modal" data-target="#asignarCliente">Asignar cliente</button>
 						</div>
-						<div class="row">
+						<div class="row" id="datosCliente">
 
-							<label for="lastName" class="col-md-3 offset-4 col-form-label">DNI</label>
-							<div class="col-md-3">${cliente.getDni()}</div>
-							<label for="lastName" class="col-md-3 offset-4 col-form-label">Nombre
-							</label>
-							<div class="col-md-3">${cliente.getNombre()}</div>
-							<label for="lastName" class="col-md-3 offset-4 col-form-label">Apellido
-							</label>
-							<div class="col-md-3">${cliente.getApellido()}</div>
+<!-- 							<label for="lastName" class="col-md-3 offset-4 col-form-label">DNI</label> -->
+<%-- 							<div class="col-md-3">${cliente.getDni()}</div> --%>
+<!-- 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Nombre -->
+<!-- 							</label> -->
+<%-- 							<div class="col-md-3">${cliente.getNombre()}</div> --%>
+<!-- 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Apellido -->
+<!-- 							</label> -->
+<%-- 							<div class="col-md-3">${cliente.getApellido()}</div> --%>
 						</div>
 						<div class="row">
 							<div class="col-md-8 offset-2">
@@ -95,7 +95,7 @@
 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Fecha</label>
 							<div class="col-md-2">
 								<input type="date" id="selFecha" name="fecha" class="form-control"
-									step="1" min="01-07-2022" max="31-12-2022" value="01-07-2022" />
+									step="1" min="01-07-2022" max="31-12-2022" value="01-07-2022" required/>
 
 							</div>
 						</div>
@@ -103,7 +103,7 @@
 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Cantidad
 								Dias Prestamo</label>
 							<div class="col-md-2">
-								<input type="number" min="1" class="form-control" name="cantidadDias" value="1">
+								<input type="number" min="1" class="form-control" name="cantidadDias" id="cantidadDias" value="1" required>
 							</div>
 						</div>
 						<div class="row">
@@ -112,7 +112,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<button type="submit" class="btn btn-primary col-md-3 offset-4">Guardar
+							<button type="button" class="btn btn-primary col-md-3 offset-4" id="submitNuevoPrestamo">Guardar
 								nuevo prestamo</button>
 
 						</div>
@@ -120,74 +120,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog  modal-lg modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Seleccionar
-							Libro de la biblioteca</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-
-						<div class=" form-group row">
-							<label for="lastName" class="col-md-1 col-form-label ">ISBN</label>
-							<input type="text" class="form-control col-md-3" name="username" placeholder="ISBN"> <label
-								for="lastName" class="col-md-1 col-form-label ">Titulo</label> <input type="text"
-								class="form-control col-md-6" name="username" placeholder="Titulo">
-						</div>
-						<div class=" form-group row">
-							<label for="lastName" class="col-md-1 col-form-label ">Autor</label>
-
-							<select name="" id="" class="form-control col-md-3">
-								<option value="">Seleccionar Autor</option>
-							</select> <label for="lastName" class="col-md-1 col-form-label">Genero</label>
-							<select name="" id="" class="form-control col-md-3">
-								<option value="">Seleccionar Genero</option>
-							</select> <label for="lastName" class="col-md-1 col-form-label">Idioma</label>
-							<select name="" id="" class="form-control col-md-3">
-								<option value="">Seleccionar Idioma</option>
-							</select>
-
-						</div>
-
-						<button type="button" class="btn btn-primary col-md-2 offset-5" data-toggle="modal"
-							data-target="#exampleModalCenter">Buscar</button>
-						<div class="text-divider">
-							<span>Resultados de la busqueda, click para asignar</span>
-						</div>
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">ISBN</th>
-									<th scope="col">Titulo</th>
-									<th scope="col">Idioma</th>
-									<th scope="col">Autor</th>
-									<th scope="col">Genero</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1233</td>
-									<td>titulo libro</td>
-									<td>rusian</td>
-									<td>isac asimov</td>
-									<td>ficcion</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary">Save changes</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<div class="modal fade" id="asignarCliente" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog  modal-lg modal-dialog-centered"  style="max-width: 70%;" role="document">
@@ -235,6 +168,24 @@
 				</div>
 			</div>
 		</div>
+		
+		
+		<div class="modal fade" id="modalValidations" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog  modal-md modal-dialog-centered"  role="document">
+				<div class="modal-content bg-warning">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Atencion</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+					<div id="messageValidationError"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
@@ -246,6 +197,7 @@
 					$("#nacionalidad").val('');
 					$("#nombre").val('');
 					$("#apellido").val('');
+					$("#tablaClientes").html("cargando...");
 					$("#buscarClientesAjax").click();
 				});
 			
@@ -262,7 +214,28 @@
 					});
 				});
 				
-				
+				$(document).on("click", "#submitNuevoPrestamo", function(e) {
+					let continuar = true;
+					let mensaje = "";
+					
+					if($("#idCliente").val() === undefined){
+						continuar = false;
+						mensaje = "Se debe seleccionar un cliente.";
+					}
+					if($("#cantidadDias").val() < 1){
+						continuar = false;
+						mensaje = "La cantidad de dias debe ser mayor a uno.";
+					}
+					
+					if(!continuar){
+						$("#messageValidationError").html(mensaje);
+						$("#modalValidations").modal('show');
+						return false;
+					}
+					
+					
+					$("#formNuevoPrestamo").submit();
+				});
 				
 			});
 			

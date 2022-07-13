@@ -115,12 +115,10 @@ public class PaginaController {
 	}
 
 	@RequestMapping(value="nuevoPrestamo.html")
-	public ModelAndView PaginaNuevoPrestamo(@SessionAttribute("biblioteca") Biblioteca biblioteca, @SessionAttribute(name="cliente",required=false) Cliente cliente) {
+	public ModelAndView PaginaNuevoPrestamo(@SessionAttribute("biblioteca") Biblioteca biblioteca) {
 		ModelAndView mv = new ModelAndView();
 		if(biblioteca != null && biblioteca.getId() != 0)
 			mv.addObject("libro", biblioteca);
-		if(cliente != null &&cliente.getId() != 0)
-			mv.addObject("cliente", cliente);
 		mv.setViewName("NuevoPrestamo");
 		return mv;
 	}

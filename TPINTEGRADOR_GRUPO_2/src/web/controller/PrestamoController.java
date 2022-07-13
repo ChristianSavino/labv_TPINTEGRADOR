@@ -1,19 +1,14 @@
 package web.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Biblioteca;
 import web.entidades.Cliente;
-import web.entidades.Prestamo;
 import web.negocioImp.NegBiblioteca;
 import web.negocioImp.NegCliente;
 import web.negocioImp.NegPrestamo;
@@ -34,15 +29,11 @@ public class PrestamoController {
 	private NegPrestamo iNegPrestamo;
 	
 	@RequestMapping(value="guardarNuevoPrestamo.html")
-	public String GuardarNuevoPrestamo(ModelMap map,@SessionAttribute("biblioteca") Biblioteca biblioteca, @SessionAttribute("cliente") Cliente cliente,
+	public String GuardarNuevoPrestamo(@SessionAttribute("biblioteca") Biblioteca biblioteca,
 			int idBiblioteca, int idCliente, String fecha, int cantidadDias) {
 		try {
-								
+			Cliente cliente = iNegCliente.obtenerCliente(idCliente);			
 			boolean res = iNegPrestamo.agregarPrestamo(biblioteca,cliente,cantidadDias,fecha);
-			
-			map.put("biblioteca", null);
-			map.put("cliente", null);
-			
 		
 		} catch (Exception e) {
 			 System.err.println(e.getMessage());
