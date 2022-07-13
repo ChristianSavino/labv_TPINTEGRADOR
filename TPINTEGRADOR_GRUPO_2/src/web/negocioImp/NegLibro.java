@@ -1,6 +1,7 @@
 package web.negocioImp;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,44 @@ public class NegLibro implements InegLibro {
 	@Autowired
 	private NegComplementos iNegComplementos;
 	
+	@Override
+	public List<Object[]> listarLibroTabla(int isbn, String nombre) {
+		int newIsbn = 0;
+		
+		if(isbn > 0)
+		{
+			newIsbn = isbn;
+		}
+		
+		String newNombre = "";
+		
+		if(nombre.length() > 0)
+		{
+			newNombre = nombre;
+		}
+		
+		return daoLibro.listarLibroTabla(newIsbn, newNombre);
+	}
+	
+	@Override
+	public List<Object[]> listarNuevoLibroTabla(int isbn, String nombre) {
+		int newIsbn = 0;
+		
+		if(isbn > 0)
+		{
+			newIsbn = isbn;
+		}
+		
+		String newNombre = "";
+		
+		if(nombre.length() > 0)
+		{
+			newNombre = nombre;
+		}
+		
+		return daoLibro.listarNuevoLibroTabla(newIsbn, newNombre);
+	}
+
 	@Override
 	public Libro BuscarLibroNuevaBiblioteca(String isbn, String nombre) {
 		int isbnAux = 0;

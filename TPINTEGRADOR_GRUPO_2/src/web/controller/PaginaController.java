@@ -103,13 +103,8 @@ public class PaginaController {
 	}
 
 	@RequestMapping("nuevaBiblioteca.html")
-	public ModelAndView PaginaNuevaBiblioteca(@SessionAttribute(name="libro",required=false) Libro libro) {
+	public ModelAndView PaginaNuevaBiblioteca() {
 		ModelAndView mv = new ModelAndView();
-
-		if(libro != null && libro.getIsbn() > 0) {
-			mv.addObject("isbnLibro",libro.getIsbn());
-			mv.addObject("nombreLibro",libro.getTitulo());
-		}
 		mv.setViewName("NuevaBiblioteca");
 		return mv;
 	}

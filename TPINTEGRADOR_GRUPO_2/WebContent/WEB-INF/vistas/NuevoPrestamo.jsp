@@ -92,10 +92,10 @@
 						</div>
 
 						<div class="row">
-							<label for="lastName" class="col-md-3 offset-4 col-form-label">Fecha</label>
+							<label for="selFecha" class="col-md-3 offset-4 col-form-label">Fecha</label>
 							<div class="col-md-2">
 								<input type="date" id="selFecha" name="fecha" class="form-control"
-									step="1" min="01-07-2022" max="31-12-2022" value="01-07-2022" required/>
+									step="1" min="01-07-2022" value="01-07-2022" required/>
 
 							</div>
 						</div>
@@ -170,22 +170,8 @@
 		</div>
 		
 		
-		<div class="modal fade" id="modalValidations" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog  modal-md modal-dialog-centered"  role="document">
-				<div class="modal-content bg-warning">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Atencion</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-					<div id="messageValidationError"></div>
-					</div>
-				</div>
-			</div>
-		</div>
+			<jsp:include page="ModalValidaciones.jsp" />
+
 
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
@@ -206,7 +192,7 @@
 					let nombre = $("#nombre").val();
 					let apellido = $("#apellido").val();
 					$.ajax({
-						url: `listarClienteFiltroAjax.html?nacionalidad=${nacionalidad}&nombre=${nombre}&apellido=${apellido}`,
+						url: "listarClienteFiltroAjax.html?nacionalidad="+nacionalidad+"&nombre="+nombre+"&apellido="+apellido,
 						type: 'GET',
 						success: function (data) {
 							$("#tablaClientes").html(data);
@@ -220,7 +206,7 @@
 					
 					if($("#idCliente").val() === undefined){
 						continuar = false;
-						mensaje = "Se debe seleccionar un cliente.";
+						mensaje = "Se debe asignar un cliente.";
 					}
 					if($("#cantidadDias").val() < 1){
 						continuar = false;

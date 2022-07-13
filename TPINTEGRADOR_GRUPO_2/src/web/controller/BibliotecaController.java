@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Biblioteca;
+import web.entidades.Cliente;
 import web.negocioImp.NegBiblioteca;
 import web.negocioImp.NegCliente;
 
@@ -38,14 +39,17 @@ public class BibliotecaController {
 		return mv;
 	}
 	
-	@RequestMapping("agregarBiblioteca.html")
-	public String AgregarBiblioteca(String isbn, String fechaAlta ) {
-		boolean estado = iNegBiblioteca.agregarBiblioteca(Integer.parseInt(isbn), fechaAlta);
-		String redirect = "";
-		if(estado)
-			redirect = "redirect:/listadoBiblioteca.html";
+	@RequestMapping("guardarNuevaBiblioteca.html")
+	public String GuardarNuevaBiblioteca(String isbn, String fechaAlta ) {
 		
-		return redirect;
+		try {
+			boolean estado = iNegBiblioteca.agregarBiblioteca(Integer.parseInt(isbn), fechaAlta);
+		
+		}catch(Exception e) {
+			 System.err.println(e.getMessage());
+		}
+
+		return  "redirect:/listadoBiblioteca.html";
 	}
 	
 	@RequestMapping(value="obtenerBibliotecaDesdeLista.html",method = RequestMethod.GET)

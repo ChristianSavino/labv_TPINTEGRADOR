@@ -11,4 +11,6 @@ public interface IdaoLibro {
 	public boolean eliminarLibro(Libro l);
 	public Libro obtenerLibro(int isbn);
 	public Libro obtenerLibroFiltroNuevaBiblioteca(int isbn,String nombre);
+	List<Object[]> listarLibroTabla(int isbn, String nombre);
+	List<Object[]> listarNuevoLibroTabla(int isbn, String nombre);
 }
