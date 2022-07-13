@@ -4,6 +4,7 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -29,11 +30,12 @@ public class PrestamoController {
 	private NegPrestamo iNegPrestamo;
 	
 	@RequestMapping(value="guardarNuevoPrestamo.html")
-	public String GuardarNuevoPrestamo(@SessionAttribute("biblioteca") Biblioteca biblioteca,
+	public String GuardarNuevoPrestamo(ModelMap map, @SessionAttribute("biblioteca") Biblioteca biblioteca,
 			int idBiblioteca, int idCliente, String fecha, int cantidadDias) {
 		try {
 			Cliente cliente = iNegCliente.obtenerCliente(idCliente);			
 			boolean res = iNegPrestamo.agregarPrestamo(biblioteca,cliente,cantidadDias,fecha);
+			map.put("biblioteca", null);
 		
 		} catch (Exception e) {
 			 System.err.println(e.getMessage());
