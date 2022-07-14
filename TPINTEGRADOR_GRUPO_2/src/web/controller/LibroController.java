@@ -15,7 +15,6 @@ import web.entidades.Libro;
 import web.negocioImp.NegLibro;
 
 @Controller
-@SessionAttributes({"libro"})
 public class LibroController {
 
 	@Autowired
@@ -68,6 +67,5 @@ public class LibroController {
 		mv.addObject("libro", l);
 		mv.setViewName("NuevaBiblioteca");
 		return mv;
-		//return "nuevaBiblioteca.html";
 	}
 }

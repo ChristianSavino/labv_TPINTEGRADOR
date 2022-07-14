@@ -19,7 +19,6 @@ import web.negocioImp.NegBiblioteca;
 import web.negocioImp.NegCliente;
 
 @Controller
-@SessionAttributes({"biblioteca"})
 public class BibliotecaController {
 	
 	@Autowired

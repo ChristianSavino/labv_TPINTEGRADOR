@@ -28,53 +28,56 @@
 				<div class="col-12">
 					<table class="table table-bordered table-hover table-sm">
 						<tr>
-								<th scope="col">Nro. Prestamo</th>
-                                <th scope="col">Libro</th>
+<!-- 								<th scope="col">Nro. Prestamo</th> -->
+								<th scope="col">ISBN</th>
+                                <th scope="col">Titulo</th>
                                 <th scope="col">Autor</th>
                                 <th scope="col">Fecha prestamo</th>
-                                <th scope="col">Dias de prestamo</th>
+                                <th scope="col">Dias prestamo</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">DNI</th>
                                 <th scope="col">Acciones</th>
 							</tr>
 							<c:forEach var="obj" items="${prestamos}">
 								<tr>
-									<td>${obj[0]}</td>
+<%-- 									<td>${obj[0]}</td> --%>
 									<td>${obj[1]}</td>
-									<td>${obj[2]} ${obj[3]}</td>
+									<td>${obj[2]}</td>
+									<td>${obj[3]} ${obj[4]}</td>
+									<td>${obj[6]}</td>
 									<td>${obj[5]}</td>
-									<td>${obj[4]}</td>
-									<td>${obj[6]} ${obj[7]}</td>
-									<td>${obj[8]}</td>
+									<td>${obj[7]} ${obj[8]}</td>
+									<td>${obj[9]}</td>
 									<td>    
-									 <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModalCenter"><i class="far fa-eye"></i></button>
-                                    <a href="NuevoPrestamo.html" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                    <button type="button" class="btn btn-success" data-toggle="modal"
-                                        data-target="#exampleModalCenter2"><i class="fas fa-check"></i></button>                          
-										<input type="button" value="Eliminar"	onclick="location.href = 'eliminarCliente.html?id=${obj[0]}';"	class="btn btn-danger"></input>
-										<input type="button" value="Modificar"	onclick="location.href = 'modificarCliente.html?id=${obj[0]}';"	class="btn btn-primary"></input>									
+<!-- 								 <button type="button" class="btn btn-primary" data-toggle="modal" -->
+<!--                                         data-target="#exampleModalCenter"><i class="far fa-eye"></i></button> -->
+<!--    onclick="location.href = 'finalizarPrestamo.html?id=${obj[0]}';"	                                 <a href="NuevoPrestamo.html" class="btn btn-warning"><i class="fas fa-edit"></i></a> -->
+<!--                                     <button type="button" class="btn btn-success" data-toggle="modal" -->
+<!--                                         data-target="#exampleModalCenter2"><i class="fas fa-check"></i></button>                           -->
+										<input type="button" value="Devolver Libro" data-id-prestamo="${obj[0]}" class="btn btn-success devolverLibro"></input>
 	                              	</td>
 								</tr>
 							</c:forEach>
 						</table>
 						</div>
-						<form class="col-12" action="listarClienteFiltro.html" method="Get">			
+						
+
+						<form class="col-12" action="listadoPrestamos.html" method="Get">			
 								<div>
 								<p>
 								<h3>Filtrar por:</h3>
 								</p>
 								
-									<p>Nacionalidad:
-									<input class="form-control" type="search" name="nacionalidad"></p>
+									<p>ISBN:
+									<input class="form-control" type="search" name="isbn"></p>
 									<p></p>							
 									<p>
-									Nombre:
-									<input class="form-control" type="search" name="nombre"></p>
+									Titulo:
+									<input class="form-control" type="search" name="titulo"></p>
 									<p></p>
 									<p></p>						
-									<p>Apellido:
-									<input class="form-control" type="search" name="apellido">
+									<p>DNI Cliente:
+									<input class="form-control" type="search" name="dniCliente">
 									</p>
 									<p><input class="form-control" type="submit" value="Buscar"></p>
 								</div>
@@ -136,7 +139,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
+        <div class="modal fade" id="devolverLibroModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -161,16 +164,42 @@
                 </div>
             </div>
         </div>
+        		<jsp:include page="ModalValidaciones.jsp" />
+        
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$(document).off('click', '.devolverLibro');
+				$(document).on('click','.devolverLibro', function (e) {
+					let prestamo = $(this).data('id-prestamo');
+					 $('#devolverLibroModal').modal('show');
+					
+					$('#devolverLibroModal').on('click', '.btn-primary', function(){
+					    
+					    $('#devolverLibroModal').modal('hide');
+					    location.href = 'finalizarPrestamo.html?idPrestamo=' + prestamo;
+// 					    $.ajax({
+
+// 						    type: "POST",
+// 						    url: "finalizarPrestamo.html?idPrestamo="+prestamo,
+// 						    error: function (response) {
+						    	
+// 								$("#messageValidationError").html("Ocurrio un error interno al intentar seleccionar el libro.");
+// 								$("#modalValidations").modal('show');
+								
+// 						    }});
+					    
+					});
+					
+
+				});
+			});
+			
+			
+		</script>
     </body>
 
     </html>

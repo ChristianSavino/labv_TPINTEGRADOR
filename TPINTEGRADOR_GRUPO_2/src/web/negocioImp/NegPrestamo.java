@@ -71,4 +71,9 @@ public class NegPrestamo implements InegPrestamo{
 		
 		return daoPrestamo.listarPrestamosTabla(fechaAlta,isbnAux,titulo, nombreAutor, apellidoAutor, nombreCliente, apellidoCliente, dniClienteAux);
 	}
+	
+	@Override
+	public boolean eliminarPrestamo(Prestamo p) {
+		return daoPrestamo.eliminarPrestamo(p);
+	}
 }

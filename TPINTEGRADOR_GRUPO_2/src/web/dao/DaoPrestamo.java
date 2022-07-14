@@ -146,7 +146,7 @@ public class DaoPrestamo implements IdaoPrestamo{
 		
 		conexion.abrirConexion();
 		List<Object[]> listaPrestamos= conexion.ObtenerListaPorQuery("SELECT " + 
-				"p.id as idPrestamo, l.titulo as tituloLibro, " + 
+				"p.id as idPrestamo, l.id as isbn, l.titulo as tituloLibro, " + 
 				"a.nombre as nombreAutor, " + 
 				"a.apellido as apellidoAutor, " + 
 				"p.CantidadDias as cantidadDiasPrestamo, DATE_FORMAT(p.fechaDePrestamo, '%d-%m-%Y') as fechaPrestamo, c.nombre as nombreCliente, c.apellido as apellidoCliente, c.dni as dniCliente, c.idCliente as idCliente " + 
@@ -159,5 +159,21 @@ public class DaoPrestamo implements IdaoPrestamo{
 		conexion.cerrarSession();
 
 		return listaPrestamos;
+	}
+	
+	@Override
+	public boolean eliminarPrestamo(Prestamo p){
+		conexion.abrirConexion();
+		boolean exito = true;
+		try {
+			conexion.IniciarTransaccion();
+			conexion.BorrarObjeto(p);
+			conexion.CommitTransaccion();
+		} catch (Exception e) {
+			conexion.RollbackearTransaccion();
+			exito = false;
+		}
+		conexion.cerrarSession();
+		return exito;
 	}
 }

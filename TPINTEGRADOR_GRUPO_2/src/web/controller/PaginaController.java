@@ -83,14 +83,7 @@ public class PaginaController {
 		return mv;
 	}
 
-	@RequestMapping("listadoPrestamos.html")
-	public ModelAndView PaginaPrestamos() {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("prestamos",iNegPrestamo.listarPrestamosTabla("","","","","","","",""));
-
-		mv.setViewName("ListadoPrestamos");
-		return mv;
-	}
+	
 
 	@RequestMapping("listadoClientes.html")
 	public ModelAndView PaginaClientes() {

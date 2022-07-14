@@ -11,4 +11,5 @@ public interface IdaoPrestamo {
 	public Prestamo obtenerPrestamo(int idPrestamo);
 	List<Object[]> listarPrestamosTabla(String fechaAlta, int isbn, String titulo, String nombreAutor,
 			String apellidoAutor, String nombreCliente, String apellidoCliente, int dniCliente);
+	boolean eliminarPrestamo(Prestamo p);
 }

@@ -13,7 +13,6 @@ import web.entidades.Nacionalidad;
 import web.negocioImp.NegAutor;
 
 @Controller
-@SessionAttributes("autor")
 public class AutorController {
 	
 	@Autowired
