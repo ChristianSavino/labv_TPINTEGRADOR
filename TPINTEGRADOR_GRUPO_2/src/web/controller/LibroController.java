@@ -59,10 +59,15 @@ public class LibroController {
 	
 	
 	@RequestMapping("agregarLibro.html")
-	public String AgregarNuevoLibro(ModelMap map, String isbn, String titulo, String fechaLanzamiento, String idAutor, String descripcion,String idioma, String generos, String cantidadPaginas) {
+	@ResponseBody
+	public ModelAndView AgregarNuevoLibro(String isbn, String titulo, String fechaLanzamiento, String idAutor, String descripcion,String idioma, String generos, String cantidadPaginas) {
 		iNegLibro.AgregarLibro(isbn,titulo,fechaLanzamiento,idAutor,descripcion,idioma,generos,cantidadPaginas);
 		Libro l = iNegLibro.obtenerLibro(Integer.parseInt(isbn));
-		map.put("libro", l);
-		return "redirect:/nuevaBiblioteca.html";
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("libro", l);
+		mv.setViewName("NuevaBiblioteca");
+		return mv;
+		//return "nuevaBiblioteca.html";
 	}
 }

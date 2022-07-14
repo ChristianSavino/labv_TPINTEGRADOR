@@ -17,7 +17,7 @@ import web.entidades.*;
 import web.negocioImp.*;
 
 @Controller
-@SessionAttributes({"usuario","biblioteca","cliente","libro","autor"})
+@SessionAttributes({"usuario"})
 public class PaginaController {
 
 	@Autowired
@@ -31,6 +31,10 @@ public class PaginaController {
 	@Autowired
 	@Qualifier("servicioBiblioteca")
 	private NegBiblioteca iNegBiblioteca;
+	
+	@Autowired
+	@Qualifier("servicioPrestamo")
+	private NegPrestamo iNegPrestamo;
 
 	@Autowired
 	@Qualifier("servicioCliente")
@@ -82,6 +86,8 @@ public class PaginaController {
 	@RequestMapping("listadoPrestamos.html")
 	public ModelAndView PaginaPrestamos() {
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("prestamos",iNegPrestamo.listarPrestamosTabla("","","","","","","",""));
+
 		mv.setViewName("ListadoPrestamos");
 		return mv;
 	}
@@ -110,10 +116,8 @@ public class PaginaController {
 	}
 
 	@RequestMapping(value="nuevoPrestamo.html")
-	public ModelAndView PaginaNuevoPrestamo(@SessionAttribute("biblioteca") Biblioteca biblioteca) {
+	public ModelAndView PaginaNuevoPrestamo() {
 		ModelAndView mv = new ModelAndView();
-		if(biblioteca != null && biblioteca.getId() != 0)
-			mv.addObject("libro", biblioteca);
 		mv.setViewName("NuevoPrestamo");
 		return mv;
 	}
@@ -137,10 +141,8 @@ public class PaginaController {
 	}
 	
 	@RequestMapping("nuevoLibro.html")
-	public ModelAndView PaginaNuevoLibro(@SessionAttribute(name="autor",required=false) Autor autor) {
+	public ModelAndView PaginaNuevoLibro() {
 		ModelAndView mv = new ModelAndView();
-		if (autor != null && autor.getIdAutor() != 0)
-			mv.addObject("autor",autor);
 		List<Genero> generos = iNegComplementos.ListarGeneros();
 		mv.addObject("generos", generos);
 		mv.setViewName("NuevoLibro");

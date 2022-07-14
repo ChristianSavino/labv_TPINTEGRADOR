@@ -58,4 +58,17 @@ public class NegPrestamo implements InegPrestamo{
 		
 		return true;
 	}
+	
+	@Override
+	public List<Object[]> listarPrestamosTabla(String fechaAlta, String isbn, String titulo, String nombreAutor, String apellidoAutor, String nombreCliente, String apellidoCliente, String dniCliente) {
+		
+		int isbnAux = 0;
+		int dniClienteAux = 0;
+		if (isbn.length() > 0)
+			isbnAux = Integer.parseInt(isbn);
+		if (dniCliente.length() > 0)
+			dniClienteAux = Integer.parseInt(dniCliente);
+		
+		return daoPrestamo.listarPrestamosTabla(fechaAlta,isbnAux,titulo, nombreAutor, apellidoAutor, nombreCliente, apellidoCliente, dniClienteAux);
+	}
 }

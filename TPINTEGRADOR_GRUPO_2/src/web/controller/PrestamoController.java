@@ -30,12 +30,11 @@ public class PrestamoController {
 	private NegPrestamo iNegPrestamo;
 	
 	@RequestMapping(value="guardarNuevoPrestamo.html")
-	public String GuardarNuevoPrestamo(ModelMap map, @SessionAttribute("biblioteca") Biblioteca biblioteca,
-			int idBiblioteca, int idCliente, String fecha, int cantidadDias) {
+	public String GuardarNuevoPrestamo(int idBiblioteca, int idCliente, String fecha, int cantidadDias) {
 		try {
-			Cliente cliente = iNegCliente.obtenerCliente(idCliente);			
+			Cliente cliente = iNegCliente.obtenerCliente(idCliente);
+			Biblioteca biblioteca = iNegBiblioteca.obtenerBiblioteca(idBiblioteca);
 			boolean res = iNegPrestamo.agregarPrestamo(biblioteca,cliente,cantidadDias,fecha);
-			map.put("biblioteca", null);
 		
 		} catch (Exception e) {
 			 System.err.println(e.getMessage());

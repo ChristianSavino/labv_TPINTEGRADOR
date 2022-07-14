@@ -12,7 +12,6 @@ import web.negocioImp.NegCliente;
 import web.entidades.Nacionalidad;
 
 @Controller
-@SessionAttributes("cliente")
 public class ClienteController {
 
 	@Autowired
@@ -80,7 +79,7 @@ public class ClienteController {
 	}
 
 	@RequestMapping("agregarCliente.html")
-	public String agregarCliente(ModelMap map,@ModelAttribute("cliente") Cliente cliente ,String dni, String nombre, String apellido, String sexo, String nacionalidad,
+	public String agregarCliente(String dni, String nombre, String apellido, String sexo, String nacionalidad,
 	String fNacimiento, String localidad, String direccion, String correo, String telefono) {
 		boolean estado = iNegCliente.agregarCliente(dni, nombre, apellido, sexo, Integer.parseInt(nacionalidad), fNacimiento, localidad, direccion, correo,telefono);
 		

@@ -11,4 +11,6 @@ public interface InegPrestamo {
 	public boolean agregarPrestamo(Biblioteca b,Cliente c,int cantidadDias,String fecha);
 	public boolean modificarPrestamo(Prestamo p);
 	public Prestamo obtenerPrestamo(int idPrestamo);
+	List<Object[]> listarPrestamosTabla(String fechaAlta, String isbn, String titulo, String nombreAutor,
+			String apellidoAutor, String nombreCliente, String apellidoCliente, String dniCliente);
 }

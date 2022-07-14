@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
-    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
     <html>
 
     <head>
@@ -15,100 +17,73 @@
 
     <body>
         <jsp:include page="Header.jsp" />
-
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Listado de prestamos</h1>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 offset-10">
-                <input type="button" value="Nuevo Prestamo" onclick="location.href = 'nuevoPrestamo.html';" class="btn btn-primary"></input>
-                </div>
-            </div>
-            <h3></h3>
-            <div class="row">
-                <div class="col-12">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nro. Prestamo</th>
+		<div class="card">
+		<div class="card-body">				
+				<div class="col-12">
+					<h1>Prestamos</h1>
+					<input type="button" value="Agregar Prestamo" onclick="location.href = 'nuevoPrestamo.html';" class="btn btn-primary"></input>
+				</div>
+				<br>
+				<div class="col-12">
+					<table class="table table-bordered table-hover table-sm">
+						<tr>
+								<th scope="col">Nro. Prestamo</th>
                                 <th scope="col">Libro</th>
-                                <th scope="col">Cliente</th>
+                                <th scope="col">Autor</th>
                                 <th scope="col">Fecha prestamo</th>
-                                <th scope="col">Dias</th>
-                                <th scope="col">Estado</th>
+                                <th scope="col">Dias de prestamo</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">DNI</th>
                                 <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Nombre del libro </td>
-                                <td>DNI Cliente</td>
-                                <td>Fecha Prestamo</td>
-                                <td>Cantida dias prestamo</td>
-                                <td>Atrasado</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+							</tr>
+							<c:forEach var="obj" items="${prestamos}">
+								<tr>
+									<td>${obj[0]}</td>
+									<td>${obj[1]}</td>
+									<td>${obj[2]} ${obj[3]}</td>
+									<td>${obj[5]}</td>
+									<td>${obj[4]}</td>
+									<td>${obj[6]} ${obj[7]}</td>
+									<td>${obj[8]}</td>
+									<td>    
+									 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#exampleModalCenter"><i class="far fa-eye"></i></button>
                                     <a href="NuevoPrestamo.html" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                     <button type="button" class="btn btn-success" data-toggle="modal"
-                                        data-target="#exampleModalCenter2"><i class="fas fa-check"></i></button>
+                                        data-target="#exampleModalCenter2"><i class="fas fa-check"></i></button>                          
+										<input type="button" value="Eliminar"	onclick="location.href = 'eliminarCliente.html?id=${obj[0]}';"	class="btn btn-danger"></input>
+										<input type="button" value="Modificar"	onclick="location.href = 'modificarCliente.html?id=${obj[0]}';"	class="btn btn-primary"></input>									
+	                              	</td>
+								</tr>
+							</c:forEach>
+						</table>
+						</div>
+						<form class="col-12" action="listarClienteFiltro.html" method="Get">			
+								<div>
+								<p>
+								<h3>Filtrar por:</h3>
+								</p>
+								
+									<p>Nacionalidad:
+									<input class="form-control" type="search" name="nacionalidad"></p>
+									<p></p>							
+									<p>
+									Nombre:
+									<input class="form-control" type="search" name="nombre"></p>
+									<p></p>
+									<p></p>						
+									<p>Apellido:
+									<input class="form-control" type="search" name="apellido">
+									</p>
+									<p><input class="form-control" type="submit" value="Buscar"></p>
+								</div>
+							</form>	
+						</div>
+				</div>
+			</div>
 
-
-
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Lista completa.
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> Eliminar
-                        </label>
-                    </div>
-                    <div class="btn-group">
-                        <button type="radio" name="options" id="option3" autocomplete="off"
-                            class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Filtrar por <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <button type="button" class="btn btn-outline-secondary">DNI</button>
-
-                            <p>
-                                <input type="search" name="busqueda">
-
-                                <input type="submit" value="Buscar">
-
-                            </p>
-
-                            <li class="divider"></li>
-                            <button type="button" class="btn btn-outline-secondary">ISBN</button>
-                            <p>
-                                <input type="search" name="busqueda">
-
-                                <input type="submit" value="Buscar">
-
-                            </p>
-                            <li class="divider"></li>
-                            <button type="button" class="btn btn-outline-secondary">Estado</button>
-                            <p>
-                                <input type="search" name="busqueda">
-
-                                <input type="submit" value="Buscar">
-
-                            </p>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

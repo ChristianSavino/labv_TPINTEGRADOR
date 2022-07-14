@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<html>
 
@@ -43,26 +45,46 @@
 						</div>
 					</div>
 					<form action="guardarNuevoPrestamo.html" method="post" id="formNuevoPrestamo">
-						<input type="hidden" value="${biblioteca.getId()}" name="idBiblioteca"></input>
-<%-- 						<input type="hidden" value="${cliente.getId()}" name="idCliente" id="idCliente"></input> --%>
-						<div class="row">
-							<div class="col-md-8 offset-2">
-								<hr>
-							</div>
-						</div>
-						<div class="row">
-							<h3 class="col-md-3 offset-4">Libro</h3>
-
-							<label for="lastName" class="col-md-3 offset-4 col-form-label">ISBN</label>
-							<div class="col-md-3">${libro.getLibro().getIsbn()}</div>
-							<label for="lastName" class="col-md-3 offset-4 col-form-label">Titulo
-							</label>
-							<div class="col-md-3">${libro.getLibro().getTitulo()}</div>
-							<label for="lastName" class="col-md-3 offset-4 col-form-label">Autor
-							</label>
-							<div class="col-md-3">${libro.getLibro().getAutor().getNombre()}
-								${libro.getLibro().getAutor().getApellido()}</div>
-						</div>
+					<div class="row">
+									<div class="col-md-8 offset-2">
+										<hr>
+									</div>
+								</div>
+						<c:choose>
+							<c:when test="${libro eq null}">
+								<div class="row">
+	
+									<button type="button" id="listadoLibrosAjax" class="btn btn-primary col-md-3 offset-4"
+										data-toggle="modal" data-target="#asignarLibro">Asignar Libro</button>
+								</div>
+								<div class="row" id="datosLibro">
+		
+								</div>
+							
+							</c:when>
+							
+							<c:otherwise>
+								<input type="hidden" value="${libro.getId()}" name="idBiblioteca" id="idBiblioteca"></input>
+								
+								<div class="row">
+									<h3 class="col-md-3 offset-4">Libro</h3>
+		
+									<label for="lastName" class="col-md-3 offset-4 col-form-label">ISBN</label>
+									<div class="col-md-3">${libro.getLibro().getIsbn()}</div>
+									<label for="lastName" class="col-md-3 offset-4 col-form-label">Titulo
+									</label>
+									<div class="col-md-3">${libro.getLibro().getTitulo()}</div>
+									<label for="lastName" class="col-md-3 offset-4 col-form-label">Autor
+									</label>
+									<div class="col-md-3">${libro.getLibro().getAutor().getNombre()}
+										${libro.getLibro().getAutor().getApellido()}</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+					
+						
+					
+						
 						<div class="row">
 							<div class="col-md-8 offset-2">
 								<hr>
@@ -75,15 +97,6 @@
 								data-toggle="modal" data-target="#asignarCliente">Asignar cliente</button>
 						</div>
 						<div class="row" id="datosCliente">
-
-<!-- 							<label for="lastName" class="col-md-3 offset-4 col-form-label">DNI</label> -->
-<%-- 							<div class="col-md-3">${cliente.getDni()}</div> --%>
-<!-- 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Nombre -->
-<!-- 							</label> -->
-<%-- 							<div class="col-md-3">${cliente.getNombre()}</div> --%>
-<!-- 							<label for="lastName" class="col-md-3 offset-4 col-form-label">Apellido -->
-<!-- 							</label> -->
-<%-- 							<div class="col-md-3">${cliente.getApellido()}</div> --%>
 						</div>
 						<div class="row">
 							<div class="col-md-8 offset-2">
@@ -167,7 +180,47 @@
 				</div>
 			</div>
 		</div>
-		
+		<div class="modal fade" id="asignarLibro" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog  modal-lg modal-dialog-centered"  style="max-width: 70%;" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Buscar Libro, click para asignar</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+										
+									    
+										<div class="row">
+											<label for="isbnLibro" class="col-md-1 col-form-label">ISBN</label>	
+											<div class="col-md-2">				
+												<input class="form-control" type="number" min="0" id="isbnLibro" name="isbn"></p>
+											</div>		
+									
+											<label for="titulo" class="col-md-1 offset-1 col-form-label">Titulo</label>	
+											<div class="col-md-2">				
+												<input class="form-control" type="text" id="titulo" name="titulo"></p>
+											</div>	
+											<div class="col-md-1 offset-1 btn btn-primary mb-3" id="buscarLibrosAjax" >Buscar</div>	
+											
+										</div>	
+										
+										
+			
+								<hr>
+								<div id="tablaLibros"></div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 			<jsp:include page="ModalValidaciones.jsp" />
 
@@ -178,6 +231,29 @@
 
 		<script type="text/javascript">
 			$(document).ready(function () {
+				
+				$(document).on('click','#listadoLibrosAjax', function () {
+					$("#isbnLibro").val('');
+					$("#nombre").val('');
+					$("#tablaLibros").html("cargando...");
+					$("#buscarLibrosAjax").click();
+				});
+			
+				$(document).on('click','#buscarLibrosAjax', function () {
+					let isbn = $("#isbnLibro").val();
+					let titulo = $("#titulo").val();
+					let fechaAlta = '';
+					let estado = 'Disponible';
+					$.ajax({
+						url: "listarBibliotecaFiltroAjax.html?fechaAlta="+fechaAlta+"&estado="+estado+"&isbn="+isbn+"&titulo="+titulo,
+						type: 'GET',
+						success: function (data) {
+							$("#tablaLibros").html(data);
+						}
+					});
+				});
+				
+				
 				$(document).on('click','#listadoClienteAjax', function () {
 					$("#nacionalidad").val('');
 					$("#nombre").val('');
@@ -198,7 +274,7 @@
 						}
 					});
 				});
-				
+
 				$(document).on("click", "#submitNuevoPrestamo", function(e) {
 					let continuar = true;
 					let mensaje = "";
@@ -206,6 +282,10 @@
 					if($("#idCliente").val() === undefined){
 						continuar = false;
 						mensaje = "Se debe asignar un cliente.";
+					}
+					if($("#idBiblioteca").val() === undefined){
+						continuar = false;
+						mensaje = "Se debe asignar un libro.";
 					}
 					if($("#cantidadDias").val() < 1){
 						continuar = false;

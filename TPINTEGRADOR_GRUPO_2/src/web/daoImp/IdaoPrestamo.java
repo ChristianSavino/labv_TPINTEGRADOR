@@ -9,4 +9,6 @@ public interface IdaoPrestamo {
 	public boolean agregarPrestamo(Prestamo p);
 	public boolean modificarPrestamo(Prestamo p);
 	public Prestamo obtenerPrestamo(int idPrestamo);
+	List<Object[]> listarPrestamosTabla(String fechaAlta, int isbn, String titulo, String nombreAutor,
+			String apellidoAutor, String nombreCliente, String apellidoCliente, int dniCliente);
 }

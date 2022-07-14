@@ -14,6 +14,9 @@
       <li class="nav-item">
         <a class="nav-link" href="listadoBiblioteca.html">Biblioteca</a>
       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="listadoPrestamos.html">Prestamos</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="listadoClientes.html">Clientes</a>
       </li>
