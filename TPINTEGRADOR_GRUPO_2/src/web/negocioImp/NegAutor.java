@@ -59,4 +59,30 @@ public class NegAutor implements InegAutor{
 	public Autor obtenerAutorNombreYApellido(String nombre, String apellido) {
 		return daoAutor.obtenerAutorNombreYApellido(nombre,apellido);
 	}
+	
+	@Override
+	public List<Object[]> listarAutorTabla(String nacionalidad, String nombre, String apellido) {
+		String newNacionalidad = "";
+		
+		if(nacionalidad.length() > 0)
+		{
+			newNacionalidad = nacionalidad;
+		}
+		
+		String newNombre = "";
+		
+		if(nombre.length() > 0)
+		{
+			newNombre = nombre;
+		}
+		
+		String newApellido = "";
+		
+		if(apellido.length() > 0)
+		{
+			newApellido = apellido;
+		}
+		
+		return daoAutor.listarAutorTabla(newNacionalidad, newNombre, newApellido);
+	}
 }

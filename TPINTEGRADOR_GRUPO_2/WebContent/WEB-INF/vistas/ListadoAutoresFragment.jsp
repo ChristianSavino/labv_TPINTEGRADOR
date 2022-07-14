@@ -4,39 +4,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 	<c:choose>
-		<c:when test="${libros.size() eq 0}">
+		<c:when test="${autores.size() eq 0}">
 			<div class="row">
 			<div class="col-md-3 offset-3">
-			No hay libros para mostrar
+			No hay autores para mostrar
 			</div>
 			<div class="col-md-1">
-			<div class="btn btn-primary" onclick="location.href = 'nuevoLibro.html';">Agregar Libro</div>
+			<div class="btn btn-primary" onclick="location.href = 'nuevoAutor.html';">Agregar Autor</div>
 			</div>
 			</div>
 		</c:when>
 		<c:otherwise>
 		<table class="table table-bordered table-hover">
 			<tr>
-				<td>ISBN</td>
-				<td>Cantidad de paginas</td>
-				<td>Descripcion</td>
-				<td>Fecha de lanzamiento</td>
-				<td>Idioma</td>
-				<td>Titulo</td>
-				<td>Autor</td>
+				<td>Nombre</td>
+				<td>Apellido</td>
+				<td>Nacionalidad</td>
+				<td>Email</td>
+				
 			</tr>
-			<c:forEach var="obj" items="${libros}">
+			<c:forEach var="obj" items="${autores}">
 				<tr>
-					<td>${obj[0]}</td>
 					<td>${obj[1]}</td>
 					<td>${obj[2]}</td>
 					<td>${obj[3]}</td>
 					<td>${obj[4]}</td>
-					<td>${obj[5]}</td>
-					<td>${obj[6]} ${obj[7]}</td>
 					<td><input type="button" value="Seleccionar"
-						data-isbn="${obj[0]}"
-						class=" btn btn-success seleccionarLibro"></input></td>
+						data-id-autor="${obj[0]}"
+						class=" btn btn-success seleccionarAutor"></input></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -48,21 +43,21 @@
 	<script type="text/javascript">
 			$(document).ready(function () {
 				// onclick="location.href = 'obtenerClienteNuevoPrestamo.html?idCliente=${obj[0]}';"
-				$(document).off('click', '.seleccionarLibro');
-				$(document).on('click','.seleccionarLibro', function (e) {
-					let isbn = $(this).data('isbn');
-					$("#idLibro").val(isbn);
+				$(document).off('click', '.seleccionarAutor');
+				$(document).on('click','.seleccionarAutor', function (e) {
+					let idAutor = $(this).data('id-autor');
+					$("#idAutor").val(idAutor);
 					$.ajax({
 
 					    type: "GET",
-					    url: "obtenerLibroNuevaBibliotecaFragment.html?isbn="+isbn,
+					    url: "obtenerAutorNuevoLibroFragment.html?idAutor="+idAutor,
 					    success: function (data) {
-					       $("#datosLibro").html(data);
-					       $('#asignarLibro').modal('hide')
+					       $("#datosAutor").html(data);
+					       $('#asignarAutor').modal('hide')
 					    },
 					    error: function (response) {
 					    	
-							$("#messageValidationError").html("Ocurrio un error interno al intentar seleccionar el libro.");
+							$("#messageValidationError").html("Ocurrio un error interno al intentar seleccionar el autor.");
 							$("#modalValidations").modal('show');
 							
 					    }

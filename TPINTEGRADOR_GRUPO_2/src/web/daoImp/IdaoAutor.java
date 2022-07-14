@@ -11,4 +11,5 @@ public interface IdaoAutor {
 	public boolean eliminarAutor(Autor a);
 	public Autor obtenerAutor(int idAutor);
 	public Autor obtenerAutorNombreYApellido(String nombre,String apellido);
+	List<Object[]> listarAutorTabla(String nacionalidad, String nombre, String apellido);
 }

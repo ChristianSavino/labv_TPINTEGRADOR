@@ -112,8 +112,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<button type="button" class="btn btn-primary col-md-3 offset-4" id="submitNuevoPrestamo">Guardar
-								nuevo prestamo</button>
+							<input type="submit" class="btn btn-primary col-md-3 offset-4" id="submitNuevoPrestamo" value="Guardar nuevo prestamo">
 
 						</div>
 					</form>
@@ -220,7 +219,7 @@
 					}
 					
 					
-					$("#formNuevoPrestamo").submit();
+					//$("#formNuevoPrestamo").submit();
 				});
 				
 			});

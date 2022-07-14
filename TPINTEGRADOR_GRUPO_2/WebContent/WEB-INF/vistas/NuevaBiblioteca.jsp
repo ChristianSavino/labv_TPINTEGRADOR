@@ -71,9 +71,7 @@
 					</div>
 
 					<div class="row">
-						<input type="button" id="submitNuevaBiblioteca"
-							value="Agregar Biblioteca" 
-							class="btn btn-primary col-md-3 offset-4 ml-center"></input>
+						<input type="submit" class="btn btn-primary col-md-3 offset-4" id="submitNuevaBiblioteca" value="Agregar Biblioteca">
 					</div>
 				</form>
 			</div>
