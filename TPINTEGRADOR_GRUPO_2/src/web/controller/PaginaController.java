@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -151,4 +153,25 @@ public class PaginaController {
 		mv.setViewName("NuevoLibro");
 		return mv;
 	}
+	
+	@RequestMapping("modificarBiblioteca.html")
+	public ModelAndView PaginaModificarBiblioteca(@RequestParam(value = "id", required = false) int id) {
+		ModelAndView mv = new ModelAndView();
+		Biblioteca biblioteca = iNegBiblioteca.obtenerBiblioteca(id);
+		mv.addObject("biblioteca", biblioteca);
+		mv.setViewName("ModificarBiblioteca");
+		return mv;
+	}
+	
+	@RequestMapping("modificarCliente.html")
+	public ModelAndView PaginaModificarCliente(@RequestParam(value = "id", required = false) int id) {
+		ModelAndView mv = new ModelAndView();
+		Cliente cliente = iNegCliente.obtenerCliente(id);
+		List<Nacionalidad> nacionalidades = iNegComplementos.ListarNacionalidades();
+		mv.addObject("nacionalidades",nacionalidades);
+		mv.addObject("cliente", cliente);
+		mv.setViewName("ModificarCliente");
+		return mv;
+	}
+	
 }
