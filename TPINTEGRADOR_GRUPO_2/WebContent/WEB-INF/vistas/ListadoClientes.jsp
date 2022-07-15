@@ -59,9 +59,11 @@
 									<td>${obj[8]}</td>
 									<td>${obj[9]}</td>
 									<td>${obj[10]}</td>
-									<td>                              
-										<input type="button" value="Eliminar"	onclick="location.href = 'eliminarCliente.html?id=${obj[0]}';"	class="btn btn-danger"></input>
-										<input type="button" value="Modificar"	onclick="location.href = 'modificarCliente.html?id=${obj[0]}';"	class="btn btn-primary"></input>									
+									<td>
+										<form method="GET">                   
+											<input type="button" value="Eliminar"	onclick="location.href = 'eliminarCliente.html?id=${obj[0]}';"	class="btn btn-danger"></input>
+											<input type="button" value="Modificar"	onclick="location.href = 'modificarCliente.html?id=${obj[0]}';"	class="btn btn-primary"></input>
+										</form>									
 	                              	</td>
 								</tr>
 							</c:forEach>
