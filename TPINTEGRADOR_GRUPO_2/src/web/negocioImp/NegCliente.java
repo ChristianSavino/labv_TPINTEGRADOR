@@ -1,15 +1,15 @@
 package web.negocioImp;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.DaoCliente;
-import web.dao.DaoNacionalidad;
-import web.entidades.Biblioteca;
 import web.entidades.Cliente;
+import web.entidades.Nacionalidad;
 import web.negocio.InegCliente;
 
 @Service("servicioCliente")
@@ -79,29 +79,27 @@ public class NegCliente implements InegCliente {
 	}
 
 	@Override
-	public boolean modificarCliente(int dni, String nombre, String apellido, String nacionalidad,
-			String sexo, String fechaNacimiento, String direccion, String telefono, String localidad, String email) {
+	public boolean modificarCliente(int id, int dni,String nombre,String apellido,String sexo, int nacionalidad,String fechaNacimiento,String localidad,String direccion,String email,String telefono) {
 		try {
-			Cliente cliente = daoCliente.obtenerCliente(dni);
-			cliente.setDni(dni);
-			cliente.setNombre(nombre);
+			Cliente cliente = daoCliente.obtenerCliente(id);
+			cliente.setId(id);
 			cliente.setApellido(apellido);
-			cliente.setNacionalidad(iNegComplementos.obtenerNacionalidad(Integer.parseInt(nacionalidad)));
-			cliente.setSexo(sexo);
-			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento));
 			cliente.setDireccion(direccion);
-			cliente.setTelefono(telefono);
-			cliente.setLocalidad(localidad);
+			cliente.setDni(dni);
 			cliente.setEmail(email);
-
-			return daoCliente.modificarCliente(cliente);
-			/*iNegCliente.modificarCliente(cliente); 
-			 * Funcion estaba como string	*/
-		}catch(Exception e){		
-		}		
-		return true;
+			cliente.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento));
+			cliente.setLocalidad(localidad);
+			cliente.setNombre(nombre);		
+			cliente.setSexo(sexo);
+			cliente.setTelefono(telefono);
+			cliente.setNacionalidad(iNegComplementos.obtenerNacionalidad(nacionalidad));			
+			boolean estado =  daoCliente.modificarCliente(cliente);
+			return estado;
+		}catch(Exception e){
+			return false;
+		}
 	}
-
+	
 	@Override
 	public boolean eliminarCliente(Cliente c) {
 		return daoCliente.eliminarCliente(c);
@@ -111,4 +109,5 @@ public class NegCliente implements InegCliente {
 	public Cliente obtenerCliente(int dni) {
 		return daoCliente.obtenerCliente(dni);
 	}
+
 }

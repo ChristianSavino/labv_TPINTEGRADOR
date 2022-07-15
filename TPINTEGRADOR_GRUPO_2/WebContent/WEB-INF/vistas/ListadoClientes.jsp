@@ -62,7 +62,7 @@
 									<td>
 										<form method="GET">                   
 											<input type="button" value="Eliminar"	onclick="location.href = 'eliminarCliente.html?id=${obj[0]}';"	class="btn btn-danger"></input>
-											<input type="button" value="Modificar"	onclick="location.href = 'modificarCliente.html?id=${obj[0]}';"	class="btn btn-primary"></input>
+											<input type="button" value="Modificar"	onclick="location.href = 'paginaModificarCliente.html?id=${obj[0]}';"	class="btn btn-primary"></input>
 										</form>									
 	                              	</td>
 								</tr>

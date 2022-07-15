@@ -163,7 +163,7 @@ public class PaginaController {
 		return mv;
 	}
 	
-	@RequestMapping("modificarCliente.html")
+	@RequestMapping("paginaModificarCliente.html")
 	public ModelAndView PaginaModificarCliente(@RequestParam(value = "id", required = false) int id) {
 		ModelAndView mv = new ModelAndView();
 		Cliente cliente = iNegCliente.obtenerCliente(id);

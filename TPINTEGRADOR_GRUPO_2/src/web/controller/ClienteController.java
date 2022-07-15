@@ -3,7 +3,9 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.text.SimpleDateFormat;
@@ -90,4 +92,16 @@ public class ClienteController {
 		}
 		return redirect;
 	}
+	
+	@RequestMapping("modificarCliente.html")
+	public String modificarCliente(@ModelAttribute("cliente") Cliente cliente, String id, String dni, String nombre, String apellido, String sexo, String nacionalidad,
+			String fNacimiento, String localidad, String direccion, String correo, String telefono) {
+		boolean estado = iNegCliente.modificarCliente(Integer.parseInt(id), Integer.parseInt(dni), nombre, apellido, sexo, Integer.parseInt(nacionalidad), fNacimiento, localidad, direccion, correo, telefono);
+		String redirect = "";
+		if(estado) {
+			redirect = "redirect:/listadoClientes.html";
+		}
+		return redirect;
+	}
+	
 }
