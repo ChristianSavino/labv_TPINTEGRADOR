@@ -17,16 +17,7 @@
 		crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="css/Main.css" />
-	<script>
-		/*function modificarBiblioteca() {
-			id = document.getElementById("idBiblioteca").value;
-	        isbn = document.getElementById("isbn").value;
-	        nombre = document.getElementById("nombre").value;
-	        estado = document.getElementById("estado").value;
-	        fechaAlta = document.getElementById("fechaAlta").value;
-	        location.href = "modificarBiblioteca.html?id = "+id+"&isbn="+ isbn+"&nombre ="+nombre+"&estado= "+estado+"&fechaAlta= "+fechaAlta;
-	    };*/
- 	</script>
+	
 </head>
 <body>
  <jsp:include page="Header.jsp" />
@@ -34,10 +25,10 @@
 		<div class="card">
 			<h1>Modificar Biblioteca</h1>
 			<div class="card-body">
-				<form action="#" method="post">
+				<form action="modificarBiblioteca.html" method="get">
 					<h3>Biblioteca: </h3>
 						<label class="col-md-2">ID Biblioteca: </label>
-						<input type="text" value="${biblioteca.getId()}" name="idBiblioteca" id="idBiblioteca" readonly></input>
+						<input type="text" name="id" value="${biblioteca.getId()}" name="idBiblioteca" id="idBiblioteca" readonly></input>
 						<div class="row">
 							<div class="col-md-11 offset-15">
 								<hr>
@@ -46,19 +37,16 @@
 							<h3>Libro: </h3>
 							<br>
 							<label>ISBN: </label>
-							<input type="text" id="isbn" value="${biblioteca.getLibro().getIsbn()}" readonly/>
+							<input type="text" name=""isbn id="isbn" value="${biblioteca.getLibro().getIsbn()}" readonly/>
 							<label>Titulo: </label>
-							<input type="text" id="nombre" value="${biblioteca.getLibro().getTitulo()}" readonly/>
+							<input type="text" name="titulo" id="titulo" value="${biblioteca.getLibro().getTitulo()}" readonly/>
 							<label>Estado: </label>
-							<select name="estado" id="estado">
-							<option value="${biblioteca.isEstado()}">Seleccione Estado</option> 
-                            		<option value="1">Disponible</option>
-                            		<option value="0">No Disponible</option>
-                          	</select>
-                            <label>Fecha de Alta: </label> <input type="text" id="fechaAlta" value="${biblioteca.getFechaLanzamiento()}" readonly>
+							<input type="text" name="estado" value="${biblioteca.isEstado()}" readonly/>
+                            <label>Fecha de Alta: </label> <input type="text" name="fechaAlta" id="fechaAlta" value="${biblioteca.getFechaLanzamiento()}">
 							<br><br>
-						<input type="button" id="botonModificarBiblioteca" value="Modificar Biblioteca" onclick="" class="btn btn-primary col-md-3 offset-4 ml-center"></input>
-					
+						<div class="row">
+                        <button type="submit" class="btn btn-primary col-md-3 offset-4 ml-center">Modificar Biblioteca</button>
+                    </div>					
 					</form>
 				</div>
 			</div>

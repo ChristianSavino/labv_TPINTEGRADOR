@@ -154,7 +154,7 @@ public class PaginaController {
 		return mv;
 	}
 	
-	@RequestMapping("modificarBiblioteca.html")
+	@RequestMapping("paginaModificarBiblioteca.html")
 	public ModelAndView PaginaModificarBiblioteca(@RequestParam(value = "id", required = false) int id) {
 		ModelAndView mv = new ModelAndView();
 		Biblioteca biblioteca = iNegBiblioteca.obtenerBiblioteca(id);

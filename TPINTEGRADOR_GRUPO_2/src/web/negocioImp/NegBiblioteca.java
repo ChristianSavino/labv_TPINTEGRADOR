@@ -1,5 +1,6 @@
 package web.negocioImp;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -56,10 +57,23 @@ public class NegBiblioteca implements InegBiblioteca{
 	}
 
 	@Override
+	public boolean modificarBiblioteca(int id, int estado, String fechaAlta){
+		Biblioteca biblioteca = daoBiblioteca.obtenerBiblioteca(id);
+		biblioteca.setId(id);
+		biblioteca.setEstado(estado);
+		try {
+			biblioteca.setFechaLanzamiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaAlta));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return daoBiblioteca.modificarBiblioteca(biblioteca);
+	}
+	
+	@Override
 	public boolean modificarBiblioteca(Biblioteca b) {
 		return daoBiblioteca.modificarBiblioteca(b);
 	}
-
+	
 	@Override
 	public boolean eliminarBiblioteca(Biblioteca b) {
 		return daoBiblioteca.eliminarBiblioteca(b);
@@ -69,5 +83,6 @@ public class NegBiblioteca implements InegBiblioteca{
 	public Biblioteca obtenerBiblioteca(int id) {
 		return daoBiblioteca.obtenerBiblioteca(id);
 	}
+
 
 }

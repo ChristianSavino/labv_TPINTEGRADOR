@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Biblioteca;
 import web.negocioImp.NegBiblioteca;
-import web.negocioImp.NegCliente;
 
 @Controller
 @SessionAttributes({"biblioteca"})
@@ -72,5 +71,16 @@ public class BibliotecaController {
 		catch(Exception e) {
 		}
 		return "redirect:/listadoBiblioteca.html";
+	}
+	
+	@RequestMapping("modificarBiblioteca.html")
+	public String modificarBiblioteca(@ModelAttribute("biblioteca") Biblioteca biblioteca,
+			int id, int estado, String fechaAlta) {
+		boolean est = iNegBiblioteca.modificarBiblioteca(id, estado,fechaAlta);
+		String redirect = "";
+		if(est) {
+			redirect = "redirect:/listadoBiblioteca.html";
+		}
+		return redirect;
 	}
 }
