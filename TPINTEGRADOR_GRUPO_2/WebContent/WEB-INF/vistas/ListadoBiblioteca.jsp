@@ -51,8 +51,14 @@
 								<form method="GET">                              
 									<input type="button" value="Eliminar"	onclick="location.href = 'eliminarBiblioteca.html?id=${obj[0]}';"	class="btn btn-danger"></input>
 									<input type="button" value="Modificar"  onclick="location.href = 'paginaModificarBiblioteca.html?id=${obj[0]}';"	class="btn btn-primary"></input>
-									<input type="button" <c:choose><c:when test="${obj[4] == 'Prestado'}"><c:out value="value='Info. Prestamo'" escapeXml="false"/></c:when> <c:otherwise><c:out value="value='Nuevo Prestamo'" escapeXml="false"/></c:otherwise></c:choose>  onclick="location.href = 'obtenerBibliotecaDesdeLista.html?idBiblioteca=${obj[0]}';" class="btn btn-primary"></input>
-									</form>
+									<c:choose>
+										<c:when test="${obj[4] == 'Prestado'}">
+											<input type="button" value="Info. Prestamo" class="btn btn-primary"></input>
+										</c:when>
+										<c:otherwise>
+											<input type="button" value="Nuevo Prestamo" onclick="location.href = 'obtenerBibliotecaDesdeLista.html?idBiblioteca=${obj[0]}';" class="btn btn-primary"></input>
+										</c:otherwise>
+									</c:choose>									</form>
                               	</td>
 							</tr>
 						</c:forEach>

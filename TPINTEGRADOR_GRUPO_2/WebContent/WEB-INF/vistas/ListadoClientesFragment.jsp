@@ -58,7 +58,6 @@
 				// onclick="location.href = 'obtenerClienteNuevoPrestamo.html?idCliente=${obj[0]}';"
 				$(document).off('click', '.seleccionarCliente');
 				$(document).on('click','.seleccionarCliente', function (e) {
-					console.log("idCliente", $(this).data('id-cliente'));
 					let idCliente = $(this).data('id-cliente');
 					$("#idCliente").val(idCliente);
 					$.ajax({

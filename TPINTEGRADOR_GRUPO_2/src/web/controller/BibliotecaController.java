@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import web.entidades.Autor;
 import web.entidades.Biblioteca;
+import web.entidades.Cliente;
 import web.negocioImp.NegBiblioteca;
 
 @Controller
-@SessionAttributes({"biblioteca"})
 public class BibliotecaController {
 	
 	@Autowired
@@ -37,29 +38,34 @@ public class BibliotecaController {
 		return mv;
 	}
 	
-	@RequestMapping("agregarBiblioteca.html")
-	public String AgregarBiblioteca(String isbn, String fechaAlta ) {
-		boolean estado = iNegBiblioteca.agregarBiblioteca(Integer.parseInt(isbn), fechaAlta);
-		String redirect = "";
-		if(estado)
-			redirect = "redirect:/listadoBiblioteca.html";
+	@RequestMapping("guardarNuevaBiblioteca.html")
+	public String GuardarNuevaBiblioteca(String isbn, String fechaAlta ) {
 		
-		return redirect;
+		try {
+			boolean estado = iNegBiblioteca.agregarBiblioteca(Integer.parseInt(isbn), fechaAlta);
+		
+		}catch(Exception e) {
+			 System.err.println(e.getMessage());
+		}
+
+		return  "redirect:/listadoBiblioteca.html";
 	}
 	
-	@RequestMapping(value="obtenerBibliotecaDesdeLista.html",method = RequestMethod.GET)
-	public String obtenerBibliotecaDesdeLista(ModelMap map, @ModelAttribute("biblioteca") Biblioteca biblioteca,int idBiblioteca) {
-		String returnvalue="";
+	@RequestMapping(value="obtenerBibliotecaDesdeLista.html")
+	@ResponseBody
+	public ModelAndView obtenerBibliotecaDesdeLista(@RequestParam(value = "idBiblioteca", required = false) int idBiblioteca) {
 		try {
 			Biblioteca libro = iNegBiblioteca.obtenerBiblioteca(idBiblioteca);
-			biblioteca = libro;
-			map.put("biblioteca", biblioteca);
-			if(libro.isEstado() == 1)
-				 returnvalue= "redirect:/nuevoPrestamo.html";
+			
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("libro", libro);
+			mv.setViewName("NuevoPrestamo");
+			return mv;
+
 		} catch (Exception e) {
-			 returnvalue="redirect:/ListadoBiblioteca.html";
+			System.out.println("<<MENSAJE ERROR>>" + e.getMessage());
+			return null;
 		}
-		return returnvalue;	
 	}
 	
 	@RequestMapping("eliminarBiblioteca.html")
@@ -82,5 +88,32 @@ public class BibliotecaController {
 			redirect = "redirect:/listadoBiblioteca.html";
 		}
 		return redirect;
+	}
+
+	@RequestMapping("listarBibliotecaFiltroAjax.html")
+	@ResponseBody
+	public ModelAndView ListarBibliotecaFiltroAjax(String fechaAlta,String estado, String isbn,String titulo) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("bibliotecas",iNegBiblioteca.listarBibliotecasTabla(fechaAlta,estado,isbn,titulo));
+		mv.setViewName("ListadoBibliotecaFragment");
+		return mv;
+	}
+	
+	@RequestMapping(value="obtenerBibliotecaNuevoPrestamoFragment.html")
+	@ResponseBody
+	public ModelAndView ObtenerBibliotecaNuevoPrestamoFragment(ModelMap map,int idBiblioteca) {
+		
+		try {
+			Biblioteca libro = iNegBiblioteca.obtenerBiblioteca(idBiblioteca);
+			map.put("biblioteca", libro);
+			
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("bibliotecaFragmentAjax", libro);
+			mv.setViewName("BibliotecaFragment");
+			return mv;
+		} catch (Exception e) {
+			System.out.println("<<MENSAJE ERROR>>" + e.getMessage());
+			return null;
+		}
 	}
 }

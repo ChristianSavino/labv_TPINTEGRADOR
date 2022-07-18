@@ -92,4 +92,40 @@ public class DaoAutor implements IdaoAutor {
 
 		return autor;
 	}
+	
+	@Override
+	public List<Object[]> listarAutorTabla(String nacionalidad, String nombre, String apellido) {
+		String condiciones = "";
+		int cantCondiciones = 0;
+		
+		if (nacionalidad.length() > 0) {
+			condiciones = " WHERE n.descripcion= '" + nacionalidad + "'";
+			cantCondiciones++;
+		}
+		
+		if(nombre.length() > 0) {
+			if(cantCondiciones == 0) {
+				condiciones = " WHERE a.nombre = '" + nombre + "'";
+				cantCondiciones++;
+			}
+			else
+				condiciones += " AND a.nombre = '" + nombre + "'";
+		}
+		
+		if(apellido.length() > 0) {
+			if(cantCondiciones == 0) {
+				condiciones = " WHERE a.apellido = '" + apellido + "'";
+				cantCondiciones++;
+			}
+			else
+				condiciones += " AND a.apellido = '" + apellido + "'";
+		}
+		
+		conexion.abrirConexion();
+		List<Object[]> listaAutores= conexion.ObtenerListaPorQuery("select a.idAutor as idAutor, a.nombre as nombre, a.apellido as apellido, n.descripcion as nacionalidad,"
+				+"a.email as email from autor as a join nacionalidad as n on n.idNacionalidad = a.idNacionalidad" + condiciones+";");
+		conexion.cerrarSession();
+
+		return listaAutores;
+	}
 }

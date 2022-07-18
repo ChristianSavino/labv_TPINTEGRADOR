@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import web.entidades.Autor;
+import web.entidades.Cliente;
 import web.entidades.Nacionalidad;
 import web.negocioImp.NegAutor;
 
 @Controller
-@SessionAttributes("autor")
 public class AutorController {
 	
 	@Autowired
@@ -52,7 +52,16 @@ public class AutorController {
 		map.put("autor", autor);
 		return "redirect:/nuevoLibro.html";
 	}
-
+	
+	@RequestMapping("listarAutorFiltroAjax.html")
+	@ResponseBody
+	public ModelAndView ListarAutorFiltroAjax(String nacionalidad, String nombre,String apellido) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("autores", iNegAutor.listarAutorTabla(nacionalidad, nombre, apellido));
+		mv.setViewName("ListadoAutoresFragment");
+		return mv;
+	}
+	
 	@RequestMapping("eliminarAutor.html")
 	public String eliminarAutor(@RequestParam(value = "id", required = false) int id){
 		try {
@@ -62,5 +71,19 @@ public class AutorController {
 		catch(Exception e) {
 		}
 		return "redirect:/listadoAutores.html";
+	}
+	
+	@RequestMapping("obtenerAutorNuevoLibroFragment.html")
+	public ModelAndView ObtenerAutorNuevoLibroFragment(int idAutor) {
+		try {
+			Autor autor = iNegAutor.obtenerAutor(idAutor);
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("autorFragmentAjax", autor);
+			mv.setViewName("AutorFragment");
+			return mv;
+		} catch (Exception e) {
+			System.out.println("<<MENSAJE ERROR>>" + e.getMessage());
+			return null;
+		}		
 	}
 }

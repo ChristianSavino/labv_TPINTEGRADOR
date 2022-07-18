@@ -102,4 +102,66 @@ public class DaoLibro implements IdaoLibro {
 		conexion.cerrarSession();
 		return l;
 	}
+	
+	@Override
+	public List<Object[]> listarLibroTabla(int isbn, String nombre) {
+		String condiciones = "";
+		int cantCondiciones = 0;
+		
+		if (isbn > 0) {
+			condiciones = " WHERE l.id	 = " + isbn + "";
+			cantCondiciones++;
+		}
+		
+		if(nombre.length() > 0) {
+			if(cantCondiciones == 0) {
+				condiciones = " WHERE l.titulo = '" + nombre + "'";
+				cantCondiciones++;
+			}
+			else
+				condiciones += " AND l.titulo = '" + nombre + "'";
+		}
+		
+		
+		
+		conexion.abrirConexion();
+		List<Object[]> listaLibros= conexion.ObtenerListaPorQuery("SELECT l.id as id, l.cantidadPaginas as cantidadPaginas, l.descripcion as descripcion, l.fechaLanzamiento as fechaLanzamiento, l.idioma as idioma, l.titulo as titulo," + 
+				"a.nombre as nombre, a.apellido as apellido" + 
+				" from libro as l" + 
+				" join autor as a on l.idAutor = a.idAutor" + condiciones+";");
+		conexion.cerrarSession();
+
+		return listaLibros;
+	}
+	@Override
+	public List<Object[]> listarNuevoLibroTabla(int isbn, String nombre) {
+		//este metodo trae solo libros que no esten en biblioteca
+		String condiciones = "";
+		int cantCondiciones = 0;
+		
+		if (isbn > 0) {
+			condiciones = " WHERE l.id	 = " + isbn + "";
+			cantCondiciones++;
+		}
+		
+		if(nombre.length() > 0) {
+			if(cantCondiciones == 0) {
+				condiciones = " AND l.titulo = '" + nombre + "'";
+				cantCondiciones++;
+			}
+			else
+				condiciones += " AND l.titulo = '" + nombre + "'";
+		}
+		
+		
+		
+		conexion.abrirConexion();
+		List<Object[]> listaLibros= conexion.ObtenerListaPorQuery("SELECT l.id as id, l.cantidadPaginas as cantidadPaginas, l.descripcion as descripcion, l.fechaLanzamiento as fechaLanzamiento, l.idioma as idioma, l.titulo as titulo," + 
+				"a.nombre as nombre, a.apellido as apellido" + 
+				" from libro as l" + 
+				" join autor as a on l.idAutor = a.idAutor where l.id not in (select b.idLibro from biblioteca as b)" + condiciones+";");
+		conexion.cerrarSession();
+
+		return listaLibros;
+	}
 }
