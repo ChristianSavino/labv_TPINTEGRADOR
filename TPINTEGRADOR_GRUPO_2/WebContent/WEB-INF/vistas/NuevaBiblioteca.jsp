@@ -17,21 +17,7 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="css/Main.css" />
-<script type="text/javascript">
-	function buscarLibro() {
-		isbn = document.getElementById("isbn").value;
-		nombre = document.getElementById("nombre").value;
-		location.href = "buscarLibroFiltro.html?isbn=" + isbn + "&nombre="
-				+ nombre;
-	};
 
-	function agregarBiblioteca() {
-		isbn = document.getElementById("isbn").value;
-		fechaAlta = document.getElementById("fechaAlta").value;
-		location.href = "agregarBiblioteca.html?isbn=" + isbn + "&fechaAlta="
-				+ fechaAlta;
-	};
-</script>
 </head>
 
 <body>
