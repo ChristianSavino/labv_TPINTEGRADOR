@@ -76,12 +76,27 @@ public class PaginaController {
 		mv.setViewName("index");
 		return mv;
 	}
+	
+	@RequestMapping("cerrarSesion.html")
+	public ModelAndView CerrarSesion(SessionStatus status) {
+		status.setComplete();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		return mv;
+	}
 
 	@RequestMapping("listadoBiblioteca.html")
-	public ModelAndView ListadoBiblioteca() {
+	public ModelAndView ListadoBiblioteca() {		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("bibliotecas",iNegBiblioteca.listarBibliotecasTabla("","","",""));
-		mv.setViewName("ListadoBiblioteca");
+		
+		try {
+			mv.addObject("bibliotecas",iNegBiblioteca.listarBibliotecasTabla("","","",""));
+			mv.setViewName("ListadoBiblioteca");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Listado Biblioteca", "Carga de Listado Biblioteca", e.toString(), 
+					"Volver al Login", "cerrarSesion.html", AvisoController.TipoAviso.Error);
+		}
+
 		return mv;
 	}
 
@@ -90,16 +105,15 @@ public class PaginaController {
 	@RequestMapping("listadoClientes.html")
 	public ModelAndView PaginaClientes() {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("clientes",iNegCliente.listarClienteTabla("","",""));
-		mv.setViewName("ListadoClientes");
-		return mv;
-	}
+		
+		try {			
+			mv.addObject("clientes",iNegCliente.listarClienteTabla("","",""));
+			mv.setViewName("ListadoClientes");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Listado Clientes", "Carga de Listado Clientes", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}
 
-	@RequestMapping("cerrarSesion.html")
-	public ModelAndView CerrarSesion(SessionStatus status) {
-		status.setComplete();
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
 		return mv;
 	}
 
@@ -110,6 +124,54 @@ public class PaginaController {
 		return mv;
 	}
 
+	@RequestMapping("nuevoAutor.html")
+	public ModelAndView PaginaAgregarAutor() {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			List<Nacionalidad> nacionalidades = iNegComplementos.ListarNacionalidades();
+			mv.addObject("nacionalidades",nacionalidades);
+			mv.setViewName("NuevoAutor");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Nuevo Autor", "Carga de Nuevo Autor", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}
+
+		return mv;
+	}
+	
+	@RequestMapping("nuevoLibro.html")
+	public ModelAndView PaginaNuevoLibro() {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			List<Genero> generos = iNegComplementos.ListarGeneros();
+			mv.addObject("generos", generos);
+			mv.setViewName("NuevoLibro");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Nuevo Libro", "Carga de Nuevo Libro", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}
+
+		return mv;
+	}
+	
+	@RequestMapping("paginaModificarBiblioteca.html")
+	public ModelAndView PaginaModificarBiblioteca(@RequestParam(value = "id", required = false) int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			Biblioteca biblioteca = iNegBiblioteca.obtenerBiblioteca(id);
+			mv.addObject("biblioteca", biblioteca);
+			mv.setViewName("ModificarBiblioteca");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Modificar Biblioteca", "Carga de Modificar Biblioteca", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}
+
+		return mv;
+	}
+	
 	@RequestMapping(value="nuevoPrestamo.html")
 	public ModelAndView PaginaNuevoPrestamo() {
 		ModelAndView mv = new ModelAndView();
@@ -120,47 +182,34 @@ public class PaginaController {
 	@RequestMapping("nuevoCliente.html")
 	public ModelAndView PaginaNuevoCliente() {
 		ModelAndView mv = new ModelAndView();
-		List<Nacionalidad> nacionalidades = iNegComplementos.ListarNacionalidades();
-		mv.addObject("nacionalidades",nacionalidades);
-		mv.setViewName("NuevoCliente");
-		return mv;
-	}
+		
+		try {
+			List<Nacionalidad> nacionalidades = iNegComplementos.ListarNacionalidades();
+			mv.addObject("nacionalidades",nacionalidades);
+			mv.setViewName("NuevoCliente");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Nuevo Cliente", "Carga de Nuevo Cliente", e.toString(), 
+					"Volver a Listado Clientes", "listadoClientes.html", AvisoController.TipoAviso.Error);
+		}
 
-	@RequestMapping("nuevoAutor.html")
-	public ModelAndView PaginaAgregarAutor() {
-		ModelAndView mv = new ModelAndView();
-		List<Nacionalidad> nacionalidades = iNegComplementos.ListarNacionalidades();
-		mv.addObject("nacionalidades",nacionalidades);
-		mv.setViewName("NuevoAutor");
-		return mv;
-	}
-	
-	@RequestMapping("nuevoLibro.html")
-	public ModelAndView PaginaNuevoLibro() {
-		ModelAndView mv = new ModelAndView();
-		List<Genero> generos = iNegComplementos.ListarGeneros();
-		mv.addObject("generos", generos);
-		mv.setViewName("NuevoLibro");
-		return mv;
-	}
-	
-	@RequestMapping("paginaModificarBiblioteca.html")
-	public ModelAndView PaginaModificarBiblioteca(@RequestParam(value = "id", required = false) int id) {
-		ModelAndView mv = new ModelAndView();
-		Biblioteca biblioteca = iNegBiblioteca.obtenerBiblioteca(id);
-		mv.addObject("biblioteca", biblioteca);
-		mv.setViewName("ModificarBiblioteca");
 		return mv;
 	}
 	
 	@RequestMapping("paginaModificarCliente.html")
 	public ModelAndView PaginaModificarCliente(@RequestParam(value = "id", required = false) int id) {
 		ModelAndView mv = new ModelAndView();
-		Cliente cliente = iNegCliente.obtenerCliente(id);
-		List<Nacionalidad> nacionalidades = iNegComplementos.ListarNacionalidades();
-		mv.addObject("nacionalidades",nacionalidades);
-		mv.addObject("cliente", cliente);
-		mv.setViewName("ModificarCliente");
+		
+		try {
+			Cliente cliente = iNegCliente.obtenerCliente(id);
+			List<Nacionalidad> nacionalidades = iNegComplementos.ListarNacionalidades();
+			mv.addObject("nacionalidades",nacionalidades);
+			mv.addObject("cliente", cliente);
+			mv.setViewName("ModificarCliente");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Modificar Cliente", "Carga de Modificar Cliente", e.toString(), 
+					"Volver a Listado Clientes", "listadoClientes.html", AvisoController.TipoAviso.Error);
+		}
+
 		return mv;
 	}
 	
