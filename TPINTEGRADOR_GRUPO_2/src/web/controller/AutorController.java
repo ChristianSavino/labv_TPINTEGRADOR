@@ -43,22 +43,37 @@ public class AutorController {
 			autor = iNegAutor.obtenerAutorNombreYApellido(nombre, apellido);
 			map.put("autor",autor);
 		}
+		else
+			redirect ="redirect:/avisoError.html?tituloPagina="+"Nueva Biblioteca"+"&tituloMensaje="+"Guardar Nueva Biblioteca"+"&mensaje=Error al Obtener Autor"
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
 		return redirect;
 	}
 	
 	@RequestMapping("buscarAutorNombreYApellido.html")
 	public String ObtenerAutorNombreYApellido(ModelMap map,@ModelAttribute("autor") Autor autor,String nombre,String apellido) {
-		autor = iNegAutor.obtenerAutorNombreYApellido(nombre, apellido);
-		map.put("autor", autor);
-		return "redirect:/nuevoLibro.html";
+		try {
+			autor = iNegAutor.obtenerAutorNombreYApellido(nombre, apellido);
+			map.put("autor", autor);
+			return "redirect:/nuevoLibro.html";
+		} catch (Exception e) {
+			return "redirect:/avisoError.html?tituloPagina="+"Nuevo Libro"+"&tituloMensaje="+"Obtener Autor"+"&mensaje="+e.toString()
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+		}
+
 	}
 	
 	@RequestMapping("listarAutorFiltroAjax.html")
 	@ResponseBody
 	public ModelAndView ListarAutorFiltroAjax(String nacionalidad, String nombre,String apellido) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("autores", iNegAutor.listarAutorTabla(nacionalidad, nombre, apellido));
-		mv.setViewName("ListadoAutoresFragment");
+		try {
+			mv.addObject("autores", iNegAutor.listarAutorTabla(nacionalidad, nombre, apellido));
+			mv.setViewName("ListadoAutoresFragment");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Obtener Autor", "Obtener Autor Ajax", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}
+
 		return mv;
 	}
 	
@@ -69,21 +84,27 @@ public class AutorController {
 			iNegAutor.eliminarAutor(autor);
 		}
 		catch(Exception e) {
+			return "redirect:/avisoError.html?tituloPagina="+"Eliminar Autor"+"&tituloMensaje="+"Eliminar Autor"+"&mensaje="+e.toString()
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
 		}
-		return "redirect:/listadoAutores.html";
+		return "redirect:/listadoBiblioteca.html";
 	}
 	
 	@RequestMapping("obtenerAutorNuevoLibroFragment.html")
 	public ModelAndView ObtenerAutorNuevoLibroFragment(int idAutor) {
+		ModelAndView mv = new ModelAndView();
+		
 		try {
 			Autor autor = iNegAutor.obtenerAutor(idAutor);
-			ModelAndView mv = new ModelAndView();
+			
 			mv.addObject("autorFragmentAjax", autor);
 			mv.setViewName("AutorFragment");
-			return mv;
+
 		} catch (Exception e) {
-			System.out.println("<<MENSAJE ERROR>>" + e.getMessage());
-			return null;
-		}		
+			mv = AvisoController.SeteoDeAviso(mv, "Obtener Autor", "Obtener Autor Ajax", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}	
+		
+		return mv;
 	}
 }

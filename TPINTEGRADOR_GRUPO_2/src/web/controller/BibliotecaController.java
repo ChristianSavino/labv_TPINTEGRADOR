@@ -50,6 +50,9 @@ public class BibliotecaController {
 
 		try {
 			boolean estado = iNegBiblioteca.agregarBiblioteca(Integer.parseInt(isbn), fechaAlta);
+			if(!estado)
+				return "redirect:/avisoError.html?tituloPagina="+"Nueva Biblioteca"+"&tituloMensaje="+"Guardar Nueva Biblioteca"+"&mensaje=No se guardo correctamente la biblioteca"
+				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
 		}catch(Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Nueva Biblioteca"+"&tituloMensaje="+"Guardar Nueva Biblioteca"+"&mensaje="+e.toString()
 			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
@@ -97,7 +100,11 @@ public class BibliotecaController {
 	public String modificarBiblioteca(@ModelAttribute("biblioteca") Biblioteca biblioteca, int id, int estado, String fechaAlta) {
 		try {
 			boolean est = iNegBiblioteca.modificarBiblioteca(id, estado,fechaAlta);
-			return "redirect:/listadoBiblioteca.html";
+			if(est)
+				return "redirect:/listadoBiblioteca.html";
+			else
+				return "redirect:/avisoError.html?tituloPagina="+"Modificar Biblioteca"+"&tituloMensaje="+"Modificar Biblioteca"+"&mensaje="+"Error al modificar Biblioteca"
+				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
 		} catch (Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Modificar Biblioteca"+"&tituloMensaje="+"Modificar Biblioteca"+"&mensaje="+e.toString()
 			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";

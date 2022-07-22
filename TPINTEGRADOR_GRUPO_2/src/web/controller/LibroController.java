@@ -21,11 +21,17 @@ public class LibroController {
 	
 	@RequestMapping("buscarLibroFiltro.html")
 	public String BuscarLibroNuevaBiblioteca(ModelMap map, String isbn, String nombre) {	
-		map.put("libro", null);
-		if(isbn.length() > 0 || nombre.length() > 0) {
-			Libro l = iNegLibro.BuscarLibroNuevaBiblioteca(isbn, nombre);
-			map.put("libro",l);
+		try {
+			map.put("libro", null);
+			if(isbn.length() > 0 || nombre.length() > 0) {
+				Libro l = iNegLibro.BuscarLibroNuevaBiblioteca(isbn, nombre);
+				map.put("libro",l);
+			}
+		} catch (Exception e) {
+			return "redirect:/avisoError.html?tituloPagina="+"Buscar Libro Filtro"+"&tituloMensaje="+"Buscar Libro Filtro"+"&mensaje="+e.toString()
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
 		}
+
 		return "redirect:/nuevaBiblioteca.html";
 	}
 	
@@ -35,35 +41,50 @@ public class LibroController {
 	@ResponseBody
 	public ModelAndView ListarNuevosLibrosFiltroAjax(String isbn, String nombre) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("libros", iNegLibro.listarNuevoLibroTabla(isbn.length() == 0 ? 0 : Integer.parseInt(isbn), nombre));
-		mv.setViewName("ListadoLibrosFragment");
+		try {
+			mv.addObject("libros", iNegLibro.listarNuevoLibroTabla(isbn.length() == 0 ? 0 : Integer.parseInt(isbn), nombre));
+			mv.setViewName("ListadoLibrosFragment");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Listar Libros", "Listar Libros Ajax", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}
+
 		return mv;
 	}
 	
 	@RequestMapping("obtenerLibroNuevaBibliotecaFragment.html")
 	public ModelAndView ObtenerLibroNuevaBibliotecaFragment(int isbn) {
+		ModelAndView mv = new ModelAndView();
+	
 		try {
-			Libro l = iNegLibro.obtenerLibro(isbn);
-			ModelAndView mv = new ModelAndView();
+			Libro l = iNegLibro.obtenerLibro(isbn);			
 			mv.addObject("libroFragmentAjax", l);
 			mv.setViewName("LibroFragment");
-			return mv;
 		} catch (Exception e) {
-			System.out.println("<<MENSAJE ERROR>>" + e.getMessage());
-			return null;
-		}		
+			mv = AvisoController.SeteoDeAviso(mv, "Obtener Libro", "Obtener Libro Ajax", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}	
+		
+		return mv;
 	}
 	
 	
 	@RequestMapping("agregarLibro.html")
 	@ResponseBody
 	public ModelAndView AgregarNuevoLibro(String isbn, String titulo, String fechaLanzamiento, String idAutor, String descripcion,String idioma, String generos, String cantidadPaginas) {
-		iNegLibro.AgregarLibro(isbn,titulo,fechaLanzamiento,idAutor,descripcion,idioma,generos,cantidadPaginas);
-		Libro l = iNegLibro.obtenerLibro(Integer.parseInt(isbn));
-		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("libro", l);
-		mv.setViewName("NuevaBiblioteca");
+		
+		try {
+			iNegLibro.AgregarLibro(isbn,titulo,fechaLanzamiento,idAutor,descripcion,idioma,generos,cantidadPaginas);
+			Libro l = iNegLibro.obtenerLibro(Integer.parseInt(isbn));
+			
+			mv.addObject("libro", l);
+			mv.setViewName("NuevaBiblioteca");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Nuevo Libro", "Agregar Nuevo Libro", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}
+		
 		return mv;
 	}
 }

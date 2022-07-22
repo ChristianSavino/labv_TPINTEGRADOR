@@ -40,11 +40,15 @@ public class PrestamoController {
 			Cliente cliente = iNegCliente.obtenerCliente(idCliente);
 			Biblioteca biblioteca = iNegBiblioteca.obtenerBiblioteca(idBiblioteca);
 			boolean res = iNegPrestamo.agregarPrestamo(biblioteca,cliente,cantidadDias,fecha);
-		
+			if (res)
+				return "redirect:/listadoBiblioteca.html";
+			else
+				return "redirect:/avisoError.html?tituloPagina="+"Nuevo Prestamo"+"&tituloMensaje="+"Akta Nuevo Prestamo"+"&mensaje=Error al crear nuevo prestamo"
+				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
 		} catch (Exception e) {
-			 System.err.println(e.getMessage());
-		}
-		return "redirect:/listadoBiblioteca.html";
+			return "redirect:/avisoError.html?tituloPagina="+"Nuevo Prestamo"+"&tituloMensaje="+"Alta Nuevo Prestamo"+"&mensaje="+e.toString()
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+		}		
 	}
 	
 	@RequestMapping("listadoPrestamos.html")
@@ -59,26 +63,30 @@ public class PrestamoController {
 			@RequestParam(defaultValue = "") String apellidoCliente, 
 			@RequestParam(defaultValue = "") String dniCliente) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("prestamos",iNegPrestamo.listarPrestamosTabla(fechaAlta, isbn, titulo, nombreAutor, apellidoAutor, nombreCliente, apellidoCliente, dniCliente));
-
-		mv.setViewName("ListadoPrestamos");
+		try {
+			mv.addObject("prestamos",iNegPrestamo.listarPrestamosTabla(fechaAlta, isbn, titulo, nombreAutor, apellidoAutor, nombreCliente, apellidoCliente, dniCliente));
+			mv.setViewName("ListadoPrestamos");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Listar Prestamos", "Listar Prestamos", e.toString(), 
+					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
+		}
+		
 		return mv;
 	}
 	
 	@RequestMapping("finalizarPrestamo.html")
 	public String FinalizarPrestamo(int idPrestamo) {
-		try {
-			
+		try {			
 			Prestamo p = iNegPrestamo.obtenerPrestamo(idPrestamo);
 			iNegPrestamo.eliminarPrestamo(p);
 			Biblioteca b = iNegBiblioteca.obtenerBiblioteca(p.getBiblioteca().getId());
 			b.setEstado(1);
 			iNegBiblioteca.modificarBiblioteca(b);
-			
+			return "redirect:/listadoPrestamos.html";
 		} catch (Exception e) {
-			System.out.println("<<MENSAJE ERROR>>" + e.getMessage());
+			return "redirect:/avisoError.html?tituloPagina="+"Finalizar Prestamo"+"&tituloMensaje="+"Finalizar Prestamo"+"&mensaje="+e.toString()
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
 			
 		}		
-		return "redirect:/listadoPrestamos.html";
 	}
 }

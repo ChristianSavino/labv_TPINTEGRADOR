@@ -29,8 +29,15 @@ public class ClienteController {
 	@ResponseBody
 	public ModelAndView ListarTodosClientesFiltro(String nacionalidad,String nombre, String apellido) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("clientes",iNegCliente.listarClienteTabla(nacionalidad, nombre, apellido));
-		mv.setViewName("ListadoClientes");
+		
+		try {
+			mv.addObject("clientes",iNegCliente.listarClienteTabla(nacionalidad, nombre, apellido));
+			mv.setViewName("ListadoClientes");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Obtener Cliente", "Obtener Cliente Filtro", e.toString(), 
+					"Volver a Listado Cliente", "listadoCliente.html", AvisoController.TipoAviso.Error);
+		}
+
 		return mv;
 	}	
 	
@@ -39,8 +46,14 @@ public class ClienteController {
 	@ResponseBody
 	public ModelAndView ListarTodosClientesFiltroAjax(String nacionalidad, String nombre, String apellido) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("clientes", iNegCliente.listarClienteTabla(nacionalidad, nombre, apellido));
-		mv.setViewName("ListadoClientesFragment");
+		try {
+			mv.addObject("clientes", iNegCliente.listarClienteTabla(nacionalidad, nombre, apellido));
+			mv.setViewName("ListadoClientesFragment");
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Obtener Cliente", "Obtener Cliente Ajax", e.toString(), 
+					"Volver a Listado Cliente", "listadoCliente.html", AvisoController.TipoAviso.Error);
+		}
+
 		return mv;
 	}
 	
@@ -56,17 +69,19 @@ public class ClienteController {
 		
 	@RequestMapping("obtenerClienteNuevoPrestamoFragment.html")
 	public ModelAndView ObtenerClienteNuevoPrestamoFragment(int idCliente) {
-		//lo que no se manejar todavia es cuando no encuentra el cliente, por algun motivo no devuelve null el obtenerCliente de iNegCliente.
+		ModelAndView mv = new ModelAndView();
 		try {
 			Cliente cl = iNegCliente.obtenerCliente(idCliente);
-			ModelAndView mv = new ModelAndView();
+			
 			mv.addObject("clienteFragmentAjax", cl);
 			mv.setViewName("ClienteFragment");
-			return mv;
+			
 		} catch (Exception e) {
-			System.out.println("<<MENSAJE ERROR>>" + e.getMessage());
-			return null;
-		}		
+			mv = AvisoController.SeteoDeAviso(mv, "Obtener Cliente", "Obtener Cliente Ajax", e.toString(), 
+					"Volver a Listado Cliente", "listadoCliente.html", AvisoController.TipoAviso.Error);
+		}	
+		
+		return mv;
 	}
 	
 	@RequestMapping("eliminarCliente.html")
@@ -76,6 +91,8 @@ public class ClienteController {
 			iNegCliente.eliminarCliente(cliente);
 		}
 		catch(Exception e) {
+			return "redirect:/avisoError.html?tituloPagina="+"Eliminar Cliente"+"&tituloMensaje="+"Eliminar Cliente"+"&mensaje="+e.toString()
+			+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
 		}
 		return "redirect:/listadoClientes.html";
 	}
@@ -83,24 +100,35 @@ public class ClienteController {
 	@RequestMapping("agregarCliente.html")
 	public String agregarCliente(String dni, String nombre, String apellido, String sexo, String nacionalidad,
 	String fNacimiento, String localidad, String direccion, String correo, String telefono) {
-		boolean estado = iNegCliente.agregarCliente(dni, nombre, apellido, sexo, Integer.parseInt(nacionalidad), fNacimiento, localidad, direccion, correo,telefono);
-		
-		String redirect = "";
-		if(estado) {
-			redirect = "redirect:/listadoClientes.html";
+		try {
+			boolean estado = iNegCliente.agregarCliente(dni, nombre, apellido, sexo, Integer.parseInt(nacionalidad), fNacimiento, localidad, direccion, correo,telefono);
+			
+			if(estado)
+				return "redirect:/listadoClientes.html";
+			else
+				return "redirect:/avisoError.html?tituloPagina="+"Agregar Cliente"+"&tituloMensaje="+"Agregar Cliente"+"&mensaje=Error al Agregar Cliente"
+				+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
+		} catch (Exception e) {
+			return "redirect:/avisoError.html?tituloPagina="+"Agregar Cliente"+"&tituloMensaje="+"Agregar Cliente"+"&mensaje="+e.toString()
+					+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
 		}
-		return redirect;
 	}
 	
 	@RequestMapping("modificarCliente.html")
 	public String modificarCliente(@ModelAttribute("cliente") Cliente cliente, String id, String dni, String nombre, String apellido, String sexo, String nacionalidad,
 			String fNacimiento, String localidad, String direccion, String correo, String telefono) {
-		boolean estado = iNegCliente.modificarCliente(Integer.parseInt(id), Integer.parseInt(dni), nombre, apellido, sexo, Integer.parseInt(nacionalidad), fNacimiento, localidad, direccion, correo, telefono);
-		String redirect = "";
-		if(estado) {
-			redirect = "redirect:/listadoClientes.html";
+		try {
+			boolean estado = iNegCliente.modificarCliente(Integer.parseInt(id), Integer.parseInt(dni), nombre, apellido, sexo, Integer.parseInt(nacionalidad), fNacimiento, localidad, direccion, correo, telefono);
+			if(estado) 
+				return "redirect:/listadoClientes.html";
+			else
+				return "redirect:/avisoError.html?tituloPagina="+"Modificar Cliente"+"&tituloMensaje="+"Modificar Cliente"+"&mensaje=Error al Modificar Cliente"
+				+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
+		} catch (Exception e) {
+			return "redirect:/avisoError.html?tituloPagina="+"Modificar Cliente"+"&tituloMensaje="+"Modificar Cliente"+"&mensaje="+e.toString()
+			+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
 		}
-		return redirect;
+
 	}
 	
 }
