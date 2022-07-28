@@ -21,15 +21,55 @@
 </head>
 
 <body>
-<jsp:include page="Header.jsp" />
+	<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="card">
-		<div class="card-body">
+			<div class="card-body">
 				<div class="col-12">
 					<h1>Biblioteca</h1>
-					<input type="button" value="Agregar Libro" onclick="location.href = 'nuevaBiblioteca.html';" class="btn btn-primary"></input>
+					<input type="button" value="Agregar Libro" onclick="location.href = 'nuevaBiblioteca.html';"	class="btn btn-primary"></input>
 				</div>
 				<br>
+				<form class="col-12" action="listarBibliotecaFiltro.html"	method="Get">
+					<h3>Filtrar por:</h3>
+					<div class=" form-group row">
+						<label for="isbn" class="col-sm-2 col-form-label">ISBN:</label>
+						<div class="col-sm-7">
+							<input class="form-control" min="1" type="number" id="isbn"
+								name="isbn">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="titulo" class="col-sm-2 col-form-label">Titulo:</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" id="titulo" name="titulo"
+								placeholder="Ingrese un titulo">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="estado" class="col-sm-2 col-form-label">Estado:</label>
+						<div class="col-sm-7">
+							<select name="estado" id="estado">
+								<option value="">Todos</option>
+								<option value="Disponible">Disponible</option>
+								<option value="Prestado">Prestado</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="fechaAlta" class="col-sm-2 col-form-label">Fecha
+							de Alta:</label>
+						<div class="col-sm-7">
+							<input type="date" class="form-control" id="fechaAlta"
+								name="fechaAlta">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-7">
+							<input class="col-sm-2 col-form-label" type="submit" value="Buscar">
+						</div>
+					</div>
+				</form>
 				<div class="col-12">
 					<table class="table table-bordered table-hover">
 						<tr>
@@ -48,50 +88,30 @@
 								<td>${obj[3]}</td>
 								<td>${obj[4]}</td>
 								<td>
-								<form method="GET">                              
-									<input type="button" value="Eliminar"	onclick="location.href = 'eliminarBiblioteca.html?id=${obj[0]}';"	class="btn btn-danger"></input>
-									<input type="button" value="Modificar"  onclick="location.href = 'paginaModificarBiblioteca.html?id=${obj[0]}';"	class="btn btn-primary"></input>
-									<c:choose>
-										<c:when test="${obj[4] == 'Prestado'}">
-											<input type="button" value="Info. Prestamo" class="btn btn-primary"></input>
-										</c:when>
-										<c:otherwise>
-											<input type="button" value="Nuevo Prestamo" onclick="location.href = 'obtenerBibliotecaDesdeLista.html?idBiblioteca=${obj[0]}';" class="btn btn-primary"></input>
-										</c:otherwise>
-									</c:choose>									</form>
-                              	</td>
+									<form method="GET">
+										<input type="button" value="Eliminar"
+											onclick="location.href = 'eliminarBiblioteca.html?id=${obj[0]}';"
+											class="btn btn-danger"></input> <input type="button"
+											value="Modificar"
+											onclick="location.href = 'paginaModificarBiblioteca.html?id=${obj[0]}';"
+											class="btn btn-primary"></input>
+										<c:choose>
+											<c:when test="${obj[4] == 'Prestado'}">
+												<input type="button" value="Info. Prestamo"
+													class="btn btn-primary"></input>
+											</c:when>
+											<c:otherwise>
+												<input type="button" value="Nuevo Prestamo"
+													onclick="location.href = 'obtenerBibliotecaDesdeLista.html?idBiblioteca=${obj[0]}';"
+													class="btn btn-primary"></input>
+											</c:otherwise>
+										</c:choose>
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>
-					</div>
-					<form class="col-9" action="listarBibliotecaFiltro.html" method="Get">			
-							<div>
-							<p>
-							<h3>Filtrar por:</h3>
-							</p>
-							
-								<p>Fecha de Alta:
-								<input class="form-control" type="date" name="fechaAlta"></p>
-								<p></p>							
-								<p>
-								Estado:
-								<select name="estado">
-  									<option value="">Todos</option>
-  									<option value="Disponible">Disponible</option>
-  									<option value="Prestado">Prestado</option>
-								</select>
-								</p>
-								<p></p>						
-								<p>ISBN:
-								<input class="form-control" type="number" name="isbn">
-								</p>
-								<p></p>	
-								<p>Titulo:
-								<input class="form-control" type="text" name="titulo">
-								</p>
-								<p><input class="form-control" type="submit" value="Buscar"></p>
-							</div>
-					</form>
+				</div>
 			</div>
 		</div>
 	</div>

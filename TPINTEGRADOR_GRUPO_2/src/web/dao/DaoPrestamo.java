@@ -155,7 +155,7 @@ public class DaoPrestamo implements IdaoPrestamo{
 				"join biblioteca as b on p.idBiblioteca = b.id " + 
 				"join libro as l on b.idLibro = l.id " + 
 				"join autor as a on l.idAutor = a.idAutor " + 
-				"where b.estado = 2 " + condiciones+";");
+				"where b.estado = 2 " + condiciones+" order by p.id;");
 		conexion.cerrarSession();
 
 		return listaPrestamos;

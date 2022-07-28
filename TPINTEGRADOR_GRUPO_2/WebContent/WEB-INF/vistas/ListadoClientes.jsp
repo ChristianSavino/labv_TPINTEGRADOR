@@ -6,7 +6,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Biblioteca</title>
+<title>Clientes</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -30,6 +30,32 @@
 					<input type="button" value="Agregar Cliente" onclick="location.href = 'nuevoCliente.html';" class="btn btn-primary"></input>
 				</div>
 				<br>
+				<form class="col-12" action="listarClienteFiltro.html"	method="Get">
+					<h3>Filtrar por:</h3>
+					<div class=" form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+						<div class="col-sm-7">
+							<input class="form-control"  type="text" id="nombre" name="nombre" placeholder="Ingrese un nombre">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="apellido" class="col-sm-2 col-form-label">Apellido:</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese un apellido">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="nacionalidad" class="col-sm-2 col-form-label">Nacionalidad:</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" id="nacionalidad" name="nacionalidad" placeholder="Ingrese una nacionalidad">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-7">
+							<input class="col-sm-2 col-form-label" type="submit" value="Buscar">
+						</div>
+					</div>
+				</form>
 				<div class="col-12">
 					<table class="table table-bordered table-hover table-sm">
 						<tr>
@@ -69,27 +95,7 @@
 							</c:forEach>
 						</table>
 						</div>
-						<form class="col-12" action="listarClienteFiltro.html" method="Get">			
-								<div>
-								<p>
-								<h3>Filtrar por:</h3>
-								</p>
-								
-									<p>Nacionalidad:
-									<input class="form-control" type="search" name="nacionalidad"></p>
-									<p></p>							
-									<p>
-									Nombre:
-									<input class="form-control" type="search" name="nombre"></p>
-									<p></p>
-									<p></p>						
-									<p>Apellido:
-									<input class="form-control" type="search" name="apellido">
-									</p>
-									<p><input class="form-control" type="submit" value="Buscar"></p>
-								</div>
-							</form>	
-						</div>
+					</div>
 				</div>
 			</div>
 	<!-- Modal -->

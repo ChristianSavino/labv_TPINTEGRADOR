@@ -61,7 +61,7 @@ public class DaoBiblioteca implements IdaoBiblioteca {
 		
 		conexion.abrirConexion();
 		List<Object[]> listaBibliotecas= conexion.ObtenerListaPorQuery("SELECT b.id as Codigo, l.id as ISBN, l.titulo as Titulo, DATE_FORMAT(b.fechaDeAlta,'%d/%m/%Y') as 'Fecha Alta', CASE WHEN b.estado = 1 THEN 'Disponible' ELSE 'Prestado' END as Estado "
-				+ "FROM biblioteca b INNER JOIN libro l ON b.idlibro = l.id" + condiciones+";");
+				+ "FROM biblioteca b INNER JOIN libro l ON b.idlibro = l.id" + condiciones +" order by b.id ;");
 		conexion.cerrarSession();
 
 		return listaBibliotecas;
