@@ -44,10 +44,10 @@ public class PrestamoController {
 				return "redirect:/listadoBiblioteca.html";
 			else
 				return "redirect:/avisoError.html?tituloPagina="+"Nuevo Prestamo"+"&tituloMensaje="+"Akta Nuevo Prestamo"+"&mensaje=Error al crear nuevo prestamo"
-				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar="+"listadoBiblioteca.html";
 		} catch (Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Nuevo Prestamo"+"&tituloMensaje="+"Alta Nuevo Prestamo"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar="+"listadoBiblioteca.html";
 		}		
 	}
 	
@@ -85,7 +85,7 @@ public class PrestamoController {
 			return "redirect:/listadoPrestamos.html";
 		} catch (Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Finalizar Prestamo"+"&tituloMensaje="+"Finalizar Prestamo"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar="+"listadoBiblioteca.html";
 			
 		}		
 	}

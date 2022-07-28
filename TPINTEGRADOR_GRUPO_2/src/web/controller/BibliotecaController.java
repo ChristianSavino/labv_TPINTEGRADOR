@@ -52,10 +52,10 @@ public class BibliotecaController {
 			boolean estado = iNegBiblioteca.agregarBiblioteca(Integer.parseInt(isbn), fechaAlta);
 			if(!estado)
 				return "redirect:/avisoError.html?tituloPagina="+"Nueva Biblioteca"+"&tituloMensaje="+"Guardar Nueva Biblioteca"+"&mensaje=No se guardo correctamente la biblioteca"
-				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
 		}catch(Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Nueva Biblioteca"+"&tituloMensaje="+"Guardar Nueva Biblioteca"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
 		}
 
 		return  "redirect:/listadoBiblioteca.html";
@@ -91,7 +91,7 @@ public class BibliotecaController {
 		}
 		catch(Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Eliminar Biblioteca"+"&tituloMensaje="+"Eliminar Biblioteca"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
 		}
 
 	}
@@ -104,10 +104,10 @@ public class BibliotecaController {
 				return "redirect:/listadoBiblioteca.html";
 			else
 				return "redirect:/avisoError.html?tituloPagina="+"Modificar Biblioteca"+"&tituloMensaje="+"Modificar Biblioteca"+"&mensaje="+"Error al modificar Biblioteca"
-				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
 		} catch (Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Modificar Biblioteca"+"&tituloMensaje="+"Modificar Biblioteca"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
 		}
 
 

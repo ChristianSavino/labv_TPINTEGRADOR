@@ -29,7 +29,7 @@ public class LibroController {
 			}
 		} catch (Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Buscar Libro Filtro"+"&tituloMensaje="+"Buscar Libro Filtro"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar="+"listadoBiblioteca.html";
 		}
 
 		return "redirect:/nuevaBiblioteca.html";

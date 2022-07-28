@@ -45,7 +45,7 @@ public class AutorController {
 		}
 		else
 			redirect ="redirect:/avisoError.html?tituloPagina="+"Nueva Biblioteca"+"&tituloMensaje="+"Guardar Nueva Biblioteca"+"&mensaje=Error al Obtener Autor"
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar="+"listadoBiblioteca.html";
 		return redirect;
 	}
 	
@@ -57,7 +57,7 @@ public class AutorController {
 			return "redirect:/nuevoLibro.html";
 		} catch (Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Nuevo Libro"+"&tituloMensaje="+"Obtener Autor"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar="+"listadoBiblioteca.html";
 		}
 
 	}
@@ -85,7 +85,7 @@ public class AutorController {
 		}
 		catch(Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Eliminar Autor"+"&tituloMensaje="+"Eliminar Autor"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar"+"listadoBiblioteca.html";
+			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar="+"listadoBiblioteca.html";
 		}
 		return "redirect:/listadoBiblioteca.html";
 	}

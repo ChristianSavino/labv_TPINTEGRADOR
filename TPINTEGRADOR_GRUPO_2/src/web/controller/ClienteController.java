@@ -92,7 +92,7 @@ public class ClienteController {
 		}
 		catch(Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Eliminar Cliente"+"&tituloMensaje="+"Eliminar Cliente"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
+			+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar="+"listadoClientes.html";
 		}
 		return "redirect:/listadoClientes.html";
 	}
@@ -107,10 +107,10 @@ public class ClienteController {
 				return "redirect:/listadoClientes.html";
 			else
 				return "redirect:/avisoError.html?tituloPagina="+"Agregar Cliente"+"&tituloMensaje="+"Agregar Cliente"+"&mensaje=Error al Agregar Cliente"
-				+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
+				+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar="+"listadoClientes.html";
 		} catch (Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Agregar Cliente"+"&tituloMensaje="+"Agregar Cliente"+"&mensaje="+e.toString()
-					+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
+					+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar="+"listadoClientes.html";
 		}
 	}
 	
@@ -123,10 +123,10 @@ public class ClienteController {
 				return "redirect:/listadoClientes.html";
 			else
 				return "redirect:/avisoError.html?tituloPagina="+"Modificar Cliente"+"&tituloMensaje="+"Modificar Cliente"+"&mensaje=Error al Modificar Cliente"
-				+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
+				+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar="+"listadoClientes.html";
 		} catch (Exception e) {
 			return "redirect:/avisoError.html?tituloPagina="+"Modificar Cliente"+"&tituloMensaje="+"Modificar Cliente"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar"+"listadoClientes.html";
+			+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar="+"listadoClientes.html";
 		}
 
 	}
