@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.dao.DaoLibro;
+import web.entidades.Genero;
 import web.entidades.Libro;
 import web.negocio.InegLibro;
 
@@ -86,7 +87,7 @@ public class NegLibro implements InegLibro {
 	public boolean AgregarLibro(String isbn, String titulo, String fechaLanzamiento, String idAutor, String descripcion,
 			String idioma, String generos, String cantidadPaginas) {
 		try {
-
+			libro = new Libro();
 			libro.setIsbn(Integer.parseInt(isbn));
 			libro.setTitulo(titulo);
 			libro.setFechaLanzamiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaLanzamiento));
@@ -98,6 +99,8 @@ public class NegLibro implements InegLibro {
 			for (String g : genero) {
 				libro.getGeneros().add(iNegComplementos.obtenerGenero(Integer.parseInt(g)));
 			}
+			
+			
 			
 			libro.setCantidadPaginas(Integer.parseInt(cantidadPaginas));
 			
