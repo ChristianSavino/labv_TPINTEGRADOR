@@ -6,15 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import web.entidades.Autor;
+import web.controller.AvisoController.TipoAviso;
 import web.entidades.Biblioteca;
-import web.entidades.Cliente;
 import web.negocioImp.NegBiblioteca;
 
 @Controller
@@ -46,19 +43,23 @@ public class BibliotecaController {
 	}
 
 	@RequestMapping("guardarNuevaBiblioteca.html")
-	public String GuardarNuevaBiblioteca(String isbn, String fechaAlta ) {
+	public ModelAndView GuardarNuevaBiblioteca(String isbn, String fechaAlta ) {
+		ModelAndView mv = new ModelAndView();
 
 		try {
 			boolean estado = iNegBiblioteca.agregarBiblioteca(Integer.parseInt(isbn), fechaAlta);
-			if(!estado)
-				return "redirect:/avisoError.html?tituloPagina="+"Nueva Biblioteca"+"&tituloMensaje="+"Guardar Nueva Biblioteca"+"&mensaje=No se guardo correctamente la biblioteca"
-				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
+			if(estado)
+				mv = AvisoController.SeteoDeAviso(mv, "Alta Biblioteca", "Alta Nueva Biblioteca", "Se ha generado correctamente una biblioteca para el libro: " + isbn, 
+						"Listado Biblioteca", "listadoBiblioteca.html", TipoAviso.Correcto);
+			else
+				mv = AvisoController.SeteoDeAviso(mv, "Alta Biblioteca", "Alta Nueva Biblioteca", "Error interno al crear nueva biblioteca", 
+						"Listado Biblioteca", "listadoBiblioteca.html", TipoAviso.Error);
 		}catch(Exception e) {
-			return "redirect:/avisoError.html?tituloPagina="+"Nueva Biblioteca"+"&tituloMensaje="+"Guardar Nueva Biblioteca"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
+			mv = AvisoController.SeteoDeAviso(mv, "Alta Biblioteca", "Alta Nueva Biblioteca", e.toString(), 
+					"Listado Biblioteca", "listadoBiblioteca.html", TipoAviso.Error);
 		}
 
-		return  "redirect:/listadoBiblioteca.html";
+		return mv;
 	}
 
 	@RequestMapping(value="obtenerBibliotecaDesdeLista.html")
@@ -83,34 +84,41 @@ public class BibliotecaController {
 	}
 
 	@RequestMapping("eliminarBiblioteca.html")
-	public String eliminarBiblioteca(@RequestParam(value = "id", required = false) int id){
+	public ModelAndView eliminarBiblioteca(@RequestParam(value = "id", required = false) int id){
+		ModelAndView mv = new ModelAndView();
+
 		try {
 			Biblioteca biblioteca = iNegBiblioteca.obtenerBiblioteca(id);
 			iNegBiblioteca.eliminarBiblioteca(biblioteca);
-			return "redirect:/listadoBiblioteca.html";
+			mv = AvisoController.SeteoDeAviso(mv, "Eliminar Biblioteca", "Eliminar Biblioteca", "Se ha eliminado correctamente una biblioteca con id: " + id, 
+					"Listado Biblioteca", "listadoBiblioteca.html", TipoAviso.Correcto);
 		}
 		catch(Exception e) {
-			return "redirect:/avisoError.html?tituloPagina="+"Eliminar Biblioteca"+"&tituloMensaje="+"Eliminar Biblioteca"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
+			mv = AvisoController.SeteoDeAviso(mv, "Eliminar Biblioteca", "Eliminar Biblioteca", e.toString(), 
+					"Listado Biblioteca", "listadoBiblioteca.html", TipoAviso.Error);
 		}
 
+		return mv;
 	}
 
 	@RequestMapping("modificarBiblioteca.html")
-	public String modificarBiblioteca(@ModelAttribute("biblioteca") Biblioteca biblioteca, int id, int estado, String fechaAlta) {
+	public ModelAndView modificarBiblioteca(@ModelAttribute("biblioteca") Biblioteca biblioteca, int id, int estado, String fechaAlta) {
+		ModelAndView mv = new ModelAndView();
+
 		try {
 			boolean est = iNegBiblioteca.modificarBiblioteca(id, estado,fechaAlta);
 			if(est)
-				return "redirect:/listadoBiblioteca.html";
+				mv = AvisoController.SeteoDeAviso(mv, "Modificar Biblioteca", "Modificar Biblioteca", "Se ha modificado correctamente la biblioteca con id: " + id, 
+						"Listado Biblioteca", "listadoBiblioteca.html", TipoAviso.Correcto);
 			else
-				return "redirect:/avisoError.html?tituloPagina="+"Modificar Biblioteca"+"&tituloMensaje="+"Modificar Biblioteca"+"&mensaje="+"Error al modificar Biblioteca"
-				+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
-		} catch (Exception e) {
-			return "redirect:/avisoError.html?tituloPagina="+"Modificar Biblioteca"+"&tituloMensaje="+"Modificar Biblioteca"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"paginaARedireccionar="+"listadoBiblioteca.html";
+				mv = AvisoController.SeteoDeAviso(mv, "Modificar Biblioteca", "Modificar Biblioteca", "Error interno al modificar biblioteca", 
+						"Listado Biblioteca", "listadoBiblioteca.html", TipoAviso.Error);
+		}catch(Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Modificar Biblioteca", "Modificar Biblioteca", e.toString(), 
+					"Listado Biblioteca", "listadoBiblioteca.html", TipoAviso.Error);
 		}
 
-
+		return mv;
 	}
 
 	@RequestMapping("listarBibliotecaFiltroAjax.html")

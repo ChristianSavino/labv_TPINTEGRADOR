@@ -207,16 +207,6 @@
 					    
 					    $('#devolverLibroModal').modal('hide');
 					    location.href = 'finalizarPrestamo.html?idPrestamo=' + prestamo;
-// 					    $.ajax({
-
-// 						    type: "POST",
-// 						    url: "finalizarPrestamo.html?idPrestamo="+prestamo,
-// 						    error: function (response) {
-						    	
-// 								$("#messageValidationError").html("Ocurrio un error interno al intentar seleccionar el libro.");
-// 								$("#modalValidations").modal('show');
-								
-// 						    }});
 					    
 					});
 					
