@@ -29,7 +29,7 @@ public class DaoCliente implements IdaoCliente{
 		int cantCondiciones = 0;
 		
 		if (nacionalidad.length() > 0) {
-			condiciones = " WHERE c.idNacionalidad = '" + nacionalidad + "'";
+			condiciones = " WHERE n.descripcion = '" + nacionalidad + "'";
 			cantCondiciones++;
 		}
 		
