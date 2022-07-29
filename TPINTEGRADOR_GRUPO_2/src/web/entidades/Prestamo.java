@@ -27,7 +27,7 @@ public class Prestamo implements Serializable {
 
 	@Column(name = "CantidadDias")
 	private int cantDias;
-
+	
 	@OneToOne(cascade = { CascadeType.PERSIST })
 	@JoinColumn(name = "idCliente")
 	private Cliente cliente;

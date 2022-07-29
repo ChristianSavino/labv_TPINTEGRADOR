@@ -61,10 +61,11 @@ public class PrestamoController {
 			@RequestParam(defaultValue = "") String apellidoAutor, 
 			@RequestParam(defaultValue = "") String nombreCliente, 
 			@RequestParam(defaultValue = "") String apellidoCliente, 
-			@RequestParam(defaultValue = "") String dniCliente) {
+			@RequestParam(defaultValue = "") String dniCliente,
+			@RequestParam(defaultValue = "") String estado){
 		ModelAndView mv = new ModelAndView();
 		try {
-			mv.addObject("prestamos",iNegPrestamo.listarPrestamosTabla(fechaAlta, isbn, titulo, nombreAutor, apellidoAutor, nombreCliente, apellidoCliente, dniCliente));
+			mv.addObject("prestamos",iNegPrestamo.listarPrestamosTabla(fechaAlta, isbn, titulo, nombreAutor, apellidoAutor, nombreCliente, apellidoCliente, dniCliente, estado));
 			mv.setViewName("ListadoPrestamos");
 		} catch (Exception e) {
 			mv = AvisoController.SeteoDeAviso(mv, "Listar Prestamos", "Listar Prestamos", e.toString(), 

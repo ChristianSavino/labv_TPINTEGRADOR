@@ -69,7 +69,7 @@ public class DaoPrestamo implements IdaoPrestamo{
 	}
 	
 	@Override
-	public List<Object[]> listarPrestamosTabla(String fechaAlta, int isbn, String titulo, String nombreAutor, String apellidoAutor, String nombreCliente, String apellidoCliente, int dniCliente) {
+	public List<Object[]> listarPrestamosTabla(String fechaAlta, int isbn, String titulo, String nombreAutor, String apellidoAutor, String nombreCliente, String apellidoCliente, int dniCliente, String estado) {
 		String condiciones = "";
 		int cantCondiciones = 0;
 		
@@ -77,9 +77,7 @@ public class DaoPrestamo implements IdaoPrestamo{
 			condiciones = " and DATE(p.fechaDePrestamo) = '" + fechaAlta + "'";
 			cantCondiciones++;
 		}
-		
-		
-		
+					
 		if(isbn > 0) {
 			if(cantCondiciones == 0) {
 				condiciones = " and l.id = " + isbn;
@@ -149,12 +147,17 @@ public class DaoPrestamo implements IdaoPrestamo{
 				"p.id as idPrestamo, l.id as isbn, l.titulo as tituloLibro, " + 
 				"a.nombre as nombreAutor, " + 
 				"a.apellido as apellidoAutor, " + 
-				"p.CantidadDias as cantidadDiasPrestamo, DATE_FORMAT(p.fechaDePrestamo, '%d-%m-%Y') as fechaPrestamo, c.nombre as nombreCliente, c.apellido as apellidoCliente, c.dni as dniCliente, c.idCliente as idCliente " + 
+				"p.CantidadDias as cantidadDiasPrestamo, DATE_FORMAT(p.fechaDePrestamo, '%d-%m-%Y') as fechaPrestamo, c.nombre as nombreCliente, c.apellido as apellidoCliente, c.dni as dniCliente, c.idCliente as idCliente, " + 
+				"(CASE"
+				+ "	WHEN DATEDIFF(DATE_ADD(p.fechaDePrestamo, INTERVAL p.CantidadDias DAY), NOW()) >= 0"
+				+ "    THEN 'A TIEMPO'"
+				+ "    ELSE 'VENCIDO'"
+				+ "END) AS estado " +
 				"from prestamo as p " + 
 				"join cliente c on p.idCliente = c.idCliente " + 
 				"join biblioteca as b on p.idBiblioteca = b.id " + 
 				"join libro as l on b.idLibro = l.id " + 
-				"join autor as a on l.idAutor = a.idAutor " + 
+				"join autor as a on l.idAutor = a.idAutor " + 				
 				"where b.estado = 2 " + condiciones+" order by p.id;");
 		conexion.cerrarSession();
 
@@ -176,4 +179,5 @@ public class DaoPrestamo implements IdaoPrestamo{
 		conexion.cerrarSession();
 		return exito;
 	}
+	
 }
