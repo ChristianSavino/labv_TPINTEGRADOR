@@ -75,8 +75,17 @@ public class LibroController {
 		ModelAndView mv = new ModelAndView();
 		
 		try {
-			iNegLibro.AgregarLibro(isbn,titulo,fechaLanzamiento,idAutor,descripcion,idioma,generos,cantidadPaginas);
+			System.out.println(isbn + "|" + titulo + "|" + fechaLanzamiento + "|" + idAutor + "|" + descripcion + "|" + idioma + "|" + generos + "|" + cantidadPaginas);
+			boolean estado = iNegLibro.AgregarLibro(isbn,titulo,fechaLanzamiento,idAutor,descripcion,idioma,generos,cantidadPaginas);
+			if (!estado) {
+				throw new Exception("Error al intentar guardar el nuevo libro");
+			}
 			Libro l = iNegLibro.obtenerLibro(Integer.parseInt(isbn));
+			
+			if (l == null) {
+				throw new Exception("Error al intentar recuperar el nuevo libro");
+
+			}
 			
 			mv.addObject("libro", l);
 			mv.setViewName("NuevaBiblioteca");

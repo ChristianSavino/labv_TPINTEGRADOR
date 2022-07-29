@@ -79,13 +79,14 @@ public class NegLibro implements InegLibro {
 	}
 
 	@Override
-	public void AgregarLibro(Libro l) {
-		daoLibro.agregarLibro(l);		
+	public boolean AgregarLibro(Libro l) {
+		return daoLibro.agregarLibro(l);		
 	}
 
 	public boolean AgregarLibro(String isbn, String titulo, String fechaLanzamiento, String idAutor, String descripcion,
 			String idioma, String generos, String cantidadPaginas) {
 		try {
+
 			libro.setIsbn(Integer.parseInt(isbn));
 			libro.setTitulo(titulo);
 			libro.setFechaLanzamiento(new SimpleDateFormat("yyyy-MM-dd").parse(fechaLanzamiento));
@@ -100,9 +101,8 @@ public class NegLibro implements InegLibro {
 			
 			libro.setCantidadPaginas(Integer.parseInt(cantidadPaginas));
 			
-			AgregarLibro(libro);
+			return AgregarLibro(libro);
 			
-			return true;
 		} catch (Exception e) {
 			return false;
 		}	

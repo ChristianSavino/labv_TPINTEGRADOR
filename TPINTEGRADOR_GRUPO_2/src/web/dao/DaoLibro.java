@@ -35,6 +35,7 @@ public class DaoLibro implements IdaoLibro {
 			conexion.GuardarObjeto(l);
 			conexion.CommitTransaccion();
 		} catch (Exception e) {
+			System.err.println(e.getMessage());
 			conexion.RollbackearTransaccion();
 			exito = false;
 		}

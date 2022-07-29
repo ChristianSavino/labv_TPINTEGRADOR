@@ -1,7 +1,9 @@
 package web.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -43,7 +45,7 @@ public class Conexion {
 		sessionFactory.close();
 	}
 
-	public void GuardarObjeto(Object object) {
+	public void GuardarObjeto(Object object) throws HibernateException {
 		session.save(object);
 	}
 
