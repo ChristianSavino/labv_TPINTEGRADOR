@@ -106,8 +106,8 @@ public class NegCliente implements InegCliente {
 	}
 	
 	@Override
-	public Cliente obtenerCliente(int dni) {
-		return daoCliente.obtenerCliente(dni);
+	public Cliente obtenerCliente(int idCliente) {
+		return daoCliente.obtenerCliente(idCliente);
 	}
 
 }
