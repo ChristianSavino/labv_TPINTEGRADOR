@@ -29,7 +29,7 @@ public class DaoCliente implements IdaoCliente{
 		int cantCondiciones = 0;
 		
 		if (nacionalidad.length() > 0) {
-			condiciones = " WHERE c.idNacionalidad = '" + nacionalidad + "'";
+			condiciones = " WHERE n.descripcion = '" + nacionalidad + "'";
 			cantCondiciones++;
 		}
 		
@@ -52,7 +52,7 @@ public class DaoCliente implements IdaoCliente{
 		}
 		
 		conexion.abrirConexion();
-		List<Object[]> listaClientes= conexion.ObtenerListaPorQuery("SELECT c.idCliente as idCliente, c.Dni as DNI, c.Nombre as Nombre, c.Apellido as Apellido, c.sexo as Sexo, n.descripcion as Nacionalidad, c.Email as Email, c.Direccion as Direccion, c.Localidad as Localidad, c.Telefono as Tel�fono, DATE_FORMAT(c.FechaNacimiento,'%d/%m/%Y') as 'Fecha Nacimiento'"
+		List<Object[]> listaClientes= conexion.ObtenerListaPorQuery("SELECT c.idCliente as idCliente, c.Dni as DNI, c.Nombre as Nombre, c.Apellido as Apellido, c.sexo as Sexo, n.descripcion as Nacionalidad, c.Email as Email, c.Direccion as Direccion, c.Localidad as Localidad, c.Telefono as Telefono, DATE_FORMAT(c.FechaNacimiento,'%d/%m/%Y') as 'Fecha Nacimiento'"
 				+ "FROM Cliente as c INNER JOIN Nacionalidad as n ON c.idNacionalidad = n.idNacionalidad" + condiciones+" order by c.idCliente;");
 		conexion.cerrarSession();
 
