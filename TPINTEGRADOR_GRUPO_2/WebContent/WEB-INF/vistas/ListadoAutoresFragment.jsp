@@ -2,16 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<div class="col-md-1">
+			<div class="btn btn-primary" onclick="location.href = 'nuevoAutor.html';">Agregar Autor</div>
+			</div>
 	<c:choose>
 		<c:when test="${autores.size() eq 0}">
 			<div class="row">
 			<div class="col-md-3 offset-3">
 			No hay autores para mostrar
 			</div>
-			<div class="col-md-1">
-			<div class="btn btn-primary" onclick="location.href = 'nuevoAutor.html';">Agregar Autor</div>
-			</div>
+			
 			</div>
 		</c:when>
 		<c:otherwise>
