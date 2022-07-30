@@ -30,7 +30,7 @@
                         	<label class="col-md-3 offset-4 col-form-label">ID: </label>
                             <div><input type="text" name="id" value="${cliente.getId()}" readonly></div>                           
                             <label class="col-md-3 offset-4 col-form-label">DNI: </label>
-                            <div><input type="text" name="dni" value="${cliente.getDni()}"></div>
+                            <div><input type="text" name="dni" value="${cliente.getDni()}" maxlength="8"></div>
                             <label class="col-md-3 offset-4 col-form-label">Nombre: </label>
                             <div><input type="text" name="nombre" value="${cliente.getNombre()}"></div>
                             <label class="col-md-3 offset-4 col-form-label">Apellido: </label>

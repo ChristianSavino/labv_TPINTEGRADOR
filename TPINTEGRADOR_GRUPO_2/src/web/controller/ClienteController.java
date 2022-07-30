@@ -117,20 +117,25 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("modificarCliente.html")
-	public String modificarCliente(@ModelAttribute("cliente") Cliente cliente, String id, String dni, String nombre, String apellido, String sexo, String nacionalidad,
+	public ModelAndView modificarCliente(@ModelAttribute("cliente") Cliente cliente, String id, String dni, String nombre, String apellido, String sexo, String nacionalidad,
 			String fNacimiento, String localidad, String direccion, String correo, String telefono) {
+		
+		ModelAndView mv = new ModelAndView();
+		
 		try {
 			boolean estado = iNegCliente.modificarCliente(Integer.parseInt(id), Integer.parseInt(dni), nombre, apellido, sexo, Integer.parseInt(nacionalidad), fNacimiento, localidad, direccion, correo, telefono);
 			if(estado) 
-				return "redirect:/listadoClientes.html";
+				mv = AvisoController.SeteoDeAviso(mv, "Modificar Cliente", "Modificar Cliente", "Se ha modificado correctamente el cliente con id: " + id, 
+						"Listado Cliente", "listadoClientes.html", TipoAviso.Correcto);
 			else
-				return "redirect:/avisoError.html?tituloPagina="+"Modificar Cliente"+"&tituloMensaje="+"Modificar Cliente"+"&mensaje=Error al Modificar Cliente"
-				+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar="+"listadoClientes.html";
+				mv = AvisoController.SeteoDeAviso(mv, "Modificar Cliente", "Modificar Cliente", "Error interno al modificar cliente", 
+						"Listado Cliente", "listadoClientes.html", TipoAviso.Error);
 		} catch (Exception e) {
-			return "redirect:/avisoError.html?tituloPagina="+"Modificar Cliente"+"&tituloMensaje="+"Modificar Cliente"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar="+"listadoClientes.html";
+			mv = AvisoController.SeteoDeAviso(mv, "Modificar Cliente", "Modificar Cliente", e.toString(), 
+					"Listado Cliente", "listadoClientes.html", TipoAviso.Error);
 		}
-
+		
+		return mv;
 	}
 	
 }
