@@ -50,6 +50,7 @@ public class NegPrestamo implements InegPrestamo{
 			prestamo.setCliente(c);
 			prestamo.setCantDias(cantidadDias);
 			prestamo.setFechaPrestamo(new SimpleDateFormat("yyyy-MM-dd").parse(fecha));
+
 			if (daoPrestamo.agregarPrestamo(prestamo))
 					iNegBiblioteca.modificarBiblioteca(b);		
 		} catch (Exception e) {
@@ -60,7 +61,7 @@ public class NegPrestamo implements InegPrestamo{
 	}
 	
 	@Override
-	public List<Object[]> listarPrestamosTabla(String fechaAlta, String isbn, String titulo, String nombreAutor, String apellidoAutor, String nombreCliente, String apellidoCliente, String dniCliente) {
+	public List<Object[]> listarPrestamosTabla(String fechaAlta, String isbn, String titulo, String nombreAutor, String apellidoAutor, String nombreCliente, String apellidoCliente, String dniCliente, String estado) {
 		
 		int isbnAux = 0;
 		int dniClienteAux = 0;
@@ -69,11 +70,11 @@ public class NegPrestamo implements InegPrestamo{
 		if (dniCliente.length() > 0)
 			dniClienteAux = Integer.parseInt(dniCliente);
 		
-		return daoPrestamo.listarPrestamosTabla(fechaAlta,isbnAux,titulo, nombreAutor, apellidoAutor, nombreCliente, apellidoCliente, dniClienteAux);
+		return daoPrestamo.listarPrestamosTabla(fechaAlta,isbnAux,titulo, nombreAutor, apellidoAutor, nombreCliente, apellidoCliente, dniClienteAux, estado);
 	}
 	
 	@Override
 	public boolean eliminarPrestamo(Prestamo p) {
 		return daoPrestamo.eliminarPrestamo(p);
-	}
+	}	
 }

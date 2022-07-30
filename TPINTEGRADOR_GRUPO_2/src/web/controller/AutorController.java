@@ -7,23 +7,22 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import web.controller.AvisoController.TipoAviso;
 import web.entidades.Autor;
-import web.entidades.Cliente;
-import web.entidades.Nacionalidad;
 import web.negocioImp.NegAutor;
 
 @Controller
 public class AutorController {
-	
+
 	@Autowired
 	@Qualifier("servicioAutor")
 	private NegAutor iNegAutor;	
-	
+
 	@ModelAttribute("autor")
 	public Autor getAutor() {
 		return new Autor();
 	}
-	
+
 	@RequestMapping(value= "obtenerAutor.html",
 			method=RequestMethod.POST)
 	@ResponseBody
@@ -32,23 +31,32 @@ public class AutorController {
 		Autor autor = iNegAutor.obtenerAutor(idAutor);
 		return "{idCliente:"+autor.getIdAutor()+"}";
 	}
-	
+
 	@RequestMapping("agregarAutor.html")
-	public String AgregarAutor(ModelMap map,@ModelAttribute("autor") Autor autor ,String nombre, String apellido, String nacionalidad, String email) {
-		boolean estado = iNegAutor.agregarAutor(nombre, apellido, Integer.parseInt(nacionalidad), email);
-		
-		String redirect = "";
-		if(estado) {
-			redirect = "redirect:/nuevoLibro.html";
-			autor = iNegAutor.obtenerAutorNombreYApellido(nombre, apellido);
-			map.put("autor",autor);
+	public ModelAndView AgregarAutor(ModelMap map,@ModelAttribute("autor") Autor autor ,String nombre, String apellido, String nacionalidad, String email) {
+		ModelAndView mv = new ModelAndView();
+
+		try {
+
+			boolean estado = iNegAutor.agregarAutor(nombre, apellido, Integer.parseInt(nacionalidad), email);
+
+			if(estado) {
+				autor = iNegAutor.obtenerAutorNombreYApellido(nombre, apellido);
+				map.put("autor",autor);
+				mv = AvisoController.SeteoDeAviso(mv, "Alta Autor", "Alta Nuevo Autor", "Se ha dado de alta al autor correctamente con id: " + autor.getIdAutor(), "Alta Libro", 
+						"nuevoLibro.html", TipoAviso.Correcto);
+			}
+			else
+				mv = AvisoController.SeteoDeAviso(mv, "Alta Autor", "Alta Nuevo Autor", "Error interno al dar de alta al autor", "Listado Biblioteca", 
+						"listadoBiblioteca.html", TipoAviso.Error);
+		} catch (Exception e) {
+			mv = AvisoController.SeteoDeAviso(mv, "Alta Autor", "Alta Nuevo Autor", e.getMessage(), "Listado Biblioteca", 
+					"listadoBiblioteca.html", TipoAviso.Error);
 		}
-		else
-			redirect ="redirect:/avisoError.html?tituloPagina="+"Nueva Biblioteca"+"&tituloMensaje="+"Guardar Nueva Biblioteca"+"&mensaje=Error al Obtener Autor"
-			+"&mensajeBoton="+"Volver a Listado Biblioteca"+"&paginaARedireccionar="+"listadoBiblioteca.html";
-		return redirect;
+
+		return mv;
 	}
-	
+
 	@RequestMapping("buscarAutorNombreYApellido.html")
 	public String ObtenerAutorNombreYApellido(ModelMap map,@ModelAttribute("autor") Autor autor,String nombre,String apellido) {
 		try {
@@ -61,7 +69,7 @@ public class AutorController {
 		}
 
 	}
-	
+
 	@RequestMapping("listarAutorFiltroAjax.html")
 	@ResponseBody
 	public ModelAndView ListarAutorFiltroAjax(String nacionalidad, String nombre,String apellido) {
@@ -76,7 +84,7 @@ public class AutorController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping("eliminarAutor.html")
 	public String eliminarAutor(@RequestParam(value = "id", required = false) int id){
 		try {
@@ -89,14 +97,14 @@ public class AutorController {
 		}
 		return "redirect:/listadoBiblioteca.html";
 	}
-	
+
 	@RequestMapping("obtenerAutorNuevoLibroFragment.html")
 	public ModelAndView ObtenerAutorNuevoLibroFragment(int idAutor) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		try {
 			Autor autor = iNegAutor.obtenerAutor(idAutor);
-			
+
 			mv.addObject("autorFragmentAjax", autor);
 			mv.setViewName("AutorFragment");
 
@@ -104,7 +112,7 @@ public class AutorController {
 			mv = AvisoController.SeteoDeAviso(mv, "Obtener Autor", "Obtener Autor Ajax", e.toString(), 
 					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);
 		}	
-		
+
 		return mv;
 	}
 }

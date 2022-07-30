@@ -64,11 +64,9 @@
 							</c:when>
 							
 							<c:otherwise>
-								<input type="hidden" value="${libro.getId()}" name="idBiblioteca" id="idBiblioteca"></input>
-								
+								<input type="hidden" value="${libro.getId()}" name="idBiblioteca" id="idBiblioteca"></input>							
 								<div class="row">
-									<h3 class="col-md-3 offset-4">Libro</h3>
-		
+									<h3 class="col-md-3 offset-4">Libro</h3>		
 									<label for="lastName" class="col-md-3 offset-4 col-form-label">ISBN</label>
 									<div class="col-md-3">${libro.getLibro().getIsbn()}</div>
 									<label for="lastName" class="col-md-3 offset-4 col-form-label">Titulo
@@ -80,19 +78,13 @@
 										${libro.getLibro().getAutor().getApellido()}</div>
 								</div>
 							</c:otherwise>
-						</c:choose>
-					
-						
-					
-						
+						</c:choose>	
 						<div class="row">
 							<div class="col-md-8 offset-2">
 								<hr>
 							</div>
 						</div>
-
 						<div class="row">
-
 							<button type="button" id="listadoClienteAjax" class="btn btn-primary col-md-3 offset-4"
 								data-toggle="modal" data-target="#asignarCliente">Asignar cliente</button>
 						</div>

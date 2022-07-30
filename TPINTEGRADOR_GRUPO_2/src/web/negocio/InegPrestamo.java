@@ -12,6 +12,6 @@ public interface InegPrestamo {
 	public boolean modificarPrestamo(Prestamo p);
 	public Prestamo obtenerPrestamo(int idPrestamo);
 	List<Object[]> listarPrestamosTabla(String fechaAlta, String isbn, String titulo, String nombreAutor,
-			String apellidoAutor, String nombreCliente, String apellidoCliente, String dniCliente);
+			String apellidoAutor, String nombreCliente, String apellidoCliente, String dniCliente, String estado);
 	boolean eliminarPrestamo(Prestamo p);
 }

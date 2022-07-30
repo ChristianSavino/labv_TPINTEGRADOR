@@ -87,7 +87,7 @@
 									<td>${obj[10]}</td>
 									<td>
 										<form method="GET">                   
-											<input type="button" value="Eliminar"	onclick="location.href = 'eliminarCliente.html?id=${obj[0]}';"	class="btn btn-danger"></input>
+											<input type="button" value="Eliminar" data-id-cliente="${obj[0]}" class="btn btn-danger eliminarCliente"></input>
 											<input type="button" value="Modificar"	onclick="location.href = 'paginaModificarCliente.html?id=${obj[0]}';"	class="btn btn-primary"></input>
 										</form>									
 	                              	</td>
@@ -121,7 +121,32 @@
 			</div>
 		</div>
 	</div>
-
+		<!-- Modal -->
+	<div class="modal fade" id="eliminarclienteModal" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Eliminar Cliente</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class=" form-group row">
+							<div class="col-lg-8 offset-2">¿Esta Seguro que desea eliminar este cliente?</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">SI</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">No</button>
+					</div>
+				</div>
+			</div>
+	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -134,6 +159,24 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-</body>
+		
+	<script type="text/javascript">
+			$(document).ready(function () {
+				$(document).off('click', '.eliminarCliente');
+				$(document).on('click','.eliminarCliente', function (e) {
+					let cliente = $(this).data('id-cliente');
+					 $('#eliminarclienteModal').modal('show');
+					
+					$('#eliminarclienteModal').on('click', '.btn-primary', function(){
+					    
+					    $('#eliminarclienteModal').modal('hide');
+					    location.href = 'eliminarCliente.html?id=' + cliente;
+					    
+					});
+					
 
+				});
+			});					
+		</script>		
+</body>
 </html>

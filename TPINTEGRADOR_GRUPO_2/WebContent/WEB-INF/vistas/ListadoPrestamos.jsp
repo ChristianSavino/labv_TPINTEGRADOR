@@ -73,6 +73,7 @@
 							<th scope="col">Dias prestamo</th>
 							<th scope="col">Cliente</th>
 							<th scope="col">DNI</th>
+							<th scope="col">Estado</th>
 							<th scope="col">Acciones</th>
 						</tr>
 						<c:forEach var="obj" items="${prestamos}">
@@ -83,8 +84,9 @@
 								<td>${obj[3]}${obj[4]}</td>
 								<td>${obj[6]}</td>
 								<td>${obj[5]}</td>
-								<td>${obj[7]}${obj[8]}</td>
+								<td>${obj[7]}${obj[8]}</td>								
 								<td>${obj[9]}</td>
+								<td>${obj[11]}</td>
 								<td><input type="button" value="Devolver Libro"
 									data-id-prestamo="${obj[0]}"
 									class="btn btn-success devolverLibro"></input></td>
@@ -205,16 +207,6 @@
 					    
 					    $('#devolverLibroModal').modal('hide');
 					    location.href = 'finalizarPrestamo.html?idPrestamo=' + prestamo;
-// 					    $.ajax({
-
-// 						    type: "POST",
-// 						    url: "finalizarPrestamo.html?idPrestamo="+prestamo,
-// 						    error: function (response) {
-						    	
-// 								$("#messageValidationError").html("Ocurrio un error interno al intentar seleccionar el libro.");
-// 								$("#modalValidations").modal('show');
-								
-// 						    }});
 					    
 					});
 					

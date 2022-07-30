@@ -3,15 +3,12 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.text.SimpleDateFormat;
+
+import web.controller.AvisoController.TipoAviso;
 import web.entidades.Cliente;
-import web.negocioImp.NegCliente; 
-import web.entidades.Nacionalidad;
+import web.negocioImp.NegCliente;
 
 @Controller
 public class ClienteController {
@@ -85,16 +82,21 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("eliminarCliente.html")
-	public String eliminarCliente(@RequestParam(value = "id", required = false) int id){
+	public ModelAndView eliminarCliente(@RequestParam(value = "id", required = false) int idCliente){
+		ModelAndView mv = new ModelAndView();
+		
 		try {
-			Cliente cliente = iNegCliente.obtenerCliente(id);
+			Cliente cliente = iNegCliente.obtenerCliente(idCliente);
 			iNegCliente.eliminarCliente(cliente);
+			mv = AvisoController.SeteoDeAviso(mv, "Eliminar Cliente", "Eliminar Cliente", "Se ha eliminado correctamente el cliente con id: " + idCliente,
+					"Listado Cliente", "listadoClientes.html", AvisoController.TipoAviso.Correcto);
 		}
 		catch(Exception e) {
-			return "redirect:/avisoError.html?tituloPagina="+"Eliminar Cliente"+"&tituloMensaje="+"Eliminar Cliente"+"&mensaje="+e.toString()
-			+"&mensajeBoton="+"Volver a Listado Clientes"+"&paginaARedireccionar="+"listadoClientes.html";
+			mv = AvisoController.SeteoDeAviso(mv, "Eliminar Cliente", "Eliminar Cliente", e.toString(), 
+					"Listado Cliente", "listadoClientes.html", TipoAviso.Error);
 		}
-		return "redirect:/listadoClientes.html";
+		
+		return mv;
 	}
 
 	@RequestMapping("agregarCliente.html")
