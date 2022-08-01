@@ -68,16 +68,7 @@ public class PrestamoController {
 	
 	@RequestMapping("listadoPrestamos.html")
 	@ResponseBody
-	public ModelAndView PaginaPrestamos(
-			@RequestParam(defaultValue = "") String fechaAlta, 
-			@RequestParam(defaultValue = "") String isbn, 
-			@RequestParam(defaultValue = "") String titulo, 
-			@RequestParam(defaultValue = "") String nombreAutor, 
-			@RequestParam(defaultValue = "") String apellidoAutor, 
-			@RequestParam(defaultValue = "") String nombreCliente, 
-			@RequestParam(defaultValue = "") String apellidoCliente, 
-			@RequestParam(defaultValue = "") String dniCliente,
-			@RequestParam(defaultValue = "") String estado){
+	public ModelAndView PaginaPrestamos(@RequestParam(defaultValue = "") String fechaAlta, @RequestParam(defaultValue = "") String isbn, @RequestParam(defaultValue = "") String titulo, @RequestParam(defaultValue = "") String nombreAutor, @RequestParam(defaultValue = "") String apellidoAutor, @RequestParam(defaultValue = "") String nombreCliente, @RequestParam(defaultValue = "") String apellidoCliente, @RequestParam(defaultValue = "") String dniCliente, @RequestParam(defaultValue = "") String estado) {
 		ModelAndView mv = new ModelAndView();
 		try {
 			mv.addObject("prestamos",iNegPrestamo.listarPrestamosTabla(fechaAlta, isbn, titulo, nombreAutor, apellidoAutor, nombreCliente, apellidoCliente, dniCliente, estado));

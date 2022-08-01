@@ -33,13 +33,10 @@ public class NegScriptInicial implements InegScriptInicial {
 	public void CheckearScriptInicial() throws Exception {
 		ArrayList<Libro> libros = (ArrayList)iDaoLibro.listarLibros();
 
-		if (libros != null && libros.size() > 0) {
+		if (libros != null && libros.size() > 0) 
 			System.out.print("Datos existentes");
-		}
 		else
-		{
 			GenerarDatos();
-		}
 	}
 
 	void GenerarDatos() throws ParseException {

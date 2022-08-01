@@ -29,18 +29,13 @@ public class NegLibro implements InegLibro {
 	@Override
 	public List<Object[]> listarLibroTabla(int isbn, String nombre) {
 		int newIsbn = 0;
-		
-		if(isbn > 0)
-		{
-			newIsbn = isbn;
-		}
-		
 		String newNombre = "";
 		
+		if(isbn > 0)
+			newIsbn = isbn;
+				
 		if(nombre.length() > 0)
-		{
 			newNombre = nombre;
-		}
 		
 		return daoLibro.listarLibroTabla(newIsbn, newNombre);
 	}
@@ -48,18 +43,13 @@ public class NegLibro implements InegLibro {
 	@Override
 	public List<Object[]> listarNuevoLibroTabla(int isbn, String nombre) {
 		int newIsbn = 0;
-		
-		if(isbn > 0)
-		{
-			newIsbn = isbn;
-		}
-		
 		String newNombre = "";
 		
+		if(isbn > 0)
+			newIsbn = isbn;
+				
 		if(nombre.length() > 0)
-		{
 			newNombre = nombre;
-		}
 		
 		return daoLibro.listarNuevoLibroTabla(newIsbn, newNombre);
 	}
@@ -67,9 +57,9 @@ public class NegLibro implements InegLibro {
 	@Override
 	public Libro BuscarLibroNuevaBiblioteca(String isbn, String nombre) {
 		int isbnAux = 0;
-		if (isbn.length() > 0) {
+		
+		if (isbn.length() > 0)
 			isbnAux = Integer.parseInt(isbn);
-		}
 		
 		return daoLibro.obtenerLibroFiltroNuevaBiblioteca(isbnAux,nombre);
 	}
@@ -84,8 +74,9 @@ public class NegLibro implements InegLibro {
 		return daoLibro.agregarLibro(l);		
 	}
 
-	public boolean AgregarLibro(String isbn, String titulo, String fechaLanzamiento, String idAutor, String descripcion,
-			String idioma, String generos, String cantidadPaginas) {
+	public boolean AgregarLibro(String isbn, String titulo, String fechaLanzamiento, String idAutor, String descripcion, String idioma, String generos, String cantidadPaginas) {
+		String[] genero;
+		
 		try {
 			libro = new Libro();
 			libro.setIsbn(Integer.parseInt(isbn));
@@ -95,13 +86,10 @@ public class NegLibro implements InegLibro {
 			libro.setDescripcion(descripcion);
 			libro.setIdioma(idioma);
 			
-			String[] genero = generos.split("-");
-			for (String g : genero) {
+			genero = generos.split("-");
+			for (String g : genero) 
 				libro.getGeneros().add(iNegComplementos.obtenerGenero(Integer.parseInt(g)));
-			}
-			
-			
-			
+					
 			libro.setCantidadPaginas(Integer.parseInt(cantidadPaginas));
 			
 			return AgregarLibro(libro);

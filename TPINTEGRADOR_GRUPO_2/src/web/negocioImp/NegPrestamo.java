@@ -65,8 +65,10 @@ public class NegPrestamo implements InegPrestamo{
 		
 		int isbnAux = 0;
 		int dniClienteAux = 0;
+		
 		if (isbn.length() > 0)
 			isbnAux = Integer.parseInt(isbn);
+		
 		if (dniCliente.length() > 0)
 			dniClienteAux = Integer.parseInt(dniCliente);
 		

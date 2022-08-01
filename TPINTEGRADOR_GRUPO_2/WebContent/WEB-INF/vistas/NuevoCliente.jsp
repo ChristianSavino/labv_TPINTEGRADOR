@@ -26,19 +26,19 @@
                 <form action="agregarCliente.html" method="Post">
                         <div class="row">                            
                             <label for="dni" class="col-md-3 offset-4 col-form-label">DNI: </label>
-                            <div><input type="text" name="dni" value=""></div>
+                            <div><input type="text" required name="dni" value=""></div>
                             <label for="nombre" class="col-md-3 offset-4 col-form-label">Nombre: </label>
-                            <div><input type="text" name="nombre" value=""></div>
+                            <div><input type="text" required name="nombre" value=""></div>
                             <label for="apellido" class="col-md-3 offset-4 col-form-label">Apellido: </label>
-                            <div><input type="text" name="apellido" value=""></div>
+                            <div><input type="text" required name="apellido" value=""></div>
                             <label for="sexo" class="col-md-3 offset-4 col-form-label">Sexo: </label>
-                            <div><select name="sexo" id="sexo">
+                            <div><select required name="sexo" id="sexo">
                             				<option value="">Seleccione Opción</option>
                             				<option value="F">Femenino</option>
                             				<option value="M">Masculino</option>
                             				</select></div>
                             <label for="nacionalidad" class="col-md-3 offset-4 col-form-label">Nacionalidad: </label>
-                            <select name="nacionalidad">                    			
+                            <select required name="nacionalidad">                    			
 	                           <option value="">--</option>
 	                            <c:forEach var="obj" items="${nacionalidades}">
 		                            <option value="${obj.getIdNacionalidad()}">${obj.getDescripcion()}</option>
@@ -47,15 +47,15 @@
 							</select>
                             				                            			
                             <label for="fnacimiento" class="col-md-3 offset-4 col-form-label">Fecha de Nacimiento: </label>
-                            <div><input type="date" name="fNacimiento"></div>
+                            <div><input type="date" required name="fNacimiento"></div>
                             <label for="localidad" class="col-md-3 offset-4 col-form-label">Localidad: </label>
-                            <div><input type="text" name="localidad" value=""></div>
+                            <div><input type="text" required name="localidad" value=""></div>
                             <label for="direccion" class="col-md-3 offset-4 col-form-label">Dirección: </label>
-                            <div><input type="text" name="direccion" value=""></div>
+                            <div><input type="text" required name="direccion" value=""></div>
                             <label for="correo" class="col-md-3 offset-4 col-form-label">Correo Electrónico: </label>
-                            <div><input type="text" name="correo" value=""></div>
+                            <div><input type="text" required name="correo" value=""></div>
                             <label for="telefono" class="col-md-3 offset-4 col-form-label">Telefono: </label>
-                            <div><input type="text" name="telefono" value=""></div>
+                            <div><input type="text" required name="telefono" value=""></div>
                     </div>
                     
                     <div class="row">

@@ -65,7 +65,7 @@
 				<div class="col-12">
 					<table class="table table-bordered table-hover table-sm">
 						<tr>
-							<th scope="col">Nro. Prestamo</th>
+							<th scope="col" width="5%">Nro. Prestamo</th>
 							<th scope="col">ISBN</th>
 							<th scope="col">Titulo</th>
 							<th scope="col">Autor</th>
@@ -81,10 +81,10 @@
 								<td>${obj[0]}</td>
 								<td>${obj[1]}</td>
 								<td>${obj[2]}</td>
-								<td>${obj[3]}${obj[4]}</td>
+								<td>${obj[3]} ${obj[4]}</td>
 								<td>${obj[6]}</td>
 								<td>${obj[5]}</td>
-								<td>${obj[7]}${obj[8]}</td>								
+								<td>${obj[7]} ${obj[8]}</td>								
 								<td>${obj[9]}</td>
 								<td>${obj[11]}</td>
 								<td><input type="button" value="Devolver Libro"

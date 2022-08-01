@@ -21,36 +21,28 @@ public class NegCliente implements InegCliente {
 	@Autowired
 	private NegComplementos iNegComplementos;
 	
+	@Autowired
+	private Cliente cliente;
+	
 	@Override
 	public List<Cliente> listarClientes() {
 		return daoCliente.listarClientes();
 	}
 	
-	@Autowired
-	private Cliente cliente;
-	
 	@Override
 	public List<Object[]> listarClienteTabla(String nacionalidad, String nombre, String apellido) {
 		String newNacionalidad = "";
-		
-		if(nacionalidad.length() > 0)
-		{
-			newNacionalidad = nacionalidad;
-		}
-		
 		String newNombre = "";
-		
-		if(nombre.length() > 0)
-		{
-			newNombre = nombre;
-		}
-		
 		String newApellido = "";
 		
+		if(nacionalidad.length() > 0)
+			newNacionalidad = nacionalidad;
+	
+		if(nombre.length() > 0)
+			newNombre = nombre;
+		
 		if(apellido.length() > 0)
-		{
 			newApellido = apellido;
-		}
 		
 		return daoCliente.listarClienteTabla(newNacionalidad, newNombre, newApellido);
 	}
@@ -70,6 +62,7 @@ public class NegCliente implements InegCliente {
 			cliente.setSexo(sexo);
 			cliente.setTelefono(telefono);
 			cliente.setNacionalidad(iNegComplementos.obtenerNacionalidad(nacionalidad));
+			
 			return daoCliente.agregarCliente(cliente);
 		}
 		catch (Exception e) {
@@ -82,6 +75,7 @@ public class NegCliente implements InegCliente {
 	public boolean modificarCliente(int id, int dni,String nombre,String apellido,String sexo, int nacionalidad,String fechaNacimiento,String localidad,String direccion,String email,String telefono) {
 		try {
 			Cliente cliente = daoCliente.obtenerCliente(id);
+			
 			cliente.setId(id);
 			cliente.setApellido(apellido);
 			cliente.setDireccion(direccion);
@@ -93,6 +87,7 @@ public class NegCliente implements InegCliente {
 			cliente.setSexo(sexo);
 			cliente.setTelefono(telefono);
 			cliente.setNacionalidad(iNegComplementos.obtenerNacionalidad(nacionalidad));			
+			
 			boolean estado =  daoCliente.modificarCliente(cliente);
 			return estado;
 		}catch(Exception e){

@@ -150,8 +150,8 @@ public class DaoPrestamo implements IdaoPrestamo{
 				"p.CantidadDias as cantidadDiasPrestamo, DATE_FORMAT(p.fechaDePrestamo, '%d-%m-%Y') as fechaPrestamo, c.nombre as nombreCliente, c.apellido as apellidoCliente, c.dni as dniCliente, c.idCliente as idCliente, " + 
 				"(CASE"
 				+ "	WHEN DATEDIFF(DATE_ADD(p.fechaDePrestamo, INTERVAL p.CantidadDias DAY), NOW()) >= 0"
-				+ "    THEN 'A TIEMPO'"
-				+ "    ELSE 'VENCIDO'"
+				+ "    THEN 'A Tiempo'"
+				+ "    ELSE 'Vencido'"
 				+ "END) AS estado " +
 				"from prestamo as p " + 
 				"join cliente c on p.idCliente = c.idCliente " + 

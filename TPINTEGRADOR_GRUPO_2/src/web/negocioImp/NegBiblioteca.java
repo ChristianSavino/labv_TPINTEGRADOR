@@ -32,13 +32,14 @@ public class NegBiblioteca implements InegBiblioteca{
 	@Override
 	public List<Object[]> listarBibliotecasTabla(String fechaAlta, String estado, String isbn, String titulo) {
 		int est = 0;
+		int isbnAux = 0;
+		
 		if(estado.length() > 1) {
 			if(estado.equals("Disponible"))
 				est = 1;
 			else
 				est = 2;
 		}
-		int isbnAux = 0;
 		if (isbn.length() > 0)
 			isbnAux = Integer.parseInt(isbn);
 		return daoBiblioteca.listarBibliotecasTabla(fechaAlta,est,isbnAux,titulo);

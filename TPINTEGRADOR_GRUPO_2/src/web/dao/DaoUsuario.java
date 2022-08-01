@@ -1,10 +1,6 @@
 package web.dao;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
 
 import web.daoImp.IdaoUsuario;

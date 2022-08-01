@@ -288,10 +288,7 @@
 						$("#messageValidationError").html(mensaje);
 						$("#modalValidations").modal('show');
 						return false;
-					}
-					
-					
-					//$("#formNuevoPrestamo").submit();
+					}					
 				});
 				
 			});

@@ -73,12 +73,12 @@
 				<div class="col-12">
 					<table class="table table-bordered table-hover">
 						<tr>
-							<td>Codigo</td>
-							<td>ISBN</td>
-							<td>Titulo</td>
-							<td>Fecha Alta</td>
-							<td>Estado</td>
-							<td>Acciones</td>
+							<th scope="col">Codigo</th>
+							<th scope="col">ISBN</th>
+							<th scope="col">Titulo</th>
+							<th scope="col">Fecha Alta</th>
+							<th scope="col">Estado</th>
+							<th scope="col">Acciones</th>
 						</tr>
 						<c:forEach var="obj" items="${bibliotecas}">
 							<tr>

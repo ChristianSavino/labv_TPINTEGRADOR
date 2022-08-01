@@ -3,7 +3,6 @@ package web.negocio;
 import java.util.List;
 
 import web.entidades.Autor;
-import web.entidades.Nacionalidad;
 
 public interface InegAutor {
 	public List<Autor> listarAutores();	

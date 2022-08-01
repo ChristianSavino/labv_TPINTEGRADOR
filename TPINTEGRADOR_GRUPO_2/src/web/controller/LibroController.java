@@ -36,8 +36,7 @@ public class LibroController {
 	}
 	
 	
-	@RequestMapping(value= "listarNuevosLibrosFiltroAjax.html",
-			method=RequestMethod.GET)
+	@RequestMapping(value= "listarNuevosLibrosFiltroAjax.html",	method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView ListarNuevosLibrosFiltroAjax(String isbn, String nombre) {
 		ModelAndView mv = new ModelAndView();
@@ -75,18 +74,16 @@ public class LibroController {
 		ModelAndView mv = new ModelAndView();
 		
 		try {
-			if (!iNegLibro.AgregarLibro(isbn,titulo,fechaLanzamiento,idAutor,descripcion,idioma,generos,cantidadPaginas)) {
+			if (!iNegLibro.AgregarLibro(isbn,titulo,fechaLanzamiento,idAutor,descripcion,idioma,generos,cantidadPaginas)) 
 				throw new Exception("Error al intentar guardar el nuevo libro");
-			}
+			
 			Libro l = iNegLibro.obtenerLibro(Integer.parseInt(isbn));
 			
-			if (l == null) {
+			if (l == null)
 				throw new Exception("Error al intentar recuperar el nuevo libro");
-
-			}
 			
 			mv.addObject("libro", l);
-			mv.setViewName("NuevaBiblioteca");
+			mv.setViewName("NuevaBiblioteca");		
 		} catch (Exception e) {
 			mv = AvisoController.SeteoDeAviso(mv, "Nuevo Libro", "Agregar Nuevo Libro", e.toString(), 
 					"Volver a Listado Biblioteca", "listadoBiblioteca.html", AvisoController.TipoAviso.Error);

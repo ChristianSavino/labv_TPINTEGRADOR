@@ -87,9 +87,13 @@ public class ClienteController {
 		
 		try {
 			Cliente cliente = iNegCliente.obtenerCliente(idCliente);
-			iNegCliente.eliminarCliente(cliente);
-			mv = AvisoController.SeteoDeAviso(mv, "Eliminar Cliente", "Eliminar Cliente", "Se ha eliminado correctamente el cliente con id: " + idCliente,
+			
+			if(iNegCliente.eliminarCliente(cliente))
+				mv = AvisoController.SeteoDeAviso(mv, "Eliminar Cliente", "Eliminar Cliente", "Se ha eliminado correctamente el cliente con id: " + idCliente,
 					"Listado Cliente", "listadoClientes.html", AvisoController.TipoAviso.Correcto);
+			else
+				mv = AvisoController.SeteoDeAviso(mv, "Eliminar Cliente", "Eliminar Cliente", "El cliente posee prestamos vinculados", 
+						"Listado Cliente", "listadoClientes.html", TipoAviso.Error);	
 		}
 		catch(Exception e) {
 			mv = AvisoController.SeteoDeAviso(mv, "Eliminar Cliente", "Eliminar Cliente", e.toString(), 

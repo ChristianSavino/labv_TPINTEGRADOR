@@ -17,39 +17,7 @@
 
 	<link rel="stylesheet" type="text/css" href="css/Main.css" />
 	
-	<script src="js/jQuery.js"></script>
-	<script type="text/javascript">
-
-		
-		function AgregarLibro() {
-			var table = document.getElementById("tBody");
-
-			var isbn = document.getElementById("isbn").value;
-			var titulo = document.getElementById("titulo").value;
-			var fechaLanzamiento = document.getElementById("fechaLanzamiento").value;
-			var idAutor = document.getElementById("idAutor").value;
-			var descripcion = document.getElementById("descripcion").value;
-			var idioma = document.getElementById("idioma").value;		
-
-			var generos = "";
-			for (var i = 0, row; row = table.rows[i]; i++) {
-				generos += row.cells[0].innerHTML + "-";
-			};
-
-			var cantidadPaginas = document.getElementById("cantidadPaginas").value;
-			
-			location.href = "agregarLibro.html?isbn="+isbn+"&titulo="+titulo+"&fechaLanzamiento="+fechaLanzamiento+"&idAutor="+idAutor+"&descripcion="
-			+descripcion+"&idioma="+idioma+"&generos="+generos+"&cantidadPaginas="+cantidadPaginas;
-		};
-	
-		function BuscarAutor() {
-            var nombre = document.getElementById("nombreAutor").value;
-            var apellido = document.getElementById("apellidoAutor").value;
-     	   location.href = "buscarAutorNombreYApellido.html?nombre="+ nombre+"&apellido="+apellido;
-         };
-         
-	</script>
-	
+	<script src="js/jQuery.js"></script>	
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
@@ -266,9 +234,7 @@
 					       generos += $(this).html() + "-";
 				    });
 					
-					$("#generosEnviar").val(generos);
-					
-					
+					$("#generosEnviar").val(generos);					
 				});
 				
 			
