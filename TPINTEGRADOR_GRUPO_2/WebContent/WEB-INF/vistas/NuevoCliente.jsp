@@ -26,7 +26,7 @@
                 <form action="agregarCliente.html" method="Post">
                         <div class="row">                            
                             <label for="dni" class="col-md-3 offset-4 col-form-label">DNI: </label>
-                            <div><input type="text" required name="dni" value=""></div>
+                            <div><input type="text" required name="dni" value=""  maxlength="8"></div>
                             <label for="nombre" class="col-md-3 offset-4 col-form-label">Nombre: </label>
                             <div><input type="text" required name="nombre" value=""></div>
                             <label for="apellido" class="col-md-3 offset-4 col-form-label">Apellido: </label>
